@@ -1,11 +1,11 @@
 ## auto comp
-export PATH="$PATH:/usr/local/sbin:/opt/local/bin/"
+export PATH="$PATH:/usr/local/sbin:/opt/local/bin/:/Users/boris/src/Nim/bin/"
 export MANPATH="$MANPATH:/opt/local/share/man"
 export INFOPATH="$INFOPATH:/opt/local/share/info"
 export TERM=xterm-256color
 
 autoload -U compinit promptinit
-compinit
+#compinit
 promptinit
 
 setopt CORRECT_ALL
@@ -49,3 +49,7 @@ alias libreoffice='/Applications/LibreOffice.app/Contents/MacOS/soffice'
 alias -s {html,svg,pdf}="open -a 'google Chrome'"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+alias initenv="virtualenv ENV --python=python3 --no-site-packages"

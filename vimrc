@@ -47,6 +47,8 @@ Plugin 'dag/vim2hs'
 Plugin 'tpope/vim-markdown'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'StanAngeloff/php.vim'
+Plugin 'briancollins/vim-jst'
+Plugin 'juvenn/mustache.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -69,8 +71,10 @@ map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
-:noremap <C-left> :bprev<CR>
-:noremap <C-right> :bnext<CR>
+function! ChangeBuf(cmd)
+	execute a:cmd
+endfunction
+nnoremap <silent> <C-b> :call ChangeBuf(":bn")<CR>
 
 "syntax enable
 "hi Normal ctermfg=16 ctermbg=254
@@ -94,7 +98,6 @@ set mouse=a
 vnoremap < <gv
 vnoremap > >gv
 
-set clipboard=unnamed
 
 let g:neocomplcache_enable_at_startup = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -164,3 +167,4 @@ if has('autocmd')
 "nmap <C-]> :vertical resize 80<CR>
 "nmap <C-[> :vertical resize 30<CR>
 
+set clipboard=unnamed
