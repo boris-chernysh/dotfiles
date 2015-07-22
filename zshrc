@@ -5,7 +5,6 @@ export INFOPATH="$INFOPATH:/opt/local/share/info"
 export TERM=xterm-256color
 
 autoload -U compinit promptinit
-#compinit
 promptinit
 
 setopt CORRECT_ALL
@@ -33,7 +32,7 @@ if [[ $EUID == 0 ]]
 then
 	PROMPT=$'%{\e[1;34m%}%n %{\e[1;34m%}%~ %{\e[1;34m%}#%{\e[0m%} ' # user dir % %{\e[1;34m%}%n
 else
-	PROMPT=$'%{\e[1;32m%}→ %{\e[1;36m%}%~ %{\e[0m%}' # root dir #
+	PROMPT=$'%{\e[1;32m%}%m→ %{\e[1;36m%}%~ %{\e[0m%}' # root dir #
 fi
 RPROMPT=$'%{\e[1;36m%}%T%{\e[0m%}' # right prompt with time 
 

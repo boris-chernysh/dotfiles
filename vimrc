@@ -49,11 +49,11 @@ Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'briancollins/vim-jst'
 Plugin 'juvenn/mustache.vim'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'jonathanfilip/vim-lucius'
 
 call vundle#end()
 filetype plugin indent on
-
-execute pathogen#infect()
 
 let g:EasyMotion_do_mapping = 0
 
