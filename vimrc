@@ -1,7 +1,7 @@
 set modelines=0
 set encoding=utf-8
 set nocompatible
-set backspace=2	
+set backspace=2
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -51,6 +51,10 @@ Plugin 'briancollins/vim-jst'
 Plugin 'juvenn/mustache.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'jonathanfilip/vim-lucius'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'zah/nimrod.vim'
+Plugin 'mattn/emmet-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -69,19 +73,13 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 
-let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+let g:EasyMotion_startofline = 0
 
 function! ChangeBuf(cmd)
 	execute a:cmd
 endfunction
 nnoremap <silent> <C-b> :call ChangeBuf(":bn")<CR>
 
-"syntax enable
-"hi Normal ctermfg=16 ctermbg=254
-"let g:solarized_visibility = "high"
-"let g:solarized_contrast = "high"
-"let g:solarized_termcolors=256
-"let g:solarized_termtrans = 1
 syntax enable
 colorscheme lucius
 set background=dark
@@ -129,7 +127,6 @@ function! MyModified()
     return ""
   endif
 endfunction
-
 function! MyReadonly()
   if &filetype == "help"
     return ""
@@ -160,11 +157,23 @@ set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~"
 
 if has('autocmd')
   autocmd FileType html nested NeoComplCacheLock
- endif
-
-"nmap <F3> :resize<CR>
-"nmap <F2> :vertical resize<CR>
-"nmap <C-]> :vertical resize 80<CR>
-"nmap <C-[> :vertical resize 30<CR>
+endif
 
 set clipboard=unnamed
+autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+
+autocmd BufRead,BufNewFile *.nim setfiletype nim
+autocmd FileType nim set tabstop=4|set shiftwidth=4|set expandtab
+
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+
+" Jump to tag
+nn <M-g> :call JumpToDef()<cr>
+ino <M-g> <esc>:call JumpToDef()<cr>i
+
