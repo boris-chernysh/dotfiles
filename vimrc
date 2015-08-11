@@ -55,6 +55,7 @@ Plugin 'nanotech/jellybeans.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'zah/nimrod.vim'
 Plugin 'mattn/emmet-vim'
+Plugin 'tomtom/tcomment_vim'
 
 call vundle#end()
 filetype plugin indent on
