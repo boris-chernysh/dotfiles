@@ -25,8 +25,6 @@ ZSH_HIGHLIGHT_STYLES=(
         'globbing'        'fg=166'
 )
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 zstyle ':completion:*' menu select=long-list select=0
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
@@ -56,19 +54,3 @@ alias v='vim'
 which nvim > /dev/null && alias vim="nvim"
 alias c="cd .."
 alias initenv="virtualenv ENV --python=python3 --no-site-packages"
-
-# osx
-export PATH="$PATH:/usr/local/sbin:/opt/local/bin:$HOME/src/Nim/bin:$HOME/.nimble/bin"
-export MANPATH="$MANPATH:/opt/local/share/man"
-export INFOPATH="$INFOPATH:/opt/local/share/info"
-export PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
-
-alias libreoffice='open -a "libreOffice"'
-alias chrome='open -a "Google Chrome"'
-alias -s {html,svg,pdf}="open -a 'google Chrome'"
-alias o='open -a'
-
-# linux
-export PATH="$HOME/.linuxbrew/bin:$PATH"
-export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
