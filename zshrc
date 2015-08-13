@@ -1,14 +1,14 @@
-## auto comp
-export PATH="$PATH:/usr/local/sbin:/opt/local/bin:/Users/boris/src/Nim/bin:/Users/boris/.nimble/bin"
-export MANPATH="$MANPATH:/opt/local/share/man"
-export INFOPATH="$INFOPATH:/opt/local/share/info"
+# paths
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+# colors
 export TERM=xterm-256color
 
+# completion
 autoload -U compinit promptinit
 promptinit
 compinit
-
-autoload zmv
 
 setopt CORRECT_ALL
 setopt autocd
@@ -30,35 +30,45 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 zstyle ':completion:*' menu select=long-list select=0
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+brew_args=(info home options install uninstall search list update upgrade \
+	pin unpin doctor cleanup)
+compctl -k brew_args brew
+
+# modules
+autoload zmv
+
 # prompts
 PROMPT=$'%{\e[1;32m%}%m→ %{\e[1;36m%}%~ %{\e[0m%}'
-if [[ $EUID == 0 ]] 
-then
-	PROMPT=$'%{\e[1;34m%}%n %{\e[1;34m%}%~ %{\e[1;34m%}#%{\e[0m%} ' # user dir % %{\e[1;34m%}%n
-fi
-RPROMPT=$'%{\e[1;36m%}%T%{\e[0m%}' # right prompt with time 
+RPROMPT=$'%{\e[1;36m%}%T%{\e[0m%}'
 
-export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
-# vi bindings
+# bindings
 bindkey -v
+bindkey '^R' history-incremental-search-backward
 
+#aliases
 alias ls='ls -FG'
 alias l='ls -p'
 alias la='ls -a'
 alias ll='ls -l' 
 alias v='vim'
-alias libreoffice='/Applications/LibreOffice.app/Contents/MacOS/soffice'
-alias -s {html,svg,pdf}="open -a 'google Chrome'"
-alias vim="nvim"
+which nvim > /dev/null && alias vim="nvim"
 alias c="cd .."
-
-fpath=(/usr/local/share/zsh-completions $fpath)
-
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
 alias initenv="virtualenv ENV --python=python3 --no-site-packages"
 
-brew_args=(info home options install uninstall search list update upgrade \
-	pin unpin doctor cleanup)
-compctl -k brew_args brew
-bindkey '^R' history-incremental-search-backward
+# osx
+export PATH="$PATH:/usr/local/sbin:/opt/local/bin:$HOME/src/Nim/bin:$HOME/.nimble/bin"
+export MANPATH="$MANPATH:/opt/local/share/man"
+export INFOPATH="$INFOPATH:/opt/local/share/info"
+export PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
+
+alias libreoffice='open -a "libreOffice"'
+alias chrome='open -a "Google Chrome"'
+alias -s {html,svg,pdf}="open -a 'google Chrome'"
+alias o='open -a'
+
+# linux
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"

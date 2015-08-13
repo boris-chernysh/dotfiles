@@ -28,7 +28,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle "pangloss/vim-javascript"
+Plugin 'pangloss/vim-javascript'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'itchyny/lightline.vim'
 Plugin 'jelera/vim-javascript-syntax'
@@ -56,6 +56,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'zah/nimrod.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'jiangmiao/auto-pairs'
 
 call vundle#end()
 filetype plugin indent on
