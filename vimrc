@@ -27,14 +27,12 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
 Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'pangloss/vim-javascript'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'itchyny/lightline.vim'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/html5.vim'
 Plugin 'nono/jquery.vim'
-Plugin 'tyru/open-browser.vim'
 Plugin 'buftabs'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'ap/vim-css-color'
@@ -56,7 +54,10 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'zah/nimrod.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'jiangmiao/auto-pairs'
+Plugin 'Raimondi/delimitMate'
+Plugin 'mattn/webapi-vim.git'
+Plugin 'FuzzyFinder'
+Plugin 'moll/vim-node'
 
 call vundle#end()
 filetype plugin indent on
@@ -103,54 +104,57 @@ let g:neocomplcache_enable_at_startup = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'filename' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'MyFugitive',
-      \   'readonly': 'MyReadonly',
-      \   'modified': 'MyModified',
-      \   'filename': 'MyFilename'
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-      \ }
+			\ 'colorscheme': 'wombat',
+			\ 'active': {
+			\   'left': [ [ 'mode', 'paste' ],
+			\             [ 'fugitive', 'filename' ] ]
+			\ },
+			\ 'component_function': {
+			\   'fugitive': 'MyFugitive',
+			\   'readonly': 'MyReadonly',
+			\   'modified': 'MyModified',
+			\   'filename': 'MyFilename'
+			\ },
+			\ 'separator': { 'left': '⮀', 'right': '⮂' },
+			\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+			\ }
+
+" 'separator': { 'left': '⮀', 'right': '⮂' },
+" 'subseparator': { 'left': '⮁', 'right': '⮃' }
 
 function! MyModified()
-  if &filetype == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
+	if &filetype == "help"
+		return ""
+	elseif &modified
+		return "+"
+	elseif &modifiable
+		return ""
+	else
+		return ""
+	endif
 endfunction
 function! MyReadonly()
-  if &filetype == "help"
-    return ""
-  elseif &readonly
-    return "⭤"
-  else
-    return ""
-  endif
+	if &filetype == "help"
+		return ""
+	elseif &readonly
+		return "⭤"
+	else
+		return ""
+	endif
 endfunction
 
 function! MyFugitive()
-  if exists("*fugitive#head")
-    let _ = fugitive#head()
-    return strlen(_) ? '⭠ '._ : ''
-  endif
-  return ''
+	if exists("*fugitive#head")
+		let _ = fugitive#head()
+		return strlen(_) ? '⭠ '._ : ''
+	endif
+	return ''
 endfunction
 
 function! MyFilename()
-  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-       \ ('' != MyModified() ? ' ' . MyModified() : '')
+	return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+				\ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+				\ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
 set laststatus=2
@@ -158,24 +162,25 @@ set list
 set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~"
 
 if has('autocmd')
-  autocmd FileType html nested NeoComplCacheLock
+	autocmd FileType html nested NeoComplCacheLock
 endif
 
 set clipboard=unnamed
-autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+autocmd BufRead,BufNewFile *.es6,*.js setfiletype javascript
 
 autocmd BufRead,BufNewFile *.nim setfiletype nim
 autocmd FileType nim set tabstop=4|set shiftwidth=4|set expandtab
 
 fun! JumpToDef()
-  if exists("*GotoDefinition_" . &filetype)
-    call GotoDefinition_{&filetype}()
-  else
-    exe "norm! \<C-]>"
-  endif
+	if exists("*GotoDefinition_" . &filetype)
+		call GotoDefinition_{&filetype}()
+	else
+		exe "norm! \<C-]>"
+	endif
 endf
 
 " Jump to tag
 nn <M-g> :call JumpToDef()<cr>
 ino <M-g> <esc>:call JumpToDef()<cr>i
 
+let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.snippets_emmet.json')), "\n"))

@@ -1,6 +1,4 @@
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-export PATH="$PATH:/usr/local/sbin:/opt/local/bin:$HOME/src/Nim/bin:$HOME/.nimble/bin"
+export PATH="$PATH:/usr/local/sbin:/opt/local/bin:$HOME/src/Nim/bin:$HOME/.nimble/bin:$HOME/scripts/bin"
 export MANPATH="$MANPATH:/opt/local/share/man"
 export INFOPATH="$INFOPATH:/opt/local/share/info"
 export PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
@@ -9,3 +7,7 @@ alias libreoffice='open -a "libreOffice"'
 alias chrome='open -a "Google Chrome"'
 alias -s {html,svg,pdf}="open -a 'google Chrome'"
 alias o='open -a'
+alias als='alpha.sh'
+which nvim > /dev/null && alias vim="nvim"
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

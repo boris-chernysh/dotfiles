@@ -1,0 +1,20 @@
+{
+	"variables": {
+		"lang": "en",
+		"locale": "en-US",
+		"charset": "UTF-8",
+		"indentation": "\t",
+		"newline": "\n"
+	},
+	"javascript": {
+		"filters": "javascript",
+		"profile": "javascript",
+		"snippets": {
+			"cl": "console.log(${child});",
+			"cli": "console.log(${1});",
+			"rq": "var ${child} = require(\"${0}\")",
+			"fn": "function(${0}) {}",
+			"fn;": "function(${0}) {};"
+		}
+	}
+}
