@@ -58,6 +58,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'mattn/webapi-vim.git'
 Plugin 'FuzzyFinder'
 Plugin 'moll/vim-node'
+Plugin 'java.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -184,3 +185,13 @@ nn <M-g> :call JumpToDef()<cr>
 ino <M-g> <esc>:call JumpToDef()<cr>i
 
 let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.snippets_emmet.json')), "\n"))
+
+" strings numbering
+set relativenumber
+set number
+
+function! ChangeNumbering()
+	set relativenumber!
+endfunction
+nmap <silent> ;s :call ChangeNumbering()<CR>
+
