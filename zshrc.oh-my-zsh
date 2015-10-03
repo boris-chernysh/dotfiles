@@ -51,7 +51,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git)
 plugins=(git bundler osx mercurial node jump brew brew-cask thefuck\
-	vi-mode vim-interaction virtualenv nvm npm web-search)
+	vi-mode vim-interaction nvm npm web-search)
 
 # User configuration
 

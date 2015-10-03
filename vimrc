@@ -58,7 +58,8 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'mattn/webapi-vim.git'
 Plugin 'FuzzyFinder'
 Plugin 'moll/vim-node'
-Plugin 'java.vim'
+Plugin 'javacomplete'
+Plugin 'tfnico/vim-gradle'
 
 call vundle#end()
 filetype plugin indent on
@@ -86,14 +87,15 @@ nnoremap <silent> <C-b> :call ChangeBuf(":bn")<CR>
 
 syntax enable
 colorscheme lucius
+" colorscheme Tomorrow-Night-Eighties
 set background=dark
 
 hi TabLine      ctermfg=Black  ctermbg=241 cterm=NONE
 hi TabLineFill  ctermfg=Black  ctermbg=235 cterm=NONE
 hi TabLineSel   ctermfg=White  ctermbg=30 cterm=NONE
 
-
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
+let g:nerdtree_tabs_open_on_console_startup=1
 
 set mouse=a
 
@@ -194,4 +196,4 @@ function! ChangeNumbering()
 	set relativenumber!
 endfunction
 nmap <silent> ;s :call ChangeNumbering()<CR>
-
+map <F7> :!reset<CR>
