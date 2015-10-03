@@ -60,6 +60,7 @@ Plugin 'FuzzyFinder'
 Plugin 'moll/vim-node'
 Plugin 'javacomplete'
 Plugin 'tfnico/vim-gradle'
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 filetype plugin indent on
