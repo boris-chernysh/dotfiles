@@ -199,3 +199,5 @@ endfunction
 nmap <silent> ;s :call ChangeNumbering()<CR>
 map <F7> :!reset<CR>
 nmap <silent> ;w :tabclose<CR>
+nmap <silent> ;t :tabnew<CR>
+nmap <silent> ;e :tabnew +terminal<CR>
