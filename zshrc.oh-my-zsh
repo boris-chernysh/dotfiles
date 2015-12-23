@@ -62,7 +62,7 @@ export PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:/Users/boris/
 source $ZSH/oh-my-zsh.sh
 bindkey '^R' history-incremental-search-backward
 
-if [[ uname -eq 'Darwin' ]]; then;
+if [[ uname = 'Darwin' ]]; then;
 	source $HOME/dotfiles/zshrc.osx
 else
 	source $HOME/dotfiles/zshrc.linux
