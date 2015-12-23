@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/boris/.oh-my-zsh
+export ZSH=/home/boris/.oh-my-zsh
+
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -50,7 +51,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git)
-plugins=(git bundler osx mercurial node jump brew brew-cask thefuck\
+plugins=(git bundler osx mercurial node jump brew brew-cask \
 	vi-mode vim-interaction nvm npm web-search zmv)
 
 # User configuration
@@ -85,3 +86,7 @@ bindkey '^R' history-incremental-search-backward
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+source $HOME/dotfiles/zshrc.linux
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+nvm use v0.12.9 > /dev/null
