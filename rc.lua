@@ -7,6 +7,8 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
+wibox = require("wibox")
+
 -- Load Debian menu entries
 require("debian.menu")
 
@@ -15,7 +17,8 @@ vicious = require("vicious")
 
 
 -- -- {{ MY
-volumewidget = widget({ type = "textbox"})
+-- volumewidget = wibox.widget({ type = "textbox"})
+volumewidget = wibox.widget.textbox()
 vicious.register(volumewidget, vicious.widgets.volume,
 function(widget, args)
 	local label = { ["♫"] = "♫", ["♩"] = "♩" }
@@ -33,24 +36,24 @@ if awesome.startup_errors then
 end
 
 -- Handle runtime errors after startup
-do
-    local in_error = false
-    awesome.add_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
-
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = err })
-        in_error = false
-    end)
-end
+-- do
+--     local in_error = false
+--     awesome:add_signal("debug::error", function (err)
+--         -- Make sure we don't go into an endless error loop
+--         if in_error then return end
+--         in_error = true
+--
+--         naughty.notify({ preset = naughty.config.presets.critical,
+--                          title = "Oops, an error happened!",
+--                          text = err })
+--         in_error = false
+--     end)
+-- end
 -- }}}
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
+-- beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "tabbed -c xterm -into"
@@ -78,7 +81,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "main", "im", "media", "work", "tmp", "study", "lt" }, s, layouts[1])
+    tags[s] = awful.tag({ "main", "im", "media", "work", "keep"}, s, layouts[1])
 end
 -- }}}
 
@@ -341,17 +344,21 @@ root.keys(globalkeys)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
+      properties = { border_width = 1--beautiful.border_width,
                      border_color = beautiful.border_normal,
                      focus = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
+    -- { rule = { class = "MPlayer" },
+    --   properties = { floating = true } },
+    -- { rule = { class = "pinentry" },
+    --   properties = { floating = true } },
+    -- { rule = { class = "gimp" },
+    --   properties = { floating = true } },
+	{
+		rule= { class = "Telegram"},
+		properties = { tag = tags[1][2]},
+	}
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
