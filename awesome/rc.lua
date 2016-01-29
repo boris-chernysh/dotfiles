@@ -304,25 +304,26 @@ for s = 1, screen.count() do
     left_layout:add(mypromptbox[s])
     left_layout:add(separator)
 
-	-- Layout widget
-	kbdwidget = wibox.widget.textbox(" Eng ")
-	kbdwidget.border_width = 1
-	kbdwidget.border_color = beautiful.fg_normal
-	kbdwidget:set_text(" Eng ")
-	kbdstrings = {[0] = " Eng ",
-		[1] = " Рус "}
-
-	dbus.request_name("session", "ru.gentoo.kbdd")
-	dbus.add_match("session", "interface='ru.gentoo.kbdd',member='layoutChanged'")
-	dbus.connect_signal("ru.gentoo.kbdd", function(...)
-		local data = {...}
-		local layout = data[2]
-		kbdwidget:set_markup(kbdstrings[layout])
-	end)
-
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-	right_layout:add(kbdwidget)
+
+	-- Layout widget
+	-- kbdwidget = wibox.widget.textbox(" Eng ")
+	-- kbdwidget.border_width = 1
+	-- kbdwidget.border_color = beautiful.fg_normal
+	-- kbdwidget:set_text(" Eng ")
+	-- kbdstrings = {[0] = " Eng ",
+	-- 	[1] = " Рус "}
+    --
+	-- dbus.request_name("session", "ru.gentoo.kbdd")
+	-- dbus.add_match("session", "interface='ru.gentoo.kbdd',member='layoutChanged'")
+	-- dbus.connect_signal("ru.gentoo.kbdd", function(...)
+	-- 	local data = {...}
+	-- 	local layout = data[2]
+	-- 	kbdwidget:set_markup(kbdstrings[layout])
+	-- end)
+
+	-- right_layout:add(kbdwidget)
 
     if s == 1 then
 		right_layout:add(mysystraymargin)
@@ -469,7 +470,7 @@ globalkeys = awful.util.table.join(
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-    awful.key({ modkey,           }, "q",      function (c) c:kill()                         end),
+    awful.key({ modkey, "Shift"   }, "q",      function (c) c:kill()                         end),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
@@ -646,5 +647,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.util.spawn("owncloud", true)
 awful.util.spawn("/opt/telegram/Telegram", true)
 awful.util.spawn("/opt/google/chrome/google-chrome --profile-directory=Default --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki", true)
+-- awful.util.spawn("kbdd", true)
 -- awful.util.spawn("xterm -name kee -e keepassc", true)
 -- }}}
