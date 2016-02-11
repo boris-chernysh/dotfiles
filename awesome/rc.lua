@@ -88,7 +88,7 @@ tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
     --tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
-    tags[s] = awful.tag({ "main", "im", "media", "work", "keep"}, s, layouts[1])
+    tags[s] = awful.tag({ "main", "im", "media", "work", "keep", "mail"}, s, layouts[1])
 end
 -- }}}
 
@@ -558,8 +558,12 @@ awful.rules.rules = {
     --   properties = { floating = true } },
     { rule = { class = "Telegram" },
       properties = { tag = tags[1][2] } },
+    { rule = { class = "Icedove" },
+      properties = { tag = tags[1][6] } },
     { rule = { instance = "crx_hmjkmjkepdijhoojdojkdfohbdgmmhki" },
       properties = { tag = tags[1][5] } },
+    { rule = { instance = "inbox.google.com" },
+      properties = { tag = tags[1][6] } },
     -- { rule = { instance = "kee" },
     --   properties = { tag = tags[1][6] } },
     -- { rule = { class = "Slack" },
@@ -647,6 +651,8 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.util.spawn("owncloud", true)
 awful.util.spawn("/opt/telegram/Telegram", true)
 awful.util.spawn("/opt/google/chrome/google-chrome --profile-directory=Default --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki", true)
+awful.util.spawn("icedove", true)
+awful.util.spawn("google-chrome --app='https://inbox.google.com'", true)
 -- awful.util.spawn("kbdd", true)
 -- awful.util.spawn("xterm -name kee -e keepassc", true)
 -- }}}
