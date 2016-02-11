@@ -1,0 +1,11 @@
+# KEYBOARD CONFIGURATION FILE
+# path to this file: /etc/default/keyboard
+
+# Consult the keyboard(5) manual page.
+
+XKBMODEL="pc105"
+XKBLAYOUT="us, ru"
+XKBVARIANT=""
+XKBOPTIONS="lv3:ralt_switch,compose:rwin,grp:alt_shift_toggle,ctrl:nocaps"
+
+BACKSPACE="guess"
