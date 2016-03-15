@@ -71,3 +71,6 @@ fi
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 export PATH=$(npm bin):$PATH
+
+#aliases
+alias  wcp="git ls-files | sed -n 's/\(^.*\(js\|\jade\)$\)/\1/p' | xargs wc -l"

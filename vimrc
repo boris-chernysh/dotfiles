@@ -169,7 +169,7 @@ if has('autocmd')
 	autocmd FileType html nested NeoComplCacheLock
 endif
 
-set clipboard=unnamed
+set clipboard=unnamedplus
 autocmd BufRead,BufNewFile *.es6,*.js setfiletype javascript
 
 autocmd BufRead,BufNewFile *.nim setfiletype nim
