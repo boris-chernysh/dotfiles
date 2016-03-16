@@ -3,5 +3,5 @@ source $HOME/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 export PATH="$HOME/scripts/bin:$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-alias pbcopy='xsel -i'
+alias pbcopy='xsel --clipboard'
 alias pbpaste='xsel'
