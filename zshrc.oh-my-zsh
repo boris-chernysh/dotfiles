@@ -56,7 +56,7 @@ plugins=(git bundler osx mercurial node jump brew brew-cask \
 
 # User configuration
 
-export PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:/Users/boris/.nvm/versions/node/v0.12.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/sbin:/opt/local/bin:/Users/boris/src/Nim/bin:/Users/boris/.nimble/bin:/Users/boris/scripts/bin"
+export PATH="$HOME/dotfiles/scripts:/Library/Frameworks/Python.framework/Versions/3.4/bin:$HOME/.nvm/versions/node/v0.12.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/sbin:/opt/local/bin:$HOME/src/Nim/bin:$HOME/.nimble/bin:$HOME/scripts/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -72,5 +72,3 @@ export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 export PATH=$(npm bin):$PATH
 
-#aliases
-alias  wcp="git ls-files | sed -n 's/\(^.*\(js\|\jade\)$\)/\1/p' | xargs wc -l"
