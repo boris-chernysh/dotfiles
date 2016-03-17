@@ -1,3 +1,4 @@
 #! /bin/bash
 
-git ls-files | grep -E '^.*.(js|jade|css)$'| xargs wc -l
+extensions=`echo $1 | sed 's/,/|/g'`
+git ls-files | grep -E "^.*.($extensions)$"| xargs wc -l
