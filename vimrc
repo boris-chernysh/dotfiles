@@ -10,14 +10,17 @@ set number
 set ruler
 set showtabline=2
 set colorcolumn=81
+set mouse=a
 
 set t_Co=256
 set t_Sf=[3%dm
 set t_Sb=[4%dm
 
 syntax on
+
 au BufWrite /private/tmp/crontab.* set nowritebackup
 au BufWrite /private/etc/pw.* set nowritebackup
+
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -34,7 +37,6 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/html5.vim'
 Plugin 'nono/jquery.vim'
 Plugin 'buftabs'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'ap/vim-css-color'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'shougo/vimproc'
@@ -47,7 +49,6 @@ Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'briancollins/vim-jst'
 Plugin 'juvenn/mustache.vim'
-Plugin 'scrooloose/nerdtree.git'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'flazz/vim-colorschemes'
@@ -61,10 +62,16 @@ Plugin 'moll/vim-node'
 Plugin 'javacomplete'
 Plugin 'tfnico/vim-gradle'
 Plugin 'kien/ctrlp.vim'
+" Plugin 'jistr/vim-nerdtree-tabs'
+" Plugin 'scrooloose/nerdtree.git'
 
 call vundle#end()
 filetype plugin indent on
 
+" autocmd vimenter * NERDTree
+" let g:nerdtree_tabs_open_on_console_startup=1
+
+"easy motion
 let g:EasyMotion_do_mapping = 0
 
 nmap <leader><leader> <Plug>(easymotion-s)
@@ -81,31 +88,19 @@ map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0
 
-function! ChangeBuf(cmd)
-	execute a:cmd
-endfunction
-nnoremap <silent> <C-b> :call ChangeBuf(":bn")<CR>
-
+"colors
 syntax enable
-colorscheme lucius
-" colorscheme Tomorrow-Night-Eighties
+" colorscheme lucius
+" colorscheme jellybeans
+colorscheme Tomorrow-Night-Eighties
 set background=dark
 
+"tabline colors
 hi TabLine      ctermfg=Black  ctermbg=241 cterm=NONE
 hi TabLineFill  ctermfg=Black  ctermbg=235 cterm=NONE
 hi TabLineSel   ctermfg=White  ctermbg=30 cterm=NONE
 
-" autocmd vimenter * NERDTree
-let g:nerdtree_tabs_open_on_console_startup=1
-
-set mouse=a
-
-vnoremap < <gv
-vnoremap > >gv
-
-
-let g:neocomplcache_enable_at_startup = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"lightline
 
 let g:lightline = {
 			\ 'colorscheme': 'wombat',
@@ -122,9 +117,6 @@ let g:lightline = {
 			\ 'separator': { 'left': '⮀', 'right': '⮂' },
 			\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
 			\ }
-
-" 'separator': { 'left': '⮀', 'right': '⮂' },
-" 'subseparator': { 'left': '⮁', 'right': '⮃' }
 
 function! MyModified()
 	if &filetype == "help"
@@ -161,17 +153,25 @@ function! MyFilename()
 				\ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
+"empty characters highlight
 set laststatus=2
 set list
 set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~"
 
+"use complcache
+let g:neocomplcache_enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"not use complcache for html
 if has('autocmd')
 	autocmd FileType html nested NeoComplCacheLock
 endif
 
 set clipboard=unnamedplus
+
+"es6 bind to js filetype
 autocmd BufRead,BufNewFile *.es6,*.js setfiletype javascript
 
+"nim filetype
 autocmd BufRead,BufNewFile *.nim setfiletype nim
 autocmd FileType nim set tabstop=4|set shiftwidth=4|set expandtab
 
@@ -196,8 +196,20 @@ set number
 function! ChangeNumbering()
 	set relativenumber!
 endfunction
-nmap <silent> ;s :call ChangeNumbering()<CR>
+
+"my mappings
+map <C-S-e> :tabnew +Explore<CR>
 map <F7> :!reset<CR>
+
+nmap <silent> ;s :call ChangeNumbering()<CR>
 nmap <silent> ;w :tabclose<CR>
 nmap <silent> ;t :tabnew<CR>
 nmap <silent> ;e :tabnew +terminal<CR>
+
+function! ChangeBuf(cmd)
+	execute a:cmd
+endfunction
+nnoremap <silent> <C-b> :call ChangeBuf(":bn")<CR>
+
+vnoremap < <gv
+vnoremap > >gv
