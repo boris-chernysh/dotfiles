@@ -29,7 +29,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
-Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'pangloss/vim-javascript'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'itchyny/lightline.vim'
@@ -42,25 +41,18 @@ Plugin 'Shougo/neocomplcache.vim'
 Plugin 'shougo/vimproc'
 Plugin 'Shougo/vimshell.vim'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'dag/vim2hs'
 Plugin 'tpope/vim-markdown'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'StanAngeloff/php.vim'
 Plugin 'briancollins/vim-jst'
 Plugin 'juvenn/mustache.vim'
 Plugin 'jonathanfilip/vim-lucius'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'flazz/vim-colorschemes'
 Plugin 'zah/nimrod.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'mattn/webapi-vim.git'
-Plugin 'FuzzyFinder'
 Plugin 'moll/vim-node'
-Plugin 'javacomplete'
-Plugin 'tfnico/vim-gradle'
 Plugin 'kien/ctrlp.vim'
 " Plugin 'jistr/vim-nerdtree-tabs'
 " Plugin 'scrooloose/nerdtree.git'
@@ -90,9 +82,7 @@ let g:EasyMotion_startofline = 0
 
 "colors
 syntax enable
-" colorscheme lucius
-" colorscheme jellybeans
-colorscheme Tomorrow-Night-Eighties
+colorscheme lucius
 set background=dark
 
 "tabline colors
