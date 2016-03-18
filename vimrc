@@ -16,6 +16,8 @@ set t_Co=256
 set t_Sf=[3%dm
 set t_Sb=[4%dm
 
+let g:netrw_liststyle = 3
+
 syntax on
 
 au BufWrite /private/tmp/crontab.* set nowritebackup
@@ -31,19 +33,13 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
 Plugin 'pangloss/vim-javascript'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'itchyny/lightline.vim'
-Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/html5.vim'
-Plugin 'nono/jquery.vim'
 Plugin 'buftabs'
 Plugin 'ap/vim-css-color'
 Plugin 'Shougo/neocomplcache.vim'
-Plugin 'shougo/vimproc'
-Plugin 'Shougo/vimshell.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'dag/vim2hs'
 Plugin 'tpope/vim-markdown'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'briancollins/vim-jst'
 Plugin 'juvenn/mustache.vim'
 Plugin 'jonathanfilip/vim-lucius'
@@ -54,11 +50,22 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'mattn/webapi-vim.git'
 Plugin 'moll/vim-node'
 Plugin 'kien/ctrlp.vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'itchyny/lightline.vim'
+" Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'nono/jquery.vim'
+" Plugin 'LaTeX-Box-Team/LaTeX-Box'
+" Plugin 'shougo/vimproc'
+" Plugin 'Shougo/vimshell.vim'
 " Plugin 'jistr/vim-nerdtree-tabs'
 " Plugin 'scrooloose/nerdtree.git'
 
 call vundle#end()
 filetype plugin indent on
+
+"pangloss/vim-javascript
+:set regexpengine=1
+:syntax enable
 
 " autocmd vimenter * NERDTree
 " let g:nerdtree_tabs_open_on_console_startup=1
@@ -92,56 +99,7 @@ hi TabLineSel   ctermfg=White  ctermbg=30 cterm=NONE
 
 "lightline
 
-let g:lightline = {
-			\ 'colorscheme': 'wombat',
-			\ 'active': {
-			\   'left': [ [ 'mode', 'paste' ],
-			\             [ 'fugitive', 'filename' ] ]
-			\ },
-			\ 'component_function': {
-			\   'fugitive': 'MyFugitive',
-			\   'readonly': 'MyReadonly',
-			\   'modified': 'MyModified',
-			\   'filename': 'MyFilename'
-			\ },
-			\ 'separator': { 'left': '⮀', 'right': '⮂' },
-			\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-			\ }
-
-function! MyModified()
-	if &filetype == "help"
-		return ""
-	elseif &modified
-		return "+"
-	elseif &modifiable
-		return ""
-	else
-		return ""
-	endif
-endfunction
-function! MyReadonly()
-	if &filetype == "help"
-		return ""
-	elseif &readonly
-		return "⭤"
-	else
-		return ""
-	endif
-endfunction
-
-function! MyFugitive()
-	if exists("*fugitive#head")
-		let _ = fugitive#head()
-		return strlen(_) ? '⭠ '._ : ''
-	endif
-	return ''
-endfunction
-
-function! MyFilename()
-	return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-				\ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-				\ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
+let g:lightline = {'colorscheme': 'jellybeans'}
 
 "empty characters highlight
 set laststatus=2
