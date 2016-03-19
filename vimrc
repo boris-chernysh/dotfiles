@@ -52,6 +52,7 @@ Plugin 'moll/vim-node'
 Plugin 'kien/ctrlp.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'itchyny/lightline.vim'
+Plugin 'shutnik/jshint2.vim'
 " Plugin 'jelera/vim-javascript-syntax'
 " Plugin 'nono/jquery.vim'
 " Plugin 'LaTeX-Box-Team/LaTeX-Box'
@@ -135,7 +136,9 @@ endf
 nn <M-g> :call JumpToDef()<cr>
 ino <M-g> <esc>:call JumpToDef()<cr>i
 
-let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.snippets_emmet.json')), "\n"))
+let g:user_emmet_settings = webapi#json#decode(
+		join(readfile(expand('~/dotfiles/snippets_emmet.json')), "\n")
+	)
 
 " strings numbering
 set relativenumber
