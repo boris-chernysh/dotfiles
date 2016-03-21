@@ -158,11 +158,11 @@ endfunction
 "my mappings
 map <F7> :!reset<CR>
 
-nmap <C-S-e> :call OpenExplorer()<CR>
+nmap <silent> ;e :call OpenExplorer()<CR>
 nmap <silent> ;s :call ChangeNumbering()<CR>
 nmap <silent> ;w :tabclose<CR>
 nmap <silent> ;t :tabnew<CR>
-nmap <silent> ;e :tabnew +terminal<CR>
+" nmap <silent> ;e :tabnew +terminal<CR>
 
 function! ChangeBuf(cmd)
 	execute a:cmd
