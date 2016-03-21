@@ -147,10 +147,18 @@ function! ChangeNumbering()
 	set relativenumber!
 endfunction
 
+function! OpenExplorer()
+	if strlen(@%)
+		exe "tabnew +Explore"
+	else
+		exe "Explore"
+	endif
+endfunction
+
 "my mappings
-map <C-S-e> :vertical split +Explore<CR>
 map <F7> :!reset<CR>
 
+nmap <C-S-e> :call OpenExplorer()<CR>
 nmap <silent> ;s :call ChangeNumbering()<CR>
 nmap <silent> ;w :tabclose<CR>
 nmap <silent> ;t :tabnew<CR>
