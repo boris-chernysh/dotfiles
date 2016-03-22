@@ -161,14 +161,18 @@ endfunction
 map <F7> :!reset<CR>
 
 nmap <silent> ;e :call OpenExplorer()<CR>
+nmap <silent> ;. :Explore<CR>
 nmap <silent> ;s :call ChangeNumbering()<CR>
 nmap <silent> ;w :tabclose<CR>
 nmap <silent> ;t :tabnew<CR>
 " nmap <silent> ;e :tabnew +terminal<CR>
 nmap <silent> ;g :GundoToggle<CR>
 nmap <silent> ;r :GundoRenderGraph<CR>
-nmap <silent> ;v :vnew<CR>
+nmap <silent> ;v :vnew <CR>
 nmap <silent> ;s :new<CR>
+"TODO: jshing must hint only js files (if filetype javascript)
+nmap <silent> ;h :JSHint<CR>
+
 
 function! ChangeBuf(cmd)
 	execute a:cmd
