@@ -19,6 +19,7 @@ set t_Sb=[4%dm
 
 let g:netrw_liststyle = 0
 let g:netrw_browse_split = 0
+let g:netrw_localrmdir='rm -r'
 
 syntax on
 
@@ -164,6 +165,10 @@ nmap <silent> ;s :call ChangeNumbering()<CR>
 nmap <silent> ;w :tabclose<CR>
 nmap <silent> ;t :tabnew<CR>
 " nmap <silent> ;e :tabnew +terminal<CR>
+nmap <silent> ;g :GundoToggle<CR>
+nmap <silent> ;r :GundoRenderGraph<CR>
+nmap <silent> ;v :vnew<CR>
+nmap <silent> ;s :new<CR>
 
 function! ChangeBuf(cmd)
 	execute a:cmd
