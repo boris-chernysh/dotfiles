@@ -11,12 +11,15 @@ set ruler
 set showtabline=2
 set colorcolumn=81
 set mouse=a
+set acd
 
 set t_Co=256
 set t_Sf=[3%dm
 set t_Sb=[4%dm
 
-let g:netrw_liststyle = 3
+let g:netrw_liststyle = 0
+let g:netrw_browse_split = 0
+let g:netrw_localrmdir='rm -r'
 
 syntax on
 
@@ -49,7 +52,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'mattn/webapi-vim.git'
 Plugin 'moll/vim-node'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'shutnik/jshint2.vim'
@@ -148,14 +151,30 @@ function! ChangeNumbering()
 	set relativenumber!
 endfunction
 
+function! OpenExplorer()
+	if strlen(@%)
+		exe "tabnew +Explore"
+	else
+		exe "Explore"
+	endif
+endfunction
+
 "my mappings
-map <C-S-e> :tabnew +Explore<CR>
 map <F7> :!reset<CR>
 
+nmap <silent> ;e :call OpenExplorer()<CR>
+nmap <silent> ;. :Explore<CR>
 nmap <silent> ;s :call ChangeNumbering()<CR>
 nmap <silent> ;w :tabclose<CR>
 nmap <silent> ;t :tabnew<CR>
-nmap <silent> ;e :tabnew +terminal<CR>
+" nmap <silent> ;e :tabnew +terminal<CR>
+nmap <silent> ;g :GundoToggle<CR>
+nmap <silent> ;r :GundoRenderGraph<CR>
+nmap <silent> ;v :vnew <CR>
+nmap <silent> ;s :new<CR>
+"TODO: jshing must hint only js files (if filetype javascript)
+nmap <silent> ;h :JSHint<CR>
+
 
 function! ChangeBuf(cmd)
 	execute a:cmd
