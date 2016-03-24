@@ -172,6 +172,7 @@ nmap <silent> ;v :vnew <CR>
 nmap <silent> ;s :new<CR>
 "TODO: jshing must hint only js files (if filetype javascript)
 nmap <silent> ;h :JSHint<CR>
+nmap <silent> ;c :echo expand('%:p')
 
 
 function! ChangeBuf(cmd)

@@ -13,9 +13,9 @@
 			"cl": "console.log(${child});",
 			"cli": "console.log(${1});",
 			"rq": "var ${child} = require(\"${0}\")",
-			"fn": "function(${0}) {}",
 			"fn;": "function(${0}) {};",
 			"fnb": "function() {${0}};",
+			"fn,": "function() {${0}},",
 			"def": "define([], function() {${0}});"
 		}
 	}
