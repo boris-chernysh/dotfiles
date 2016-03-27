@@ -118,7 +118,7 @@ if has('autocmd')
 	autocmd FileType html nested NeoComplCacheLock
 endif
 
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 "es6 bind to js filetype
 autocmd BufRead,BufNewFile *.es6,*.js setfiletype javascript
