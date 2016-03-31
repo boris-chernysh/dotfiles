@@ -9,7 +9,7 @@ alias firefox='open -a firefox'
 alias -s {html,svg,pdf}="open -a 'google Chrome'"
 alias o='open -a'
 alias als='alpha.sh'
-which nvim > /dev/null && alias vim="nvim"
+# which nvim > /dev/null && alias vim="nvim"
 alias attachprivate='hdiutil attach /Users/boris/ownCloud/private.sparsebundle'
 alias detachprivate='hdiutil detach /Volumes/private'
 
