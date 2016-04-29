@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 if (! [ -z "${1//[0-9:]*[0-9]/}" ]) || [ -z "$1" ]; then
 	echo 'first argument must be a positive number or time on "dd:hh:mm:ss"'

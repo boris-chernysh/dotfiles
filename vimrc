@@ -161,10 +161,12 @@ endfunction
 "my mappings
 map <F7> :!reset<CR>
 
+nmap <silent> ;z :sh<CR>
 nmap <silent> ;e :call OpenExplorer()<CR>
 nmap <silent> ;. :Explore<CR>
-nmap <silent> ;s :call ChangeNumbering()<CR>
+" nmap <silent> ;s :call ChangeNumbering()<CR>
 nmap <silent> ;w :tabclose<CR>
+nmap <silent> ;q :q<CR>
 nmap <silent> ;t :tabnew<CR>
 " nmap <silent> ;e :tabnew +terminal<CR>
 nmap <silent> ;g :GundoToggle<CR>
@@ -174,7 +176,8 @@ nmap <silent> ;s :new<CR>
 "TODO: jshing must hint only js files (if filetype javascript)
 nmap <silent> ;h :JSHint<CR>
 nmap <silent> ;c :echo expand('%:p')<CR>
-
+vmap <silent> ;y :w !xsel -i<CR><CR>
+nmap <silent> ;p :read !xsel<CR>
 
 function! ChangeBuf(cmd)
 	execute a:cmd
