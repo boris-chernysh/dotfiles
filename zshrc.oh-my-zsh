@@ -71,4 +71,4 @@ fi
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 export PATH=$(npm bin):$PATH
-alias invim="if [ $VIM ]; then; echo 'true'; else; echo 'false'; fi"
+alias invim="if [ $VIM ]; then; echo 'vim'; else; echo ''; fi"
