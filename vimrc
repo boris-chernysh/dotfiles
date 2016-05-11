@@ -37,7 +37,6 @@ Plugin 'L9'
 Plugin 'pangloss/vim-javascript'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'othree/html5.vim'
-Plugin 'buftabs'
 Plugin 'ap/vim-css-color'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'terryma/vim-multiple-cursors'
@@ -54,9 +53,12 @@ Plugin 'mattn/webapi-vim.git'
 Plugin 'moll/vim-node'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'sjl/gundo.vim'
-Plugin 'itchyny/lightline.vim'
 Plugin 'shutnik/jshint2.vim'
 Plugin 'digitaltoad/vim-jade'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'buftabs'
+" Plugin 'itchyny/lightline.vim'
 " Plugin 'jelera/vim-javascript-syntax'
 " Plugin 'nono/jquery.vim'
 " Plugin 'LaTeX-Box-Team/LaTeX-Box'
@@ -97,14 +99,34 @@ syntax enable
 colorscheme lucius
 set background=dark
 
-"tabline colors
-hi TabLine      ctermfg=Black  ctermbg=241 cterm=NONE
-hi TabLineFill  ctermfg=Black  ctermbg=235 cterm=NONE
-hi TabLineSel   ctermfg=White  ctermbg=30 cterm=NONE
-
-"lightline
-
-let g:lightline = {'colorscheme': 'jellybeans'}
+"vim-airline
+let g:airline_theme="distinguished"
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+let g:airline#extensions#tabline#enabled = 1
 
 "empty characters highlight
 set laststatus=2
@@ -127,18 +149,6 @@ autocmd BufRead,BufNewFile *.es6,*.js setfiletype javascript
 "nim filetype
 autocmd BufRead,BufNewFile *.nim setfiletype nim
 autocmd FileType nim set tabstop=4|set shiftwidth=4|set expandtab
-
-fun! JumpToDef()
-	if exists("*GotoDefinition_" . &filetype)
-		call GotoDefinition_{&filetype}()
-	else
-		exe "norm! \<C-]>"
-	endif
-endf
-
-" Jump to tag
-nn <M-g> :call JumpToDef()<cr>
-ino <M-g> <esc>:call JumpToDef()<cr>i
 
 let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/dotfiles/snippets_emmet.json')), "\n"))
 
