@@ -57,16 +57,6 @@ Plugin 'shutnik/jshint2.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-" Plugin 'buftabs'
-" Plugin 'itchyny/lightline.vim'
-" Plugin 'jelera/vim-javascript-syntax'
-" Plugin 'nono/jquery.vim'
-" Plugin 'LaTeX-Box-Team/LaTeX-Box'
-" Plugin 'shougo/vimproc'
-" Plugin 'Shougo/vimshell.vim'
-" Plugin 'jistr/vim-nerdtree-tabs'
-" Plugin 'scrooloose/nerdtree.git'
-
 call vundle#end()
 filetype plugin indent on
 
@@ -176,8 +166,10 @@ nmap <silent> ;e :call OpenExplorer()<CR>
 nmap <silent> ;. :Explore<CR>
 " nmap <silent> ;s :call ChangeNumbering()<CR>
 nmap <silent> ;w :tabclose<CR>
+nmap <silent> ;W :bdelete<CR>
 nmap <silent> ;q :q<CR>
 nmap <silent> ;t :tabnew<CR>
+nmap <silent> ;T :enew<CR>
 " nmap <silent> ;e :tabnew +terminal<CR>
 nmap <silent> ;g :GundoToggle<CR>
 nmap <silent> ;r :GundoRenderGraph<CR>
@@ -188,11 +180,8 @@ nmap <silent> ;h :JSHint<CR>
 nmap <silent> ;c :echo expand('%:p')<CR>
 vmap <silent> ;y :w !xsel -i<CR><CR>
 nmap <silent> ;p :read !xsel<CR>
-
-function! ChangeBuf(cmd)
-	execute a:cmd
-endfunction
-nnoremap <silent> <C-b> :call ChangeBuf(":bn")<CR>
+nmap <silent> ;n :bn<CR>
+nmap <silent> ;b :bp<CR>
 
 vnoremap < <gv
 vnoremap > >gv
