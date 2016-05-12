@@ -13,6 +13,7 @@ set colorcolumn=81
 set mouse=a
 set acd
 
+"set terminal colors
 set t_Co=256
 set t_Sf=[3%dm
 set t_Sb=[4%dm
@@ -30,7 +31,7 @@ filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
+Plugin 'whatyouhide/vim-gotham'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
@@ -64,9 +65,6 @@ filetype plugin indent on
 :set regexpengine=1
 :syntax enable
 
-" autocmd vimenter * NERDTree
-" let g:nerdtree_tabs_open_on_console_startup=1
-
 "easy motion
 let g:EasyMotion_do_mapping = 0
 
@@ -91,6 +89,7 @@ set background=dark
 
 "vim-airline
 let g:airline_theme="distinguished"
+let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
@@ -146,42 +145,34 @@ let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/dotfiles/
 set relativenumber
 set number
 
-function! ChangeNumbering()
-	set relativenumber!
-endfunction
-
-function! OpenExplorer()
-	if strlen(@%)
-		exe "tabnew +Explore"
-	else
-		exe "Explore"
-	endif
-endfunction
-
 "my mappings
 map <F7> :!reset<CR>
 
 nmap <silent> ;z :sh<CR>
-nmap <silent> ;e :call OpenExplorer()<CR>
 nmap <silent> ;. :Explore<CR>
-" nmap <silent> ;s :call ChangeNumbering()<CR>
-nmap <silent> ;w :tabclose<CR>
-nmap <silent> ;W :bdelete<CR>
-nmap <silent> ;q :q<CR>
-nmap <silent> ;t :tabnew<CR>
-nmap <silent> ;T :enew<CR>
-" nmap <silent> ;e :tabnew +terminal<CR>
-nmap <silent> ;g :GundoToggle<CR>
-nmap <silent> ;r :GundoRenderGraph<CR>
-nmap <silent> ;v :vnew <CR>
-nmap <silent> ;s :new<CR>
+nmap <silent> ;c :echo expand('%:p')<CR>
 "TODO: jshing must hint only js files (if filetype javascript)
 nmap <silent> ;h :JSHint<CR>
-nmap <silent> ;c :echo expand('%:p')<CR>
+
+"tabs mappings
+nmap <silent> ;W :tabclose<CR>
+nmap <silent> ;T :tabnew<CR>
+
+"clipboard mappings
 vmap <silent> ;y :w !xsel -i<CR><CR>
 nmap <silent> ;p :read !xsel<CR>
+
+"buffers mappings
+nmap <silent> ;w :bdelete<CR>
+nmap <silent> ;t :enew<CR>
+nmap <silent> ;v :vnew <CR>
+nmap <silent> ;s :new<CR>
 nmap <silent> ;n :bn<CR>
 nmap <silent> ;b :bp<CR>
+
+"gundo mappings
+nmap <silent> ;g :GundoToggle<CR>
+nmap <silent> ;r :GundoRenderGraph<CR>
 
 vnoremap < <gv
 vnoremap > >gv

@@ -13,16 +13,17 @@ compinit
 setopt CORRECT_ALL
 setopt autocd
 
+# highlight
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES=(
-'alias'           'fg=153,bold'
-'builtin'         'fg=153'
-'function'        'fg=166'
-'command'         'fg=153'
-'precommand'      'fg=153, underline'
-'hashed-commands' 'fg=153'
-'path'            'underline'
-'globbing'        'fg=166'
+	'alias' 'fg=153,bold'
+	'builtin' 'fg=153'
+	'function' 'fg=166'
+	'command' 'fg=153'
+	'precommand' 'fg=153, underline'
+	'hashed-commands' 'fg=153'
+	'path' 'underline'
+	'globbing''fg=166'
 )
 
 zstyle ':completion:*' menu select=long-list select=0
@@ -51,7 +52,5 @@ alias l='ls -p'
 alias la='ls -a'
 alias ll='ls -l'
 alias v='vim'
-# which nvim > /dev/null && alias vim="nvim"
 alias c="cd .."
 alias initenv="virtualenv ENV --python=python3 --no-site-packages"
-nvm use v0.12.9
