@@ -12,12 +12,14 @@ set showtabline=2
 set colorcolumn=81
 set mouse=a
 set acd
+set hidden
 
-"set terminal colors
+" set terminal colors
 set t_Co=256
 set t_Sf=[3%dm
 set t_Sb=[4%dm
 
+" netrw
 let g:netrw_liststyle = 0
 let g:netrw_browse_split = 0
 let g:netrw_localrmdir='rm -r'
@@ -61,11 +63,11 @@ Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()
 filetype plugin indent on
 
-"pangloss/vim-javascript
+" pangloss/vim-javascript
 :set regexpengine=1
 :syntax enable
 
-"easy motion
+" easy motion
 let g:EasyMotion_do_mapping = 0
 
 nmap <leader><leader> <Plug>(easymotion-s)
@@ -82,12 +84,12 @@ map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0
 
-"colors
+" colors
 syntax enable
 colorscheme lucius
 set background=dark
 
-"vim-airline
+" vim-airline
 let g:airline_theme="distinguished"
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
@@ -117,25 +119,25 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:airline#extensions#tabline#enabled = 1
 
-"empty characters highlight
+" empty characters highlight
 set laststatus=2
 set list
 set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~"
 
-"use complcache
+" use complcache
 let g:neocomplcache_enable_at_startup = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"not use complcache for html
+" not use complcache for html
 if has('autocmd')
 	autocmd FileType html nested NeoComplCacheLock
 endif
 
 set clipboard=unnamed
 
-"es6 bind to js filetype
+" es6 bind to js filetype
 autocmd BufRead,BufNewFile *.es6,*.js setfiletype javascript
 
-"nim filetype
+" nim filetype
 autocmd BufRead,BufNewFile *.nim setfiletype nim
 autocmd FileType nim set tabstop=4|set shiftwidth=4|set expandtab
 
@@ -145,24 +147,24 @@ let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/dotfiles/
 set relativenumber
 set number
 
-"my mappings
+" my mappings
 map <F7> :!reset<CR>
 
 nmap <silent> ;z :sh<CR>
 nmap <silent> ;. :Explore<CR>
 nmap <silent> ;c :echo expand('%:p')<CR>
-"TODO: jshing must hint only js files (if filetype javascript)
+" TODO: jshing must hint only js files (if filetype javascript)
 nmap <silent> ;h :JSHint<CR>
 
-"tabs mappings
+" tabs mappings
 nmap <silent> ;W :tabclose<CR>
 nmap <silent> ;T :tabnew<CR>
 
-"clipboard mappings
+" clipboard mappings
 vmap <silent> ;y :w !xsel -i<CR><CR>
 nmap <silent> ;p :read !xsel<CR>
 
-"buffers mappings
+" buffers mappings
 nmap <silent> ;w :bdelete<CR>
 nmap <silent> ;t :enew<CR>
 nmap <silent> ;v :vnew <CR>
@@ -170,7 +172,7 @@ nmap <silent> ;s :new<CR>
 nmap <silent> ;n :bn<CR>
 nmap <silent> ;b :bp<CR>
 
-"gundo mappings
+" gundo mappings
 nmap <silent> ;g :GundoToggle<CR>
 nmap <silent> ;r :GundoRenderGraph<CR>
 
