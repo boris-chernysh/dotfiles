@@ -33,7 +33,7 @@ filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'whatyouhide/vim-gotham'
+
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
@@ -41,7 +41,6 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'othree/html5.vim'
 Plugin 'ap/vim-css-color'
-Plugin 'Shougo/neocomplcache.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'dag/vim2hs'
 Plugin 'tpope/vim-markdown'
@@ -60,7 +59,9 @@ Plugin 'shutnik/jshint2.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+
 call vundle#end()
+
 filetype plugin indent on
 
 " pangloss/vim-javascript
@@ -84,14 +85,14 @@ map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0
 
-" colors
+" layout colors
 syntax enable
 colorscheme lucius
 set background=dark
+let g:airline_theme="distinguished"
 
 " vim-airline
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_theme="distinguished"
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
@@ -126,12 +127,12 @@ set list
 set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~"
 
 " use complcache
-let g:neocomplcache_enable_at_startup = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" not use complcache for html
-if has('autocmd')
-	autocmd FileType html nested NeoComplCacheLock
-endif
+" let g:neocomplcache_enable_at_startup = 1
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" " not use complcache for html
+" if has('autocmd')
+" 	autocmd FileType html nested NeoComplCacheLock
+" endif
 
 set clipboard=unnamed
 
