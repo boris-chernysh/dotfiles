@@ -50,7 +50,6 @@ Plugin 'jonathanfilip/vim-lucius'
 Plugin 'zah/nimrod.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'Raimondi/delimitMate'
 Plugin 'mattn/webapi-vim.git'
 Plugin 'moll/vim-node'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -59,6 +58,8 @@ Plugin 'shutnik/jshint2.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'tpope/vim-surround'
+Plugin 'Raimondi/delimitMate'
 
 call vundle#end()
 
