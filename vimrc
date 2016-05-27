@@ -11,7 +11,7 @@ set ruler
 set showtabline=2
 set colorcolumn=81
 set mouse=a
-set acd
+" set acd
 set hidden
 
 " set terminal colors
@@ -34,6 +34,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'kshenoy/vim-signature'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
