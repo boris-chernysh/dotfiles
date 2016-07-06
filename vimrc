@@ -13,6 +13,8 @@ set colorcolumn=81
 set mouse=a
 " set acd
 set hidden
+set splitbelow
+set splitright
 
 " set terminal colors
 set t_Co=256
