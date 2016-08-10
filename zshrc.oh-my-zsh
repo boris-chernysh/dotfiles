@@ -1,7 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR="vim"
 
-ZSH_THEME="bobbynotrussel"
+which hg >> /dev/null && ZSH_THEME="bobbynotrussell" || ZSH_THEME="robbyrussell"
 
 plugins=(git bundler osx mercurial node jump brew brew-cask \
 	vi-mode vim-interaction nvm npm web-search zmv)
@@ -11,13 +11,18 @@ export PATH="$PATH:$HOME/dotfiles/scripts"
 source $ZSH/oh-my-zsh.sh
 bindkey '^R' history-incremental-search-backward
 
+#TODO: refactor this:
 if [[ `uname` = 'Darwin' ]]; then;
 	source $HOME/dotfiles/zshrc.osx
 else
-	source $HOME/dotfiles/zshrc.linux
+	if [[ ! `uname -m` = 'aarch64' ]]; then;
+		source $HOME/dotfiles/zshrc.linux
+	fi
 fi
 
+#TODO: refactor this:
 export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-export PATH=$(npm bin):$PATH
+which brew >> /dev/null && NVM_PREFIX=$(brew --prefix nvm)
+[[ -d $NVM_PREFIX ]] && source $NVM_PREFIX/nvm.sh
+which npm >> /dev/null && export PATH=$(npm bin):$PATH
 alias invim="if [ $VIM ]; then; echo '(vim) '; else; echo ''; fi"
