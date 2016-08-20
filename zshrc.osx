@@ -1,15 +1,9 @@
-export PATH="$PATH:/usr/local/sbin:/opt/local/bin:$HOME/src/Nim/bin:$HOME/.nimble/bin:$HOME/scripts/bin"
+export PATH="$PATH:/usr/local/sbin:/opt/local/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin"
 export MANPATH="$MANPATH:/opt/local/share/man"
 export INFOPATH="$INFOPATH:/opt/local/share/info"
-export PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
 
-alias libreoffice='open -a "libreOffice"'
 alias chrome='open -a "Google Chrome"'
 alias firefox='open -a firefox'
 alias -s {html,svg,pdf}="open -a 'google Chrome'"
-alias o='open -a'
-alias als='alpha.sh'
-alias attachprivate='hdiutil attach /Users/boris/ownCloud/private.sparsebundle'
-alias detachprivate='hdiutil detach /Volumes/private'
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
