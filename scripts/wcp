@@ -1,4 +1,0 @@
-#! /bin/bash
-
-extensions=`echo $1 | sed 's/,/|/g'`
-git ls-files | grep -E "^.*.($extensions)$"| xargs wc -l
