@@ -6,7 +6,9 @@ which hg >> /dev/null && ZSH_THEME="bobbynotrussell" || ZSH_THEME="robbyrussell"
 plugins=(git bundler osx mercurial node jump brew brew-cask \
 	vi-mode vim-interaction nvm npm web-search zmv)
 
-export PATH="$PATH:$HOME/scripts"
+for d in ~/scripts/**; do
+	PATH+=":$d"
+done
 
 source $ZSH/oh-my-zsh.sh
 bindkey '^R' history-incremental-search-backward
