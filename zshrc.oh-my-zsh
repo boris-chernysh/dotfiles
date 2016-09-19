@@ -6,18 +6,15 @@ which hg >> /dev/null && ZSH_THEME="bobbynotrussell" || ZSH_THEME="robbyrussell"
 plugins=(git bundler osx mercurial node jump brew brew-cask \
 	vi-mode vim-interaction nvm npm web-search zmv)
 
-export PATH="$PATH:$HOME/dotfiles/scripts"
+export PATH="$PATH:$HOME/scripts"
 
 source $ZSH/oh-my-zsh.sh
 bindkey '^R' history-incremental-search-backward
 
-#TODO: refactor this:
 if [[ `uname` = 'Darwin' ]]; then;
 	source $HOME/dotfiles/zshrc.osx
-else
-	if [[ ! `uname -m` = 'aarch64' ]]; then;
-		source $HOME/dotfiles/zshrc.linux
-	fi
+elif [[ ! `uname -m` = 'aarch64' ]]; then;
+	source $HOME/dotfiles/zshrc.linux
 fi
 
 #TODO: refactor this:
