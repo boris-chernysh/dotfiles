@@ -1,8 +1,9 @@
-export PATH="$PATH:$HOME/.linuxbrew/bin"
+export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 alias pbcopy='xsel --clipboard'
 alias pbpaste='xsel'
 
+export XDG_DATA_DIRS="/home/boris/.linuxbrew/share:$XDG_DATA_DIRS"
 source $HOME/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

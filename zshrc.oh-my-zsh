@@ -1,7 +1,15 @@
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR="vim"
 
-which hg >> /dev/null && ZSH_THEME="bobbynotrussell" || ZSH_THEME="robbyrussell"
+if [[ `uname` = 'Darwin' ]]; then;
+	ZSH_THEME="bobbynotrussell"
+	source $HOME/dotfiles/zshrc.osx
+elif [[ ! `uname -m` = 'aarch64' ]]; then;
+	ZSH_THEME="bobbynotrussell"
+	source $HOME/dotfiles/zshrc.linux
+else
+	ZSH_THEME="robbyrussell"
+fi
 
 plugins=(git bundler osx mercurial node jump brew brew-cask \
 	vi-mode vim-interaction nvm npm web-search zmv)
@@ -12,12 +20,6 @@ done
 
 source $ZSH/oh-my-zsh.sh
 bindkey '^R' history-incremental-search-backward
-
-if [[ `uname` = 'Darwin' ]]; then;
-	source $HOME/dotfiles/zshrc.osx
-elif [[ ! `uname -m` = 'aarch64' ]]; then;
-	source $HOME/dotfiles/zshrc.linux
-fi
 
 #TODO: refactor this:
 export NVM_DIR=~/.nvm
