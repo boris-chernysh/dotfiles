@@ -1,0 +1,36 @@
+# example user config (see "hg help config" for more info)
+[ui]
+# name and email, e.g.
+# username = Jane Doe <jdoe@example.com>
+username = Boris Chernysh <borischernysh31@gmail.com>
+
+[extensions]
+# uncomment these lines to enable some popular extensions
+# (see "hg help extensions" for more info)
+#
+pager =
+# progress =
+color =
+hgext.extdiff =
+mq =
+
+[color]
+status.modified = blue bold underline red_background
+status.added = green bold
+status.removed = red bold blue_background
+status.deleted = cyan bold underline
+status.unknown = magenta bold underline
+status.ignored = black bold
+
+[extdiff]
+cmd.vimdiff =
+
+[alias]
+vi  = vimdiff
+vim = vimdiff
+
+[pager]
+pager = LESS='FRX' less
+
+[hooks]
+precommit.checkstyle = ~/opt/bin/lint_changes.sh;
