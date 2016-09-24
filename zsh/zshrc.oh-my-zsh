@@ -4,9 +4,11 @@ export EDITOR="vim"
 plugins=(git bundler osx mercurial node jump brew brew-cask \
 	vi-mode vim-interaction nvm npm web-search zmv)
 
-for d in ~/scripts/**; do
-	PATH+=":$d"
-done
+if [ -d ~/scripts ]; then
+	for d in ~/scripts/**; do
+		PATH+=":$d"
+	done
+fi
 
 bindkey '^R' history-incremental-search-backward
 
