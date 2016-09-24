@@ -19,9 +19,9 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 if [[ `uname` = 'Darwin' ]]; then;
-	source $HOME/dotfiles/zshrc.osx
+	source $HOME/dotfiles/zsh/zshrc.osx
 elif [[ ! `uname -m` = 'aarch64' ]]; then;
-	source $HOME/dotfiles/zshrc.linux
+	source $HOME/dotfiles/zsh/zshrc.linux
 fi
 
 #TODO: refactor this:
