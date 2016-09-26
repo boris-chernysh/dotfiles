@@ -18,7 +18,6 @@ local helpers = require("helpers")
 -- Custom widgets
 local myvolume = require("volume")
 local mybattery = require("battery")
-local mywifi = require("wifi")
 
 -- Load Debian menu entries
 -- require("debian.menu")
@@ -54,7 +53,7 @@ beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 -- beautiful.init("~/.config/awesome/themes/current/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "tabbed -c xterm -into"
+terminal = "terminator"
 browser = "google-chrome"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
@@ -337,12 +336,6 @@ for s = 1, screen.count() do
 		right_layout:add(mybattery.text)
 	end
 
-	if mywifi.haswifi then
-		right_layout:add(separator)
-		right_layout:add(mywifi.icon)
-		right_layout:add(mywifi.text)
-	end
-
 	right_layout:add(separatorbig)
 	right_layout:add(mytextclock)
 	right_layout:add(mylayoutbox[s])
@@ -421,8 +414,7 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey,           }, "#22", function () awful.util.spawn(browser) end),
-    awful.key({ modkey,           }, "#107", function () awful.util.spawn("xscreensaver-command -lock") end),
+    awful.key({ modkey,           }, "g", function () awful.util.spawn(browser) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     -- awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -438,9 +430,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- System volume
-    awful.key({                   }, "#127", raisevolume),
-    awful.key({                   }, "#78", lowervolume),
-    awful.key({                   }, "#107", mutevolume),
+    awful.key({                   }, "#123", raisevolume),
+    awful.key({                   }, "#122", lowervolume),
+    awful.key({                   }, "#121", mutevolume),
     
     awful.key({ modkey, "Shift"   }, "Up", raisevolume),
     awful.key({ modkey, "Shift"   }, "Down", lowervolume),
@@ -459,13 +451,7 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end),
-    awful.key({ modkey, "Shift" }, "p", function()
-		awful.util.spawn("google-chrome --app=\"https://getpocket.com\"", true)
-	end),
-    awful.key({ modkey}, "#49", function()
-		awful.util.spawn("xterm -name kee -e keepassc", true)
-	end)
+    awful.key({ modkey }, "p", function() menubar.show() end)
 )
 
 clientkeys = awful.util.table.join(
@@ -554,23 +540,10 @@ awful.rules.rules = {
                      raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    -- { rule = { class = "guake" },
-    --   properties = { floating = true } },
-    { rule = { class = "Telegram" },
-      properties = { tag = tags[1][2] } },
-    { rule = { class = "Icedove" },
-      properties = { tag = tags[1][6] } },
-    { rule = { instance = "crx_hmjkmjkepdijhoojdojkdfohbdgmmhki" },
+    { rule = { instance = "keep.googe.com" },
       properties = { tag = tags[1][5] } },
     { rule = { instance = "inbox.google.com" },
       properties = { tag = tags[1][6] } },
-    -- { rule = { instance = "kee" },
-    --   properties = { tag = tags[1][6] } },
-    -- { rule = { class = "Slack" },
-    --   properties = { tag = tags[1][4] } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
 }
 -- }}}
 
@@ -648,10 +621,9 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- {{{ Autorun apps
-awful.util.spawn("owncloud", true)
-awful.util.spawn("/opt/telegram/Telegram", true)
-awful.util.spawn("/opt/google/chrome/google-chrome --profile-directory=Default --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki", true)
-awful.util.spawn("icedove", true)
+awful.util.spawn("google-chrome --app='https://web.telegram.org'", true)
+awful.util.spawn("google-chrome --app='https://keep.google.com'", true)
+awful.util.spawn("nm-applet", true)
 awful.util.spawn("google-chrome --app='https://inbox.google.com'", true)
 -- awful.util.spawn("kbdd", true)
 -- awful.util.spawn("xterm -name kee -e keepassc", true)
