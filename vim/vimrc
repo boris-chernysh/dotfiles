@@ -149,7 +149,7 @@ autocmd BufRead,BufNewFile *.es6,*.js setfiletype javascript
 autocmd BufRead,BufNewFile *.nim setfiletype nim
 autocmd FileType nim set tabstop=4|set shiftwidth=4|set expandtab
 
-let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/dotfiles/snippets_emmet.json')), "\n"))
+let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/dotfiles/vim/snippets_emmet.json')), "\n"))
 
 " strings numbering
 set relativenumber

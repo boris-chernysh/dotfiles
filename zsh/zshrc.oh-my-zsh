@@ -4,9 +4,11 @@ export EDITOR="vim"
 plugins=(git bundler osx mercurial node jump brew brew-cask \
 	vi-mode vim-interaction nvm npm web-search zmv)
 
-for d in ~/scripts/**; do
-	PATH+=":$d"
-done
+if [ -d ~/scripts ]; then
+	for d in ~/scripts/**; do
+		PATH+=":$d"
+	done
+fi
 
 bindkey '^R' history-incremental-search-backward
 
@@ -19,9 +21,9 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 if [[ `uname` = 'Darwin' ]]; then;
-	source $HOME/dotfiles/zshrc.osx
+	source $HOME/dotfiles/zsh/zshrc.osx
 elif [[ ! `uname -m` = 'aarch64' ]]; then;
-	source $HOME/dotfiles/zshrc.linux
+	source $HOME/dotfiles/zsh/zshrc.linux
 fi
 
 #TODO: refactor this:
