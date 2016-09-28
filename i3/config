@@ -82,3 +82,6 @@ bindsym $mod+t border toggle
 bindcode 121 exec amixer -D pulse set Master 1+ toggle
 bindcode 122 exec amixer set Master 9%-
 bindcode 123 exec amixer set Master 9%+
+
+bindcode 232 exec xbacklight -dec 10
+bindcode 233 exec xbacklight -inc 10
