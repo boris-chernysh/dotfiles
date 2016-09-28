@@ -75,7 +75,10 @@ bar {
 	status_command i3status
 }
 
-exec --no-startup-id np-applet
+exec --no-startup-id nm-applet
 bindsym $mod+g exec google-chrome
 bindsym $mod+t border toggle
 
+bindcode 121 exec amixer -D pulse set Master 1+ toggle
+bindcode 122 exec amixer set Master 9%-
+bindcode 123 exec amixer set Master 9%+
