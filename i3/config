@@ -32,7 +32,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
-bindsym $mod+1 workspace 1
+bindsym $mod+1 workspace main
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
@@ -43,7 +43,7 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+1 move container to workspace main
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
@@ -80,8 +80,8 @@ bindsym $mod+g exec google-chrome
 bindsym $mod+t border toggle
 
 bindcode 121 exec amixer -D pulse set Master 1+ toggle
-bindcode 122 exec amixer set Master 9%-
-bindcode 123 exec amixer set Master 9%+
+bindcode 122 exec amixer set Master 7%-
+bindcode 123 exec amixer set Master 7%+
 
 bindcode 232 exec xbacklight -dec 10
 bindcode 233 exec xbacklight -inc 10
