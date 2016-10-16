@@ -87,5 +87,7 @@ bindcode 123 exec amixer set Master 7%+
 bindcode 232 exec xbacklight -dec 10
 bindcode 233 exec xbacklight -inc 10
 
-bindcode 128 exec "import ~/`date +'%Y:%m:%d_%H:%M:%S'`.png"
-bindcode 212 exec "import -window root ~/`date +'%Y:%m:%d_%H:%M:%S'`.png"
+bindcode 128 --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindcode 212 --release exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindcode Shift+128 --release exec "scrot -s ~/Pictures/screenshot-$(date +%F_%T).png"
+bindcode Shift+212 --release exec "scrot ~/Pictures/screenshot-$(date +%F_%T).png"
