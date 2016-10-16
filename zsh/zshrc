@@ -5,6 +5,7 @@ plugins=(git bundler osx mercurial node jump brew brew-cask \
 	vi-mode vim-interaction nvm npm web-search zmv)
 
 if [ -d ~/scripts ]; then
+	PATH+=":$HOME/scripts"
 	for d in ~/scripts/**; do
 		PATH+=":$d"
 	done
