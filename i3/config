@@ -76,6 +76,7 @@ bar {
 }
 
 exec --no-startup-id nm-applet
+exec --no-startup-id syndaemon -i 0.5 -t -K -R -d
 
 bindsym $mod+g exec google-chrome
 bindsym $mod+t border toggle
