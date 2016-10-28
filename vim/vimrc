@@ -186,3 +186,8 @@ nmap <silent> ;r :GundoRenderGraph<CR>
 
 vnoremap < <gv
 vnoremap > >gv
+
+if has('gui_running')
+	set guioptions-=T
+	set guifont=Source\ Code\ Pro\ for\ Powerline\ 9
+endif

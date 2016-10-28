@@ -1,11 +1,12 @@
 set $mod Mod4
 
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:Anonymous Pro for Powerline 10
+set $font Arimo for Powerline 10
+font pango:$font
 
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec exec rofi -show run
+bindsym $mod+p exec exec rofi -show window
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -73,22 +74,39 @@ bindsym $mod+r mode "resize"
 bar {
 	position top
 	status_command i3status
+	workspace_buttons yes
+	colors {
+		separator #666666
+		background #222222
+		statusline #dddddd
+		focused_workspace #222222 #222222 #0088CC
+		active_workspace #222222 #222222 #dddddd
+		inactive_workspace #222222 #222222 #dddddd
+		urgent_workspace  #222222 #222222 #dddddd
+	}
 }
 
 exec --no-startup-id nm-applet
+exec --no-startup-id volumeicon
 exec --no-startup-id syndaemon -i 0.5 -t -K -R -d
 
 bindsym $mod+g exec google-chrome
 bindsym $mod+t border toggle
+bindsym $mod+m bar mode toggle
 
-bindcode 121 exec amixer -D pulse set Master 1+ toggle
-bindcode 122 exec amixer set Master 7%-
-bindcode 123 exec amixer set Master 7%+
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
-bindcode 232 exec xbacklight -dec 10
-bindcode 233 exec xbacklight -inc 10
+bindsym XF86AudioRaiseVolume exec amixer set Master 7%+
+bindsym XF86AudioLowerVolume exec amixer set Master 7%-
+bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
 
-bindcode 128 --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f; rm $f'"
-bindcode 212 --release exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f; rm $f'"
-bindcode Shift+128 --release exec "scrot -s ~/Pictures/screenshot-$(date +%F_%T).png"
-bindcode Shift+212 --release exec "scrot ~/Pictures/screenshot-$(date +%F_%T).png"
+bindsym XF86LaunchA --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f; rm $f'"
+bindsym XF86LaunchB --release exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f; rm $f'"
+bindsym Shift+XF86LaunchA --release exec "scrot -s ~/Pictures/screenshot-$(date +%F_%T).png"
+bindsym Shift+XF86LaunchB --release exec "scrot ~/Pictures/screenshot-$(date +%F_%T).png"
+
+client.focused #333333 #333338 #0088CC #dddddd
+client.focused_inactive #333333 #333338 #447188 #292d2e
+client.unfocused #333333 #333333 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
