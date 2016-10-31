@@ -40,14 +40,12 @@ Plugin 'kshenoy/vim-signature'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
-Plugin 'pangloss/vim-javascript'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'othree/html5.vim'
 Plugin 'ap/vim-css-color'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'dag/vim2hs'
 Plugin 'tpope/vim-markdown'
-Plugin 'briancollins/vim-jst'
 Plugin 'juvenn/mustache.vim'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'zah/nimrod.vim'
@@ -64,6 +62,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-surround'
 Plugin 'Raimondi/delimitMate'
 Plugin 'shougo/neocomplete.vim'
+Plugin 'mxw/vim-jsx'
 
 call vundle#end()
 
@@ -148,8 +147,6 @@ autocmd BufRead,BufNewFile *.es6,*.js setfiletype javascript
 " nim filetype
 autocmd BufRead,BufNewFile *.nim setfiletype nim
 autocmd FileType nim set tabstop=4|set shiftwidth=4|set expandtab
-
-let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/dotfiles/vim/snippets_emmet.json')), "\n"))
 
 " strings numbering
 set relativenumber
