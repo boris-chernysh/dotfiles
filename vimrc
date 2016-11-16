@@ -63,6 +63,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'Raimondi/delimitMate'
 Plugin 'shougo/neocomplete.vim'
 Plugin 'mxw/vim-jsx'
+Plugin 'reedes/vim-colors-pencil'
 
 call vundle#end()
 
@@ -91,9 +92,9 @@ let g:EasyMotion_startofline = 0
 
 " layout colors
 syntax enable
-colorscheme lucius
+colorscheme pencil
 set background=dark
-let g:airline_theme="distinguished"
+let g:airline_theme='pencil'
 
 " vim-airline
 let g:airline#extensions#tabline#buffer_nr_show = 1
