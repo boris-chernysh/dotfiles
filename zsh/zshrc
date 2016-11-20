@@ -4,9 +4,10 @@ export EDITOR="vim"
 plugins=(git bundler osx mercurial node jump brew brew-cask \
 	vi-mode vim-interaction nvm npm web-search zmv)
 
-if [ -d ~/scripts ]; then
+if [[ -d ~/scripts ]]; then
 	PATH+=":$HOME/scripts"
 	for d in ~/scripts/**; do
+		[[ ! -d $d ]] && continue
 		PATH+=":$d"
 	done
 fi
@@ -32,4 +33,3 @@ export NVM_DIR=~/.nvm
 which brew >> /dev/null && NVM_PREFIX=$(brew --prefix nvm)
 [[ -d $NVM_PREFIX ]] && source $NVM_PREFIX/nvm.sh
 which npm >> /dev/null && export PATH=$(npm bin):$PATH
-alias invim="if [ $VIM ]; then; echo '(vim) '; else; echo ''; fi"
