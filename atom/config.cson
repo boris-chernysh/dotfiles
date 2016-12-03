@@ -1,0 +1,11 @@
+"*":
+  core:
+    disabledPackages: [
+      "emmet"
+    ]
+    telemetryConsent: "no"
+  editor: {}
+  "exception-reporting":
+    userId: "4e1f23c4-8ffc-ee00-caa9-3a52534e4852"
+  welcome:
+    showOnStartup: false
