@@ -1,11 +1,23 @@
 "*":
   core:
     disabledPackages: [
-      "emmet"
+      "metrics"
     ]
     telemetryConsent: "no"
-  editor: {}
-  "exception-reporting":
-    userId: "4e1f23c4-8ffc-ee00-caa9-3a52534e4852"
+  editor:
+    fontFamily: "Cousine for Powerline"
+    fontSize: 12
+    invisibles:
+      cr: "¤"
+      eol: "¬"
+      space: "·"
+      tab: "⇥"
+    preferredLineLength: 80
+    showIdentGuide: true
+    showInvisibles: true
+    tabLength: 4
   welcome:
     showOnStartup: false
+".coffee.source":
+  editor:
+    tabLength: 2
