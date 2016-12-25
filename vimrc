@@ -119,7 +119,7 @@ let g:EasyMotion_startofline = 0
 
 " layout colors
 syntax enable
-colorscheme pencil
+colorscheme lucius
 set background=dark
 let g:airline_theme='pencil'
 
