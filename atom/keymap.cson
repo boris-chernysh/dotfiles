@@ -30,3 +30,13 @@
 # If you are unfamiliar with CSON, you can read more about it in the
 # Atom Flight Manual:
 # http://flight-manual.atom.io/using-atom/sections/basic-customization/#_cson
+
+'atom-text-editor.vim-mode-plus.normal-mode':
+  'g f':      'open-this:here'
+  'ctrl-w f': 'open-this:split-down'
+  'ctrl-w F': 'open-this:split-right'
+  '; w': 'core:close'
+
+'body, atom-workspace atom-text-editor':
+  'ctrl-l': 'pane:show-next-item'
+  'ctrl-h': 'pane:show-previous-item'

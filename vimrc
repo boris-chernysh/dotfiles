@@ -46,19 +46,14 @@ Plugin 'L9'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'othree/html5.vim'
 Plugin 'ap/vim-css-color'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'dag/vim2hs'
 Plugin 'tpope/vim-markdown'
 Plugin 'juvenn/mustache.vim'
 Plugin 'jonathanfilip/vim-lucius'
-Plugin 'zah/nimrod.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'mattn/webapi-vim.git'
 Plugin 'moll/vim-node'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'sjl/gundo.vim'
-Plugin 'shutnik/jshint2.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -68,6 +63,7 @@ Plugin 'shougo/neocomplete.vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'reedes/vim-colors-pencil'
 Plugin 'scrooloose/syntastic'
+Plugin 'mileszs/ack.vim'
 
 call vundle#end()
 
@@ -211,6 +207,15 @@ nmap <silent> ;r :GundoRenderGraph<CR>
 
 vnoremap < <gv
 vnoremap > >gv
+
+" The Silver Searcher
+if executable('ag')
+	set grepprg=ag\ --nogroup\ --nocolor
+
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+	let g:ackprg = 'ag --vimgrep'
+	let g:ctrlp_use_caching = 0
+endif
 
 if has('gui_running')
 	set guioptions-=T

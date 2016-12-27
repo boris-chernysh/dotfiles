@@ -38,12 +38,14 @@ bindsym $mod+2 workspace 2.workplace
 bindsym $mod+3 workspace 3.IM
 bindsym $mod+4 workspace 4.playground
 bindsym $mod+5 workspace 5.music
+bindsym $mod+6 workspace 6.kodi
 
 bindsym $mod+Shift+1 move container to workspace 1.workplace
 bindsym $mod+Shift+2 move container to workspace 2.workplace
 bindsym $mod+Shift+3 move container to workspace 3.IM
 bindsym $mod+Shift+4 move container to workspace 4.playground
 bindsym $mod+Shift+5 move container to workspace 5.music
+bindsym $mod+Shift+6 move container to workspace 6.kodi
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
@@ -78,6 +80,7 @@ bar {
 
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
+exec --no-startup-id xfce4-power-manager
 exec --no-startup-id syndaemon -i 0.5 -t -K -R -d
 
 bindsym $mod+g exec google-chrome
