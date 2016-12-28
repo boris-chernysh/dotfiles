@@ -64,6 +64,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'reedes/vim-colors-pencil'
 Plugin 'scrooloose/syntastic'
 Plugin 'mileszs/ack.vim'
+Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()
 
@@ -115,7 +116,7 @@ let g:EasyMotion_startofline = 0
 
 " layout colors
 syntax enable
-colorscheme pencil
+colorscheme lucius
 set background=dark
 let g:airline_theme='pencil'
 
@@ -196,12 +197,15 @@ nmap <silent> ;w :bdelete<CR>
 nmap <silent> ;t :enew<CR>
 nmap <silent> ;v :vnew <CR>
 nmap <silent> ;s :new<CR>
-nmap <silent> ;l :bn<CR>
-nmap <silent> ;h :bp<CR>
+nmap <silent> ;n :bn<CR>
+nmap <silent> ;b :bp<CR>
 
 " gundo mappings
 nmap <silent> ;g :GundoToggle<CR>
 nmap <silent> ;r :GundoRenderGraph<CR>
+
+" ack mappings
+nmap <silent> ;f :Ack 
 
 vnoremap < <gv
 vnoremap > >gv
