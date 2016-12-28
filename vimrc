@@ -115,7 +115,7 @@ let g:EasyMotion_startofline = 0
 
 " layout colors
 syntax enable
-colorscheme lucius
+colorscheme pencil
 set background=dark
 let g:airline_theme='pencil'
 
@@ -182,8 +182,6 @@ map <F7> :!reset<CR>
 nmap <silent> ;z :sh<CR>
 nmap <silent> ;. :Explore<CR>
 nmap <silent> ;c :echo expand('%:p')<CR>
-" TODO: jshing must hint only js files (if filetype javascript)
-nmap <silent> ;h :JSHint<CR>
 
 " tabs mappings
 nmap <silent> ;W :tabclose<CR>
@@ -198,8 +196,8 @@ nmap <silent> ;w :bdelete<CR>
 nmap <silent> ;t :enew<CR>
 nmap <silent> ;v :vnew <CR>
 nmap <silent> ;s :new<CR>
-nmap <silent> ;n :bn<CR>
-nmap <silent> ;b :bp<CR>
+nmap <silent> ;l :bn<CR>
+nmap <silent> ;h :bp<CR>
 
 " gundo mappings
 nmap <silent> ;g :GundoToggle<CR>
