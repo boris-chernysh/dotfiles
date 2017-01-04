@@ -1,15 +1,8 @@
-# example user config (see "hg help config" for more info)
 [ui]
-# name and email, e.g.
-# username = Jane Doe <jdoe@example.com>
 username = Boris Chernysh <borischernysh31@gmail.com>
 
 [extensions]
-# uncomment these lines to enable some popular extensions
-# (see "hg help extensions" for more info)
-#
 pager =
-# progress =
 color =
 hgext.extdiff =
 mq =
@@ -31,6 +24,3 @@ vim = vimdiff
 
 [pager]
 pager = LESS='FRX' less
-
-[hooks]
-precommit.checkstyle = ~/opt/bin/lint_changes.sh;

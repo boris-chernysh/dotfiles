@@ -71,7 +71,7 @@ bar {
 		separator #666666
 		background #222222
 		statusline #dddddd
-		focused_workspace #222222 #222222 #0088CC
+		focused_workspace #222222 #222222 #4FB8CC
 		active_workspace #222222 #222222 #dddddd
 		inactive_workspace #222222 #222222 #dddddd
 		urgent_workspace  #222222 #222222 #dddddd
@@ -80,7 +80,7 @@ bar {
 
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
-exec --no-startup-id xfce4-power-manager
+exec --no-startup-id screencloud
 exec --no-startup-id syndaemon -i 0.5 -t -K -R -d
 
 bindsym $mod+g exec google-chrome
@@ -94,7 +94,7 @@ bindsym XF86AudioRaiseVolume exec amixer set Master 7%+
 bindsym XF86AudioLowerVolume exec amixer set Master 7%-
 bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
 
-client.focused #333333 #333338 #0088CC #dddddd
+client.focused #333333 #333338 #4FB8CC #dddddd
 client.focused_inactive #333333 #333338 #447188 #292d2e
 client.unfocused #333333 #333333 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
