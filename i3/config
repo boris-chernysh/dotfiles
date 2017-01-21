@@ -1,10 +1,19 @@
 set $mod Mod4
 
+set $terminal terminator
+set $browser google-chrome
+
+set $tag1 1.WORKPLACE
+set $tag2 2.WORKPLACE
+set $tag3 3.IM
+set $tag4 4.PLAYGROUND
+set $tag5 5.MUSIC
+
 #set $font Arimo for Powerline 10
-set $font Purisa 9
+set $font Permanent Marker 10
 font pango:$font
 
-bindsym $mod+Return exec terminator
+bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec exec rofi -show run
 bindsym $mod+p exec exec rofi -show window
@@ -34,23 +43,35 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
-bindsym $mod+1 workspace 1.workplace
-bindsym $mod+2 workspace 2.workplace
-bindsym $mod+3 workspace 3.IM
-bindsym $mod+4 workspace 4.playground
-bindsym $mod+5 workspace 5.music
-bindsym $mod+6 workspace 6.kodi
+bindsym $mod+1 workspace $tag1
+bindsym $mod+2 workspace $tag2
+bindsym $mod+3 workspace $tag3
+bindsym $mod+4 workspace $tag4
+bindsym $mod+5 workspace $tag5
 
-bindsym $mod+Shift+1 move container to workspace 1.workplace
-bindsym $mod+Shift+2 move container to workspace 2.workplace
-bindsym $mod+Shift+3 move container to workspace 3.IM
-bindsym $mod+Shift+4 move container to workspace 4.playground
-bindsym $mod+Shift+5 move container to workspace 5.music
-bindsym $mod+Shift+6 move container to workspace 6.kodi
+bindsym $mod+Shift+1 move container to workspace $tag1
+bindsym $mod+Shift+2 move container to workspace $tag2
+bindsym $mod+Shift+3 move container to workspace $tag3
+bindsym $mod+Shift+4 move container to workspace $tag4
+bindsym $mod+Shift+5 move container to workspace $tag5
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+g exec google-chrome
+bindsym $mod+t border toggle
+bindsym $mod+m bar mode toggle
+
+bindsym XF86AudioRaiseVolume exec amixer set Master 7%+
+bindsym XF86AudioLowerVolume exec amixer set Master 7%-
+bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
+
+exec --no-startup-id nm-applet
+exec --no-startup-id volumeicon
+exec --no-startup-id screencloud
+exec --no-startup-id syndaemon -i 0.5 -t -K -R -d
+exec --no-startup-id feh --bg-scale ~/.wallpaper.jpg
 
 mode "resize" {
 	bindsym h resize shrink width 10 px or 10 ppt
@@ -78,22 +99,6 @@ bar {
 		urgent_workspace  #222222 #222222 #dddddd
 	}
 }
-
-exec --no-startup-id nm-applet
-exec --no-startup-id volumeicon
-exec --no-startup-id screencloud
-exec --no-startup-id syndaemon -i 0.5 -t -K -R -d
-
-bindsym $mod+g exec google-chrome
-bindsym $mod+t border toggle
-bindsym $mod+m bar mode toggle
-
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-
-bindsym XF86AudioRaiseVolume exec amixer set Master 7%+
-bindsym XF86AudioLowerVolume exec amixer set Master 7%-
-bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
 
 client.focused #333333 #333338 #4FB8CC #dddddd
 client.focused_inactive #333333 #333338 #447188 #292d2e

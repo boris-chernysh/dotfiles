@@ -19,7 +19,7 @@
 [plugins]
 [profiles]
   [[default]]
-    background_color = "#002b36"
+    background_color = "#2c2c2c"
     background_image = None
     cursor_color = "#20bbfc"
     font = Cousine for Powerline 10
