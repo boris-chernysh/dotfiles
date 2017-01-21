@@ -1,6 +1,7 @@
 set $mod Mod4
 
-set $font Arimo for Powerline 10
+#set $font Arimo for Powerline 10
+set $font Purisa 9
 font pango:$font
 
 bindsym $mod+Return exec terminator
