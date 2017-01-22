@@ -2,6 +2,7 @@ set $mod Mod4
 
 set $terminal terminator
 set $browser google-chrome
+set $lock gnome-screensaver-command -l
 
 set $tag1 1.WORKPLACE
 set $tag2 2.WORKPLACE
@@ -84,6 +85,15 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+mode "power" {
+	bindsym l exec $lock, mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+q mode "power"
 
 bar {
 	position top
