@@ -19,6 +19,8 @@ autocmd FileType javascript setlocal expandtab
 autocmd FileType css setlocal expandtab
 autocmd FileType less setlocal expandtab
 
+let mapleader = ';'
+
 " set terminal colors
 set t_Co=256
 set t_Sf=[3%dm
@@ -69,7 +71,6 @@ Plugin 'altercation/vim-colors-solarized'
 call vundle#end()
 
 " syntastic
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -92,10 +93,6 @@ highlight link SyntasticStyleErrorSign SignColumn
 highlight link SyntasticStyleWarningSign SignColumn
 
 filetype plugin indent on
-
-" pangloss/vim-javascript
-:set regexpengine=1
-:syntax enable
 
 " easy motion
 let g:EasyMotion_do_mapping = 0
@@ -166,46 +163,37 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 set clipboard=unnamed
 
-" es6 bind to js filetype
-autocmd BufRead,BufNewFile *.es6,*.js setfiletype javascript
-
-" nim filetype
-autocmd BufRead,BufNewFile *.nim setfiletype nim
-autocmd FileType nim set tabstop=4|set shiftwidth=4|set expandtab
-
 " strings numbering
 set relativenumber
 set number
 
-" my mappings
 map <F7> :!reset<CR>
-
-nmap <silent> ;z :sh<CR>
-nmap <silent> ;. :Explore<CR>
-nmap <silent> ;c :echo expand('%:p')<CR>
+nmap <silent> <leader>z :sh<CR>
+nmap <silent> <leader>. :Explore<CR>
+nmap <silent> <leader>c :echo expand('%:p')<CR>
 
 " tabs mappings
-nmap <silent> ;W :tabclose<CR>
-nmap <silent> ;T :tabnew<CR>
+nmap <silent> <leader>W :tabclose<CR>
+nmap <silent> <leader>T :tabnew<CR>
 
 " clipboard mappings
-vmap <silent> ;y :w !xsel -i<CR><CR>
-nmap <silent> ;p :read !xsel<CR>
+vmap <silent> <leader>y :w !xsel -i<CR><CR>
+nmap <silent> <leader>p :read !xsel<CR>
 
 " buffers mappings
-nmap <silent> ;w :bdelete<CR>
-nmap <silent> ;t :enew<CR>
-nmap <silent> ;v :vnew <CR>
-nmap <silent> ;s :new<CR>
-nmap <silent> ;n :bn<CR>
-nmap <silent> ;b :bp<CR>
+nmap <silent> <leader>w :bdelete<CR>
+nmap <silent> <leader>t :enew<CR>
+nmap <silent> <leader>v :vnew <CR>
+nmap <silent> <leader>s :new<CR>
+nmap <silent> <leader>n :bn<CR>
+nmap <silent> <leader>b :bp<CR>
 
 " gundo mappings
-nmap <silent> ;g :GundoToggle<CR>
-nmap <silent> ;r :GundoRenderGraph<CR>
+nmap <silent> <leader>g :GundoToggle<CR>
+nmap <silent> <leader>r :GundoRenderGraph<CR>
 
 " ack mappings
-nmap <silent> ;f :Ack 
+nmap <silent> <leader>f :Ack 
 
 vnoremap < <gv
 vnoremap > >gv
