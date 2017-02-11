@@ -64,12 +64,12 @@ Plug 'mattn/emmet-vim' "fast creating html/css
 Plug 'sjl/gundo.vim' "tree of file changes
 Plug 'Raimondi/delimitMate' "brackets autoclose
 Plug 'mileszs/ack.vim' "find in files
-Plug 'gcmt/taboo.vim' "extended tabline
 Plug 'skywind3000/asyncrun.vim' "async run shell commands
 Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
 Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
 Plug 'moll/vim-bbye' "close buffers without close window
 Plug 'benekastah/neomake' "async make tool
+Plug 'webdevel/tabulous' "customazible tab line
 " colors and helpers for languages
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
@@ -121,30 +121,44 @@ endif
 " neomake
 let g:jsx_ext_required = 0 "allow jsx in normal js files
 
-autocmd FileType javascript :call SetJavascriptLinter()
+autocmd FileType javascript,less,css call SetNeomakers()
 autocmd! BufWritePost,BufEnter,TextChanged,TextChangedI * Neomake
+autocmd FileType **/__tests__/*.js nmap <F9> Neomake! jest
 
 " utils
 
-" SetJavascriptLinter() sets Neomake variables for project linting engine
-function SetJavascriptLinter()
+" SetLinters() sets Neomake variables for project linting engines
+" if ./node_modules/.bin not set in $PATH binaries for makers not be found, and
+" Neomake won't use it
+function! SetNeomakers()
 	let l:npm_bin = GetNpmBinFolder()
-	let l:linters = []
+	let l:js_makers = []
+	let l:style_makers = []
 
-	if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
-		let l:linters = ['eslint']
-		let b:neomake_javascript_eslint_exe = l:npm_bin . '/eslint'
-	elseif strlen(l:npm_bin) && executable(l:npm_bin . '/jshint')
-		let l:linters = ['jshint']
-		let b:neomake_javascript_jshint_exe = l:npm_bin . '/jshint'
+	if strlen(l:npm_bin)
+		if executable(l:npm_bin . '/eslint')
+			call add(l:js_makers, 'eslint')
+			let b:neomake_javascript_eslint_exe = l:npm_bin . '/eslint'
+		elseif executable(l:npm_bin . '/jshint')
+			call add(l:js_makers, 'jshint')
+			let b:neomake_javascript_jshint_exe = l:npm_bin . '/jshint'
+		endif
+
+		if executable(l:npm_bin . '/stylelint')
+			call add(l:style_makers, 'stylelint')
+			let b:neomake_less_stylelint_exe = l:npm_bin . '/stylelint'
+			let b:neomake_css_stylelint_exe = l:npm_bin . '/stylelint'
+		endif
 	endif
 
-	let b:neomake_javascript_enabled_makers = l:linters
-	let b:neomake_jsx_enabled_makers = l:linters
+	let b:neomake_javascript_enabled_makers = l:js_makers
+	let b:neomake_jsx_enabled_makers = l:js_makers
+	let b:neomake_less_enabled_makers = l:style_makers
+	let b:neomake_css_enabled_makers = l:style_makers
 endfunction
 
 " get folder where npm store bin
-function GetNpmBinFolder()
+function! GetNpmBinFolder()
 	let l:npm_bin = ''
 
 	if executable('npm')
