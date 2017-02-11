@@ -119,9 +119,12 @@ if executable('ag')
 endif
 
 " neomake
-let g:neomake_javascript_enabled_makers = []
-let g:neomake_jsx_enabled_makers = []
 let g:jsx_ext_required = 0 "allow jsx in normal js files
+
+autocmd FileType javascript :call SetJavascriptLinter()
+autocmd! BufWritePost,BufEnter,TextChanged,TextChangedI * Neomake
+
+" utils
 
 " SetJavascriptLinter() sets Neomake variables for project linting engine
 function SetJavascriptLinter()
@@ -129,21 +132,18 @@ function SetJavascriptLinter()
 	let l:linters = []
 
 	if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
-		call add(linters, 'eslint')
-		let g:neomake_javascript_eslint_exe = l:npm_bin . '/eslint'
+		let l:linters = ['eslint']
+		let b:neomake_javascript_eslint_exe = l:npm_bin . '/eslint'
 	elseif strlen(l:npm_bin) && executable(l:npm_bin . '/jshint')
-		call add(linters, 'jshint')
-		let g:neomake_javascript_jshint_exe = l:npm_bin . '/jshint'
+		let l:linters = ['jshint']
+		let b:neomake_javascript_jshint_exe = l:npm_bin . '/jshint'
 	endif
 
-	let g:neomake_javascript_enabled_makers += l:linters
-	let g:neomake_jsx_enabled_makers += l:linters
+	let b:neomake_javascript_enabled_makers = l:linters
+	let b:neomake_jsx_enabled_makers = l:linters
 endfunction
 
-autocmd FileType javascript :call SetJavascriptLinter()
-autocmd! BufWritePost,BufEnter,TextChanged,TextChangedI * Neomake
-
-" utils
+" get folder where npm store bin
 function GetNpmBinFolder()
 	let l:npm_bin = ''
 
