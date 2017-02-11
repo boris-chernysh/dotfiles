@@ -63,13 +63,13 @@ Plug 'Lokaltog/vim-easymotion' "navigation in files
 Plug 'mattn/emmet-vim' "fast creating html/css
 Plug 'sjl/gundo.vim' "tree of file changes
 Plug 'Raimondi/delimitMate' "brackets autoclose
-Plug 'w0rp/ale' "syntax check
 Plug 'mileszs/ack.vim' "find in files
 Plug 'gcmt/taboo.vim' "extended tabline
 Plug 'skywind3000/asyncrun.vim' "async run shell commands
 Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
 Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
 Plug 'moll/vim-bbye' "close buffers without close window
+Plug 'benekastah/neomake' "async make tool
 " colors and helpers for languages
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
@@ -83,14 +83,9 @@ Plug 'jonathanfilip/vim-lucius'
 
 call plug#end()
 
-" layout colors
 colorscheme pencil
 set background=dark
 
-" taboo
-set sessionoptions+=tabpages,globals
-
-" easy motion
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_startofline = 0
@@ -103,26 +98,12 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 
-" async linting engine
-let g:ale_sign_error = '☠️'
-let g:ale_sign_warning = '⚠️️'
-nmap <leader>[ <Plug>(ale_previous_wrap)
-nmap <leader>] <Plug>(ale_next_wrap)
-
-" bbye
 nmap <leader>w :Bdelete<CR>
-
-" gundo
 nmap <leader>g :GundoToggle<CR>
-
-" async run
 nmap <leader>r :AsyncRun<Space>
-
-" ack
 nmap <leader>f :Ack!<Space>
 nmap <Leader>F :Ack! <cword><CR>
 
-" ctrlp
 nmap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_types = ['fil', 'buf']
 let g:ctrlp_lazy_update = 1
@@ -136,3 +117,39 @@ if executable('ag')
 	let g:ctrlp_use_caching = 0
 	let g:ackprg = 'ag --vimgrep'
 endif
+
+" neomake
+let g:neomake_javascript_enabled_makers = []
+let g:neomake_jsx_enabled_makers = []
+let g:jsx_ext_required = 0 "allow jsx in normal js files
+
+" SetJavascriptLinter() sets Neomake variables for project linting engine
+function SetJavascriptLinter()
+	let l:npm_bin = GetNpmBinFolder()
+	let l:linters = []
+
+	if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
+		call add(linters, 'eslint')
+		let g:neomake_javascript_eslint_exe = l:npm_bin . '/eslint'
+	elseif strlen(l:npm_bin) && executable(l:npm_bin . '/jshint')
+		call add(linters, 'jshint')
+		let g:neomake_javascript_jshint_exe = l:npm_bin . '/jshint'
+	endif
+
+	let g:neomake_javascript_enabled_makers += l:linters
+	let g:neomake_jsx_enabled_makers += l:linters
+endfunction
+
+autocmd FileType javascript :call SetJavascriptLinter()
+autocmd! BufWritePost,BufEnter,TextChanged,TextChangedI * Neomake
+
+" utils
+function GetNpmBinFolder()
+	let l:npm_bin = ''
+
+	if executable('npm')
+		let l:npm_bin = split(system('npm bin'), '\n')[0]
+	endif
+
+	return l:npm_bin
+endfunction
