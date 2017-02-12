@@ -30,22 +30,22 @@ autocmd FileType less setlocal expandtab
 let g:netrw_liststyle = 0
 let g:netrw_browse_split = 0
 let g:netrw_localrmdir='rm -r'
-nmap <leader>. :Explore<CR>
+nnoremap <leader>. :Explore<CR>
 
 " move blocks in visual mode
 vnoremap < <gv
 vnoremap > >gv
 " cure terminal
-map <F7> :!reset<CR>
+noremap <F7> :!reset<CR>
 " go to shell
-nmap <leader>z :sh<CR>
+nnoremap <leader>z :sh<CR>
 " show full path for current file
-nmap <leader>c :echo expand('%:p')<CR>
+nnoremap <leader>c :echo expand('%:p')<CR>
 " tabs bindings
-nmap <leader>W :tabclose<CR>
-nmap <leader>T :tabnew<CR>
+nnoremap <leader>W :tabclose<CR>
+nnoremap <leader>T :tabnew<CR>
 " window bindings
-nmap <leader>q :quit<CR>
+nnoremap <leader>q :quit<CR>
 
 " Gvim
 if has('gui_running')
@@ -90,21 +90,21 @@ let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_startofline = 0
 let g:EasyMotion_use_smartsign_us = 1
-map  / <Plug>(easymotion-sn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
+noremap  / <Plug>(easymotion-sn)
+noremap  n <Plug>(easymotion-next)
+noremap  N <Plug>(easymotion-prev)
+noremap <Leader>l <Plug>(easymotion-lineforward)
+noremap <Leader>j <Plug>(easymotion-j)
+noremap <Leader>k <Plug>(easymotion-k)
+noremap <Leader>h <Plug>(easymotion-linebackward)
 
-nmap <leader>w :Bdelete<CR>
-nmap <leader>g :GundoToggle<CR>
-nmap <leader>r :AsyncRun<Space>
-nmap <leader>f :Ack!<Space>
-nmap <Leader>F :Ack! <cword><CR>
+nnoremap <leader>w :Bdelete<CR>
+nnoremap <leader>g :GundoToggle<CR>
+nnoremap <leader>r :AsyncRun<Space>
+nnoremap <leader>f :Ack!<Space>
+nnoremap <Leader>F :Ack! <cword><CR>
 
-nmap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_types = ['fil', 'buf']
 let g:ctrlp_lazy_update = 1
 call ctrlp_bdelete#init()
@@ -123,7 +123,6 @@ let g:jsx_ext_required = 0 "allow jsx in normal js files
 
 autocmd FileType javascript,less,css call SetNeomakers()
 autocmd! BufWritePost,BufEnter,TextChanged,TextChangedI * Neomake
-autocmd FileType **/__tests__/*.js nmap <F9> Neomake! jest
 
 " utils
 
