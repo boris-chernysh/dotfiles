@@ -1,3 +1,37 @@
+" if vim-plug is not installed install this!
+if empty(glob("~/.vim/autoload/plug.vim"))
+	execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+
+" plugins list
+call plug#begin('~/.vim/plugged')
+Plug 'kshenoy/vim-signature' "marks helpers
+Plug 'tpope/vim-fugitive' "git aliases
+Plug 'tpope/vim-commentary' "commentary helpers
+Plug 'tpope/vim-surround' "brackets helpers
+Plug 'Lokaltog/vim-easymotion' "navigation in files
+Plug 'mattn/emmet-vim' "fast creating html/css
+Plug 'sjl/gundo.vim' "tree of file changes
+Plug 'Raimondi/delimitMate' "brackets autoclose
+Plug 'mileszs/ack.vim' "find in files
+Plug 'skywind3000/asyncrun.vim' "async run shell commands
+Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
+Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
+Plug 'moll/vim-bbye' "close buffers without close window
+Plug 'benekastah/neomake' "async make tool
+Plug 'webdevel/tabulous' "customazible tab line
+" colors and helpers for languages
+Plug 'othree/html5.vim'
+Plug 'ap/vim-css-color'
+Plug 'tpope/vim-markdown'
+Plug 'mxw/vim-jsx'
+Plug 'moll/vim-node'
+Plug 'digitaltoad/vim-jade'
+" colorschemes
+Plug 'reedes/vim-colors-pencil'
+Plug 'jonathanfilip/vim-lucius'
+call plug#end()
+
 let mapleader = ';' "set leader
 set encoding=utf-8 "characters encoding inside vim
 set modelines=0 "disable modelines
@@ -46,6 +80,9 @@ nnoremap <leader>W :tabclose<CR>
 nnoremap <leader>T :tabnew<CR>
 " window bindings
 nnoremap <leader>q :quit<CR>
+" fast work with vimrc
+nnoremap <leader>ev :tabnew $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Gvim
 if has('gui_running')
@@ -53,61 +90,45 @@ if has('gui_running')
 	set guifont=Source\ Code\ Pro\ for\ Powerline\ 9
 endif
 
-call plug#begin('~/.vim/plugged')
-
-Plug 'kshenoy/vim-signature' "marks helpers
-Plug 'tpope/vim-fugitive' "git aliases
-Plug 'tpope/vim-commentary' "commentary helpers
-Plug 'tpope/vim-surround' "brackets helpers
-Plug 'Lokaltog/vim-easymotion' "navigation in files
-Plug 'mattn/emmet-vim' "fast creating html/css
-Plug 'sjl/gundo.vim' "tree of file changes
-Plug 'Raimondi/delimitMate' "brackets autoclose
-Plug 'mileszs/ack.vim' "find in files
-Plug 'skywind3000/asyncrun.vim' "async run shell commands
-Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
-Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
-Plug 'moll/vim-bbye' "close buffers without close window
-Plug 'benekastah/neomake' "async make tool
-Plug 'webdevel/tabulous' "customazible tab line
-" colors and helpers for languages
-Plug 'othree/html5.vim'
-Plug 'ap/vim-css-color'
-Plug 'tpope/vim-markdown'
-Plug 'mxw/vim-jsx'
-Plug 'moll/vim-node'
-Plug 'digitaltoad/vim-jade'
-" colorschemes
-Plug 'reedes/vim-colors-pencil'
-Plug 'jonathanfilip/vim-lucius'
-
-call plug#end()
-
-colorscheme pencil
+colorscheme pencil " also may be used 'lucius'
 set background=dark
 
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_startofline = 0
-let g:EasyMotion_use_smartsign_us = 1
-noremap  / <Plug>(easymotion-sn)
-noremap  n <Plug>(easymotion-next)
-noremap  N <Plug>(easymotion-prev)
-noremap <Leader>l <Plug>(easymotion-lineforward)
-noremap <Leader>j <Plug>(easymotion-j)
-noremap <Leader>k <Plug>(easymotion-k)
-noremap <Leader>h <Plug>(easymotion-linebackward)
+let g:EasyMotion_do_mapping = 0 " dont use default mapping
+let g:EasyMotion_smartcase = 1 " ignore case
+let g:EasyMotion_startofline = 0 " save cursor column when use easymoiton-(j|k)
+let g:EasyMotion_use_smartsign_us = 1 " use smart sign like 2->@ on us layout
+" replace standart search
+map / <Plug>(easymotion-sn)
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
+" navfigation lines
+map <leader>l <Plug>(easymotion-lineforward)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
+map <leader>h <Plug>(easymotion-linebackward)
 
+" delete buffer without close window
 nnoremap <leader>w :Bdelete<CR>
+" show/hide gundo window
 nnoremap <leader>g :GundoToggle<CR>
+" instead !
 nnoremap <leader>r :AsyncRun<Space>
+" find something
 nnoremap <leader>f :Ack!<Space>
+" find word under cursor
 nnoremap <Leader>F :Ack! <cword><CR>
-
+" buffers navigation
 nnoremap <leader>b :CtrlPBuffer<CR>
+
 let g:ctrlp_types = ['fil', 'buf']
-let g:ctrlp_lazy_update = 1
-call ctrlp_bdelete#init()
+let g:ctrlp_lazy_update = 1 " 250ms debouncing
+call ctrlp_bdelete#init() " init plugin for delete buffers from ctrlp
+
+" neomake
+let g:jsx_ext_required = 0 "allow jsx in normal js files
+autocmd FileType javascript,less,css call SetNeomakers() " set local npm makers
+autocmd! BufWritePost,BufEnter,TextChanged,TextChangedI * Neomake
+
 
 " use ag for ctrlp and ack
 if executable('ag')
@@ -115,14 +136,9 @@ if executable('ag')
 
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 	let g:ctrlp_use_caching = 0
+
 	let g:ackprg = 'ag --vimgrep'
 endif
-
-" neomake
-let g:jsx_ext_required = 0 "allow jsx in normal js files
-
-autocmd FileType javascript,less,css call SetNeomakers()
-autocmd! BufWritePost,BufEnter,TextChanged,TextChangedI * Neomake
 
 " utils
 
