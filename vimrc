@@ -1,4 +1,4 @@
-" if vim-plug is not installed install this!
+" if vim-plug is not installed install it!
 if empty(glob("~/.vim/autoload/plug.vim"))
 	execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
@@ -13,7 +13,7 @@ Plug 'Lokaltog/vim-easymotion' "navigation in files
 Plug 'mattn/emmet-vim' "fast creating html/css
 Plug 'sjl/gundo.vim' "tree of file changes
 Plug 'Raimondi/delimitMate' "brackets autoclose
-Plug 'mileszs/ack.vim' "find in files
+Plug 'mhinz/vim-grepper' "find in filex
 Plug 'skywind3000/asyncrun.vim' "async run shell commands
 Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
 Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
@@ -114,30 +114,31 @@ nnoremap <leader>g :GundoToggle<CR>
 " instead !
 nnoremap <leader>r :AsyncRun<Space>
 " find something
-nnoremap <leader>f :Ack!<Space>
+nnoremap <leader>f :Grepper -query<Space>
 " find word under cursor
-nnoremap <Leader>F :Ack! <cword><CR>
+nnoremap <Leader>F :Grepper -query <cword><CR>
 " buffers navigation
 nnoremap <leader>b :CtrlPBuffer<CR>
 
-let g:ctrlp_types = ['fil', 'buf']
+let g:grepper = {}
+let g:grepper.tools = ['ag', 'git', 'grep'] " use ag if exists, or use git grep, or just grep
+
+let g:ctrlp_types = ['fil', 'buf'] " use only file and buffers search
 let g:ctrlp_lazy_update = 1 " 250ms debouncing
 call ctrlp_bdelete#init() " init plugin for delete buffers from ctrlp
 
 " neomake
 let g:jsx_ext_required = 0 "allow jsx in normal js files
 autocmd FileType javascript,less,css call SetNeomakers() " set local npm makers
-autocmd! BufWritePost,BufEnter,TextChanged,TextChangedI * Neomake
+autocmd! BufWritePost,BufEnter * Neomake
 
 
-" use ag for ctrlp and ack
+" use silver searcher
 if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
 
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 	let g:ctrlp_use_caching = 0
-
-	let g:ackprg = 'ag --vimgrep'
 endif
 
 " utils

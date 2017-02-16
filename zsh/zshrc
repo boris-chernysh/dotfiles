@@ -23,13 +23,20 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 if [[ `uname` = 'Darwin' ]]; then;
+	# TODO: replace this with static paths:
+	export NVM_DIR=~/.nvm
+	which brew >> /dev/null && NVM_PREFIX=$(brew --prefix nvm)
+	[[ -d $NVM_PREFIX ]] && source $NVM_PREFIX/nvm.sh
+
 	source $HOME/dotfiles/zsh/zshrc.osx
 elif [[ ! `uname -m` = 'aarch64' ]]; then;
 	source $HOME/dotfiles/zsh/zshrc.linux
 fi
 
-#TODO: refactor this:
-export NVM_DIR=~/.nvm
-which brew >> /dev/null && NVM_PREFIX=$(brew --prefix nvm)
-[[ -d $NVM_PREFIX ]] && source $NVM_PREFIX/nvm.sh
-which npm >> /dev/null && export PATH=$(npm bin):$PATH
+function initNvm () {
+	unalias nvm
+	source $NVM_INIT_SCRIPT
+	nvm "$@"
+}
+
+alias nvm=initNvm
