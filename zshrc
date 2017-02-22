@@ -1,4 +1,3 @@
-export ZSH="$HOME/.oh-my-zsh"
 export EDITOR="vim"
 
 bindkey '^R' history-incremental-search-backward
@@ -7,14 +6,11 @@ function nbin() {
 	$(npm bin)/$@
 }
 
-plugins=(git bundler osx mercurial node jump brew brew-cask \
-	vi-mode vim-interaction nvm npm)
-
 if [[ -d ~/scripts ]]; then
 	PATH+=":$HOME/scripts"
-	for d in ~/scripts/**; do
-		[[ ! -d $d ]] && continue
-		PATH+=":$d"
+	for dir in ~/scripts/**; do
+		[[ ! -d $dir ]] && continue
+		PATH+=":$dir"
 	done
 fi
 
@@ -24,7 +20,14 @@ else
 	ZSH_THEME="robbyrussell"
 fi
 
-source $ZSH/oh-my-zsh.sh
+export ZSH="$HOME/.oh-my-zsh"
+
+if [[ -d $ZSH ]]; then
+	plugins=(git bundler osx mercurial node jump brew brew-cask \
+		vi-mode vim-interaction nvm npm)
+
+	source $ZSH/oh-my-zsh.sh
+fi
 
 if [[ `uname` = 'Darwin' ]]; then;
 	# TODO: replace this with static paths:
