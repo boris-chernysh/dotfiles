@@ -1,9 +1,10 @@
-" if vim-plug is not installed install it!
+" plug autoinstall {{{
 if empty(glob("~/.vim/autoload/plug.vim"))
 	execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
+" }}}
 
-" plugins list
+" plugins list {{{
 call plug#begin('~/.vim/plugged')
 Plug 'kshenoy/vim-signature' "marks helpers
 Plug 'tpope/vim-fugitive' "git aliases
@@ -31,7 +32,9 @@ Plug 'digitaltoad/vim-jade'
 Plug 'reedes/vim-colors-pencil'
 Plug 'jonathanfilip/vim-lucius'
 call plug#end()
+" }}}
 
+" options {{{
 let mapleader = ';' "set leader
 set encoding=utf-8 "characters encoding inside vim
 set modelines=0 "disable modelines
@@ -56,16 +59,23 @@ set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~"
 set t_Co=256 "terminal colors
 
 " use spaces instead tabs
-autocmd FileType javascript setlocal expandtab
-autocmd FileType css setlocal expandtab
-autocmd FileType less setlocal expandtab
+autocmd! FileType javascript,css,less setlocal expandtab
+" set marker fold method for vim script
+autocmd! FileType vim setlocal foldmethod=marker
+" }}}
 
-" netrw
+" colors {{{
+colorscheme pencil " also may be used 'lucius'
+set background=dark
+" }}}
+
+" netrw {{{
 let g:netrw_liststyle = 0
 let g:netrw_browse_split = 0
 let g:netrw_localrmdir='rm -r'
-nnoremap <leader>. :Explore<CR>
+" }}}
 
+" mappings {{{
 " move blocks in visual mode
 vnoremap < <gv
 vnoremap > >gv
@@ -83,16 +93,23 @@ nnoremap <leader>q :quit<CR>
 " fast work with vimrc
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
+" delete buffer without close window
+nnoremap <leader>w :Bdelete<CR>
+" show/hide gundo window
+nnoremap <leader>g :GundoToggle<CR>
+" instead !
+nnoremap <leader>r :AsyncRun<Space>
+" find something
+nnoremap <leader>f :Grepper -query<Space>
+" find word under cursor
+nnoremap <Leader>F :Grepper -query <cword><CR>
+" buffers navigation
+nnoremap <leader>b :CtrlPBuffer<CR>
+" open netrw
+nnoremap <leader>. :Explore<CR>
+" }}}
 
-" Gvim
-if has('gui_running')
-	set guioptions-=T
-	set guifont=Source\ Code\ Pro\ for\ Powerline\ 9
-endif
-
-colorscheme pencil " also may be used 'lucius'
-set background=dark
-
+" easy motion {{{
 let g:EasyMotion_do_mapping = 0 " dont use default mapping
 let g:EasyMotion_smartcase = 1 " ignore case
 let g:EasyMotion_startofline = 0 " save cursor column when use easymoiton-(j|k)
@@ -106,42 +123,45 @@ map <leader>l <Plug>(easymotion-lineforward)
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 map <leader>h <Plug>(easymotion-linebackward)
+" }}}
 
-" delete buffer without close window
-nnoremap <leader>w :Bdelete<CR>
-" show/hide gundo window
-nnoremap <leader>g :GundoToggle<CR>
-" instead !
-nnoremap <leader>r :AsyncRun<Space>
-" find something
-nnoremap <leader>f :Grepper -query<Space>
-" find word under cursor
-nnoremap <Leader>F :Grepper -query <cword><CR>
-" buffers navigation
-nnoremap <leader>b :CtrlPBuffer<CR>
-
+" grepper {{{
 let g:grepper = {}
 let g:grepper.tools = ['ag', 'git', 'grep'] " use ag if exists, or use git grep, or just grep
+" }}}
 
+" ctrlp {{{
 let g:ctrlp_types = ['fil', 'buf'] " use only file and buffers search
 let g:ctrlp_lazy_update = 1 " 250ms debouncing
 call ctrlp_bdelete#init() " init plugin for delete buffers from ctrlp
+" }}}
 
-" neomake
+" Gvim {{{
+if has('gui_running')
+	set guioptions-=T
+	set guifont=Source\ Code\ Pro\ for\ Powerline\ 9
+endif
+" }}}
+
+" neomake {{{
 let g:jsx_ext_required = 0 "allow jsx in normal js files
-autocmd FileType javascript,less,css call SetNeomakers() " set local npm makers
-autocmd! BufWritePost,BufEnter * Neomake
+augroup neomake
+	autocmd!
+	autocmd FileType javascript,less,css call SetNeomakers() " set local npm makers
+	autocmd BufWritePost,BufEnter * Neomake
+augroup END
+" }}}
 
-
-" use silver searcher
+" silver searcher {{{
 if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
 
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 	let g:ctrlp_use_caching = 0
 endif
+" }}}
 
-" utils
+" utils {{{
 
 " SetLinters() sets Neomake variables for project linting engines
 " if ./node_modules/.bin not set in $PATH binaries for makers not be found, and
@@ -183,3 +203,4 @@ function! GetNpmBinFolder()
 
 	return l:npm_bin
 endfunction
+" }}}

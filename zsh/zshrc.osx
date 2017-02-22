@@ -1,9 +1,0 @@
-export PATH="/usr/local/sbin:/opt/local/bin:/usr/local/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$PATH"
-export MANPATH="$MANPATH:/opt/local/share/man"
-export INFOPATH="$INFOPATH:/opt/local/share/info"
-
-alias chrome='open -a "Google Chrome"'
-alias firefox='open -a firefox'
-alias -s {html,svg,pdf}="open -a 'google Chrome'"
-
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

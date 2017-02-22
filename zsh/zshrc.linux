@@ -1,8 +1,0 @@
-export PATH="$HOME/.linuxbrew/sbin:$HOME/.linuxbrew/bin:$PATH"
-export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-export NVM_DIR="$HOME/.nvm"
-export NVM_INIT_SCRIPT="$HOME/.linuxbrew/opt/nvm/nvm.sh"
-
-export XDG_DATA_DIRS="/home/boris/.linuxbrew/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS"
-source $HOME/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
