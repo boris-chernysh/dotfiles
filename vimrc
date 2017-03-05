@@ -157,7 +157,7 @@ endif
 " neomake {{{
 let g:jsx_ext_required = 0 "allow jsx in normal js files
 
-augroup neovim
+augroup neomakers
 	autocmd!
 	autocmd FileType javascript,less,css call SetNeomakers() " set local npm makers
 	autocmd BufWritePost,BufEnter * Neomake
