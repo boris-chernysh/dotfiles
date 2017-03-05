@@ -45,9 +45,9 @@ set shiftwidth=4 "number of spaces for each ident level
 set softtabstop=4 "count of spaces for show tab
 set showtabline=2 "always show tabline
 set scrolloff=5 "number of screen lines to keep above and below cursor
-set laststatus=0 "hide statusline
+set laststatus=2 "always show statusline
 set colorcolumn=81 "border for code
-set clipboard=unnamed "system clipboard
+set clipboard=unnamedplus "system clipboard
 set mouse=a "enable mouse for all modes
 set hidden "hide buffer instead close
 set splitbelow "new buffers position
@@ -59,9 +59,18 @@ set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~"
 set t_Co=256 "terminal colors
 
 " use spaces instead tabs
-autocmd! FileType javascript,css,less setlocal expandtab
+augroup expandtab
+	autocmd!
+	autocmd FileType javascript,css,less setlocal expandtab
+augroup END
 " set marker fold method for vim script
 autocmd! FileType vim setlocal foldmethod=marker
+" }}}
+
+" statusline {{{
+set statusline=git:(%{GetGitBranch()})
+set statusline+=%=
+set statusline+=%c:%l\ %L
 " }}}
 
 " colors {{{
@@ -88,13 +97,14 @@ nnoremap <leader>c :echo expand('%:p')<CR>
 " tabs bindings
 nnoremap <leader>W :tabclose<CR>
 nnoremap <leader>T :tabnew<CR>
+" delete buffer without close window
+nnoremap <leader>ww :Bdelete<CR>
 " window bindings
 nnoremap <leader>q :quit<CR>
+nnoremap <leader>wq :bd<CR>
 " fast work with vimrc
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
-" delete buffer without close window
-nnoremap <leader>w :Bdelete<CR>
 " show/hide gundo window
 nnoremap <leader>g :GundoToggle<CR>
 " instead !
@@ -107,6 +117,7 @@ nnoremap <Leader>F :Grepper -query <cword><CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 " open netrw
 nnoremap <leader>. :Explore<CR>
+nnoremap <leader>yp :let @+ = expand("%")<CR>
 " }}}
 
 " easy motion {{{
@@ -145,7 +156,8 @@ endif
 
 " neomake {{{
 let g:jsx_ext_required = 0 "allow jsx in normal js files
-augroup neomake
+
+augroup neovim
 	autocmd!
 	autocmd FileType javascript,less,css call SetNeomakers() " set local npm makers
 	autocmd BufWritePost,BufEnter * Neomake
@@ -202,5 +214,16 @@ function! GetNpmBinFolder()
 	endif
 
 	return l:npm_bin
+endfunction
+
+" get git branch
+function! GetGitBranch()
+	let l:git_branch = ''
+
+	if executable('git')
+		let l:git_branch = split(system('git branch | grep "^*" | cut -d" " -f2'), '\n')[0]
+	endif
+
+	return l:git_branch
 endfunction
 " }}}
