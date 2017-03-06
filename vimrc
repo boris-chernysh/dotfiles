@@ -68,7 +68,7 @@ autocmd! FileType vim setlocal foldmethod=marker
 " }}}
 
 " statusline {{{
-set statusline=git:(%{GetGitBranch()})
+set statusline=%{fugitive#statusline()}
 set statusline+=%=
 set statusline+=%c:%l\ %L
 " }}}
@@ -214,16 +214,5 @@ function! GetNpmBinFolder()
 	endif
 
 	return l:npm_bin
-endfunction
-
-" get git branch
-function! GetGitBranch()
-	let l:git_branch = ''
-
-	if executable('git')
-		let l:git_branch = split(system('git branch | grep "^*" | cut -d" " -f2'), '\n')[0]
-	endif
-
-	return l:git_branch
 endfunction
 " }}}
