@@ -47,7 +47,12 @@ set showtabline=2 "always show tabline
 set scrolloff=5 "number of screen lines to keep above and below cursor
 set laststatus=2 "always show statusline
 set colorcolumn=81 "border for code
-set clipboard=unnamedplus "system clipboard
+" use system clipboard
+if has('unnamedplus')
+	set clipboard=unnamedplus
+else
+	set clipboard=unnamed
+endif
 set mouse=a "enable mouse for all modes
 set hidden "hide buffer instead close
 set splitbelow "new buffers position
@@ -111,10 +116,9 @@ nnoremap <leader>g :GundoToggle<CR>
 nnoremap <leader>r :AsyncRun<Space>
 " find something
 nnoremap <leader>f :Grepper -query<Space>
-" find word under cursor
-nnoremap <Leader>F :Grepper -query <cword><CR>
+nnoremap <leader>F :Grepper -cword<CR>
 " buffers navigation
-nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <c-k> :CtrlPBuffer<CR>
 " open netrw
 nnoremap <leader>. :Explore<CR>
 nnoremap <leader>yp :let @+ = expand("%")<CR>
@@ -139,6 +143,8 @@ map <leader>h <Plug>(easymotion-linebackward)
 " grepper {{{
 let g:grepper = {}
 let g:grepper.tools = ['ag', 'git', 'grep'] " use ag if exists, or use git grep, or just grep
+let g:grepper.highlight = 1
+let g:grepper.prompt = 0
 " }}}
 
 " ctrlp {{{

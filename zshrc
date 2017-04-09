@@ -26,8 +26,9 @@ if [[ -d $ZSH ]]; then
 fi
 
 if [[ $OSTYPE = darwin* ]]; then
-	export NVM_DIR=~/.nvm
-	source /usr/local/opt/nvm/nvm.sh
+	export NVM_DIR="$HOME/.nvm"
+	# source /usr/local/opt/nvm/nvm.sh
+	NVM_INIT_SCRIPT="/usr/local/opt/nvm/nvm.sh"
 
 	export PATH="/usr/local/sbin:/opt/local/bin:/usr/local/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:$PATH"
 	export MANPATH="$MANPATH:/opt/local/share/man"
@@ -45,5 +46,32 @@ elif [[ ! $OSTYPE = linux-android ]]; then
 
 	export XDG_DATA_DIRS="/home/boris/.linuxbrew/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS"
 	source "$HOME/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-	source "$HOME/.linuxbrew/opt/nvm/nvm.sh"
+	# source "$HOME/.linuxbrew/opt/nvm/nvm.sh"
+	NVM_INIT_SCRIPT="$HOME/.linuxbrew/opt/nvm/nvm.sh"
 fi
+
+function initNvm() {
+	unalias node
+	unalias npm
+	unalias nvm
+
+	source $NVM_INIT_SCRIPT
+}
+
+function nodeWrapper() {
+	initNvm
+	node "$@"
+}
+alias node=nodeWrapper
+
+function npmWrapper() {
+	initNvm
+	npm "$@"
+}
+alias npm=npmWrapper
+
+function nvmWrapper() {
+	initNvm
+	nvm "$@"
+}
+alias nvm=nvmWrapper
