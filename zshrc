@@ -2,17 +2,9 @@ export EDITOR="vim"
 export PAGER="less"
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$HOME/dotfiles/zsh_custom"
-ZSH_THEME="robbyrusselext"
+ZSH_THEME="BORIS"
 
 bindkey "^R" history-incremental-search-backward
-
-if [[ -d "$HOME/scripts" ]]; then
-	PATH+=":$HOME/scripts"
-	for dir in ~/scripts/**; do
-		[[ ! -d $dir ]] && continue
-		PATH+=":$dir"
-	done
-fi
 
 if [[ -d $ZSH ]]; then
 	plugins=(git bundler osx mercurial node jump brew brew-cask \
