@@ -16,7 +16,7 @@ fi
 
 if [[ -d $ZSH ]]; then
 	plugins=(git bundler osx mercurial node jump brew brew-cask \
-		vi-mode vim-interaction nvm npm git_helpers)
+		vi-mode vim-interaction nvm npm git_helpers nvm_lazyload)
 
 	source $ZSH/oh-my-zsh.sh
 fi
@@ -30,7 +30,6 @@ if [[ $OSTYPE = darwin* ]]; then
 	export INFOPATH="$INFOPATH:/opt/local/share/info"
 
 	export NVM_DIR="$HOME/.nvm"
-	# source /usr/local/opt/nvm/nvm.sh
 	NVM_INIT_SCRIPT="/usr/local/opt/nvm/nvm.sh"
 
 	source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -41,37 +40,7 @@ elif [[ $OSTYPE = linux-* && ! $OSTYPE = linux-android ]]; then
 
 	export XDG_DATA_DIRS="/home/boris/.linuxbrew/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS"
 	export NVM_DIR="$HOME/.nvm"
-	# source "$HOME/.linuxbrew/opt/nvm/nvm.sh"
 	NVM_INIT_SCRIPT="$HOME/.linuxbrew/opt/nvm/nvm.sh"
 
 	source "$HOME/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
-
-# init nvm, node and npm on first user call
-if [[ ! $(declare -f  nvm) ]]; then
-	function initNvm() {
-		unalias node
-		unalias npm
-		unalias nvm
-
-		source $NVM_INIT_SCRIPT
-	}
-
-	function nodeWrapper() {
-		initNvm
-		node "$@"
-	}
-	alias node=nodeWrapper
-
-	function npmWrapper() {
-		initNvm
-		npm "$@"
-	}
-	alias npm=npmWrapper
-
-	function nvmWrapper() {
-		initNvm
-		nvm "$@"
-	}
-	alias nvm=nvmWrapper
 fi
