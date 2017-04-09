@@ -16,7 +16,7 @@ fi
 
 if [[ -d $ZSH ]]; then
 	plugins=(git bundler osx mercurial node jump brew brew-cask \
-		vi-mode vim-interaction nvm npm)
+		vi-mode vim-interaction nvm npm git_helpers)
 
 	source $ZSH/oh-my-zsh.sh
 fi
