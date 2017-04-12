@@ -20,3 +20,7 @@ function branch_new() {
 	git branch "$1"
 	git checkout "$1"
 }
+
+function both_edit() {
+	$EDITOR $(git status | grep both | cut -d ":" -f2)
+}
