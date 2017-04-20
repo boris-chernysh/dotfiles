@@ -9,8 +9,7 @@ export NVM_LAZY_LOAD=true
 bindkey "^R" history-incremental-search-backward
 
 if [[ -d $ZSH ]]; then
-	plugins=(git bundler osx mercurial node jump brew brew-cask \
-		vi-mode vim-interaction nvm npm git_helpers zsh-nvm)
+	plugins=(vi-mode vim-interaction jump git mercurial node brew npm zsh-nvm git_helpers)
 
 	source $ZSH/oh-my-zsh.sh
 fi
