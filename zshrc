@@ -4,7 +4,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$HOME/dotfiles/zsh_custom"
 ZSH_THEME="BORIS"
 export NVM_DIR="$HOME/.nvm"
-export NVM_LAZY_LOAD=true
+# export NVM_LAZY_LOAD=true
 
 bindkey "^R" history-incremental-search-backward
 
