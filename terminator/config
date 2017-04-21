@@ -1,4 +1,6 @@
 [global_config]
+  borderless = True
+  inactive_color_offset = 0.5
 [keybindings]
   close_term = <Primary><Super>w
   cycle_next = <Primary><Super>j
@@ -19,6 +21,7 @@
 [plugins]
 [profiles]
   [[default]]
+    show_titlebar = false
     background_color = "#2c2c2c"
     background_image = None
     cursor_color = "#20bbfc"
