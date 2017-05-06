@@ -21,6 +21,7 @@ Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
 Plug 'moll/vim-bbye' "close buffers without close window
 Plug 'benekastah/neomake' "async make tool
 Plug 'webdevel/tabulous' "customazible tab line
+Plug 'dag/vim2hs' "haskell helpers
 " colors and helpers for languages
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
@@ -66,7 +67,8 @@ set t_Co=256 "terminal colors
 " use spaces instead tabs
 augroup expandtab
 	autocmd!
-	autocmd FileType javascript,css,less setlocal expandtab
+	autocmd FileType haskell call SetHaskellOptions()
+	autocmd FileType javascript,css,less,haskell setlocal expandtab
 augroup END
 " set marker fold method for vim script
 autocmd! FileType vim setlocal foldmethod=marker
@@ -220,5 +222,11 @@ function! GetNpmBinFolder()
 	endif
 
 	return l:npm_bin
+endfunction
+
+function! SetHaskellOptions()
+	setlocal tabstop=8
+	setlocal shiftwidth=8
+	setlocal softtabstop=8
 endfunction
 " }}}

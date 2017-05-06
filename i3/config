@@ -9,6 +9,7 @@ set $tag2 2.WORKPLACE
 set $tag3 3.IM
 set $tag4 4.PLAYGROUND
 set $tag5 5.MUSIC
+set $tag6 6.EDUCATION
 
 #set $font Arimo for Powerline 10
 set $font Permanent Marker 10
@@ -49,12 +50,14 @@ bindsym $mod+2 workspace $tag2
 bindsym $mod+3 workspace $tag3
 bindsym $mod+4 workspace $tag4
 bindsym $mod+5 workspace $tag5
+bindsym $mod+6 workspace $tag6
 
 bindsym $mod+Shift+1 move container to workspace $tag1
 bindsym $mod+Shift+2 move container to workspace $tag2
 bindsym $mod+Shift+3 move container to workspace $tag3
 bindsym $mod+Shift+4 move container to workspace $tag4
 bindsym $mod+Shift+5 move container to workspace $tag5
+bindsym $mod+Shift+6 move container to workspace $tag6
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart

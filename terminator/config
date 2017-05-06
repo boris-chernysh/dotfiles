@@ -1,6 +1,6 @@
 [global_config]
   borderless = True
-  inactive_color_offset = 0.5
+  inactive_color_offset = 0.78
 [keybindings]
   close_term = <Primary><Super>w
   cycle_next = <Primary><Super>j
@@ -21,7 +21,6 @@
 [plugins]
 [profiles]
   [[default]]
-    show_titlebar = false
     background_color = "#2c2c2c"
     background_image = None
     cursor_color = "#20bbfc"
@@ -30,5 +29,6 @@
     palette = "#2e3436:#c30771:#10a778:#a89c14:#008ec4:#523c79:#20a5ba:#d9d9d9:#555753:#fb007a:#5fd7af:#f3e430:#20bbfc:#6855de:#4fb8cc:#f1f1f1"
     scrollback_infinite = True
     scrollbar_position = hidden
+    show_titlebar = False
     use_system_font = False
     visible_bell = True
