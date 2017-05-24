@@ -13,6 +13,7 @@ function branch_load() {
 	else
 		git fetch origin "$1"
 		git checkout "$1"
+		git pull origin "$1"
 	fi
 }
 
