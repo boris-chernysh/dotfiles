@@ -189,41 +189,21 @@ endif
 " if ./node_modules/.bin not set in $PATH binaries for makers not be found, and
 " Neomake won't use it
 function! SetNeomakers()
-	let l:npm_bin = GetNpmBinFolder()
-	let l:js_makers = []
-	let l:style_makers = []
-
-	if strlen(l:npm_bin)
-		if executable(l:npm_bin . '/eslint')
-			call add(l:js_makers, 'eslint')
-			let b:neomake_javascript_eslint_exe = l:npm_bin . '/eslint'
-		elseif executable(l:npm_bin . '/jshint')
-			call add(l:js_makers, 'jshint')
-			let b:neomake_javascript_jshint_exe = l:npm_bin . '/jshint'
-		endif
-
-		if executable(l:npm_bin . '/stylelint')
-			call add(l:style_makers, 'stylelint')
-			let b:neomake_less_stylelint_exe = l:npm_bin . '/stylelint'
-			let b:neomake_css_stylelint_exe = l:npm_bin . '/stylelint'
-		endif
+	let b:npm_bin = './node_modules/.bin/'
+	if !isdirectory(b:npm_bin)
+		return
 	endif
 
-	let b:neomake_javascript_enabled_makers = l:js_makers
-	let b:neomake_jsx_enabled_makers = l:js_makers
-	let b:neomake_less_enabled_makers = l:style_makers
-	let b:neomake_css_enabled_makers = l:style_makers
-endfunction
+	let g:js_makers = ['eslint']
+	let g:style_makers = ['stylelint']
+	let g:neomake_javascript_enabled_makers = g:js_makers
+	let g:neomake_jsx_enabled_makers = g:js_makers
+	let g:neomake_less_enabled_makers = g:style_makers
+	let g:neomake_css_enabled_makers = g:style_makers
 
-" get folder where npm store bin
-function! GetNpmBinFolder()
-	let l:npm_bin = ''
-
-	if executable('npm')
-		let l:npm_bin = split(system('npm bin'), '\n')[0]
-	endif
-
-	return l:npm_bin
+	let b:neomake_javascript_eslint_exe = b:npm_bin . '/eslint'
+	let b:neomake_less_stylelint_exe = b:npm_bin . '/stylelint'
+	let b:neomake_css_stylelint_exe = b:npm_bin . '/stylelint'
 endfunction
 
 function! SetHaskellOptions()
