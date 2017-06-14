@@ -124,6 +124,8 @@ nnoremap <c-k> :CtrlPBuffer<CR>
 " open netrw
 nnoremap <leader>. :Explore<CR>
 nnoremap <leader>yp :let @+ = expand("%")<CR>
+" always use the command editing window
+nnoremap : q:i
 " }}}
 
 " easy motion {{{
