@@ -117,7 +117,7 @@ nnoremap <leader>g :GundoToggle<CR>
 " instead !
 nnoremap <leader>r :AsyncRun<Space>
 " find something
-nnoremap <leader>f :Grepper -query<Space>
+nnoremap <leader>f q:iGrepper -query<Space>
 nnoremap <leader>F :Grepper -cword<CR>
 " buffers navigation
 nnoremap <c-k> :CtrlPBuffer<CR>
