@@ -75,9 +75,10 @@ autocmd! FileType vim setlocal foldmethod=marker
 " }}}
 
 " statusline {{{
-set statusline=%{fugitive#statusline()}
+set statusline=λ\ %{fugitive#statusline()}
+set statusline+=\ <%{GetFilePath()}>
 set statusline+=%=
-set statusline+=%c:%l\ %L
+set statusline+=%c:%l\ %L\ λ
 " }}}
 
 " colors {{{
@@ -124,8 +125,10 @@ nnoremap <c-k> :CtrlPBuffer<CR>
 " open netrw
 nnoremap <leader>. :Explore<CR>
 nnoremap <leader>yp :let @+ = expand("%")<CR>
+nnoremap <leader>yn :let @+ = expand("%:t:r")<CR>
 " always use the command editing window
 nnoremap : q:i
+vnoremap : q:i
 " }}}
 
 " easy motion {{{
@@ -154,6 +157,8 @@ let g:grepper.prompt = 0
 " ctrlp {{{
 let g:ctrlp_types = ['fil', 'buf'] " use only file and buffers search
 let g:ctrlp_lazy_update = 1 " 250ms debouncing
+let g:ctrlp_match_window = 'order:ttb'
+let g:ctrlp_switch_buffer = 'Et'
 call ctrlp_bdelete#init() " init plugin for delete buffers from ctrlp
 " }}}
 
@@ -210,5 +215,10 @@ function! SetHaskellOptions()
 	setlocal tabstop=8
 	setlocal shiftwidth=8
 	setlocal softtabstop=8
+endfunction
+
+function! GetFilePath()
+	" return path to file relative to current dir
+	return expand('%:.:h')
 endfunction
 " }}}

@@ -10,9 +10,10 @@ set $tag3 3.IM
 set $tag4 4.PLAYGROUND
 set $tag5 5.MUSIC
 set $tag6 6.EDUCATION
+set $tag7 7.INTERVIEW
 
-#set $font Arimo for Powerline 10
-set $font Permanent Marker 10
+#set $font Arimo for Powerline 11
+set $font Permanent Marker 11
 font pango:$font
 
 bindsym $mod+Return exec $terminal
@@ -51,6 +52,7 @@ bindsym $mod+3 workspace $tag3
 bindsym $mod+4 workspace $tag4
 bindsym $mod+5 workspace $tag5
 bindsym $mod+6 workspace $tag6
+bindsym $mod+7 workspace $tag7
 
 bindsym $mod+Shift+1 move container to workspace $tag1
 bindsym $mod+Shift+2 move container to workspace $tag2
@@ -58,6 +60,7 @@ bindsym $mod+Shift+3 move container to workspace $tag3
 bindsym $mod+Shift+4 move container to workspace $tag4
 bindsym $mod+Shift+5 move container to workspace $tag5
 bindsym $mod+Shift+6 move container to workspace $tag6
+bindsym $mod+Shift+7 move container to workspace $tag7
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
@@ -74,8 +77,11 @@ bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id screencloud
+exec --no-startup-id owncloud
 exec --no-startup-id syndaemon -i 0.5 -t -K -R -d
 exec --no-startup-id feh --bg-scale ~/.wallpaper.jpg
+exec --no-startup-id setxkbmap -layout 'us,ru' -option 'lv3:ralt_switch,compose:rwin,grp:alt_shift_toggle,ctrl:nocaps'
+
 
 mode "resize" {
 	bindsym h resize shrink width 10 px or 10 ppt
