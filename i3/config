@@ -81,6 +81,7 @@ exec --no-startup-id owncloud
 exec --no-startup-id syndaemon -i 0.5 -t -K -R -d
 exec --no-startup-id feh --bg-scale ~/.wallpaper.jpg
 exec --no-startup-id setxkbmap -layout 'us,ru' -option 'lv3:ralt_switch,compose:rwin,grp:alt_shift_toggle,ctrl:nocaps'
+exec --no-startup-id compton --backend=glx
 
 
 mode "resize" {

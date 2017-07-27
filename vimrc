@@ -16,9 +16,6 @@ Plug 'sjl/gundo.vim' "tree of file changes
 Plug 'Raimondi/delimitMate' "brackets autoclose
 Plug 'mhinz/vim-grepper' "find in filex
 Plug 'skywind3000/asyncrun.vim' "async run shell commands
-Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
-Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
-Plug 'moll/vim-bbye' "close buffers without close window
 Plug 'benekastah/neomake' "async make tool
 Plug 'webdevel/tabulous' "customazible tab line
 Plug 'dag/vim2hs' "haskell helpers
@@ -32,6 +29,11 @@ Plug 'digitaltoad/vim-jade'
 " colorschemes
 Plug 'reedes/vim-colors-pencil'
 Plug 'jonathanfilip/vim-lucius'
+" buffers
+Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
+Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
+Plug 'moll/vim-bbye' "close buffers without close window
+Plug 'vim-scripts/BufOnly.vim' "close buffers except current one
 call plug#end()
 " }}}
 
@@ -107,6 +109,8 @@ nnoremap <leader>W :tabclose<CR>
 nnoremap <leader>T :tabnew<CR>
 " delete buffer without close window
 nnoremap <leader>ww :Bdelete<CR>
+" delete all buffers except current one
+nnoremap <leader>wa :BufOnly<CR>
 " window bindings
 nnoremap <leader>q :quit<CR>
 nnoremap <leader>wq :bd<CR>
