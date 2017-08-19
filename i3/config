@@ -4,7 +4,7 @@ set $terminal terminator
 set $browser $BROWSER
 set $lock gnome-screensaver-command -l
 
-set $im_mode_title "IM (T - Telegram, C - CSSSR Slack, T - Tinkoff Slack)"
+set $im_mode_title "IM (I - Telegram, C - CSSSR Slack, T - Tinkoff Slack)"
 set $power_mode_title "power (L - lock, H - hybernate, S - shutdown)"
 
 set $tag1 1.WORKPLACE
