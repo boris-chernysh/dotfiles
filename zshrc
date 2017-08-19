@@ -1,4 +1,3 @@
-export EDITOR="vim"
 export PAGER="less"
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$HOME/dotfiles/zsh_custom"
@@ -30,4 +29,10 @@ elif [[ $OSTYPE = linux-* && ! $OSTYPE = linux-android ]]; then
 	export XDG_DATA_DIRS="/home/boris/.linuxbrew/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS"
 
 	source "$HOME/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
+if ! [ -x "$(command -v vim)" ] && [ -x "$(command -v nvim)" ]; then
+	export EDITOR="nvim"
+else
+	export EDITOR="vim"
 fi

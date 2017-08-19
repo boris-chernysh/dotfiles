@@ -1,5 +1,12 @@
 " plug autoinstall {{{
-if empty(glob("~/.vim/autoload/plug.vim"))
+
+if has('nvim')
+	let g:plug_path = "~/.config/nvim/autoload/plug.vim"
+else
+	let g:plug_path = "~/.vim/autoload/plug.vim"
+endif
+
+if empty(glob(g:plug_path))
 	execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 " }}}
@@ -193,6 +200,9 @@ endif
 " }}}
 
 " utils {{{
+
+" write file with sudo
+command! -nargs=0 -bang Wsudo :silent! w !sudo tee % &>/dev/null
 
 " SetLinters() sets Neomake variables for project linting engines
 " if ./node_modules/.bin not set in $PATH binaries for makers not be found, and

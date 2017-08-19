@@ -22,9 +22,8 @@
 [profiles]
   [[default]]
     background_color = "#2c2c2c"
-    background_image = None
     cursor_color = "#20bbfc"
-    font = Fira Mono for Powerline 12
+    font = Fira Mono for Powerline 13
     foreground_color = "#839496"
     palette = "#2e3436:#c30771:#10a778:#8c8961:#008ec4:#523c79:#20a5ba:#d9d9d9:#555753:#fb007a:#5fd7af:#9b933c:#20bbfc:#6855de:#4fb8cc:#f1f1f1"
     scrollback_infinite = True

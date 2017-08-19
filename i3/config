@@ -1,8 +1,11 @@
 set $mod Mod4
 
 set $terminal terminator
-set $browser google-chrome
+set $browser $BROWSER
 set $lock gnome-screensaver-command -l
+
+set $im_mode_title "IM (T - Telegram, C - CSSSR Slack, T - Tinkoff Slack)"
+set $power_mode_title "power (L - lock, H - hybernate, S - shutdown)"
 
 set $tag1 1.WORKPLACE
 set $tag2 2.WORKPLACE
@@ -19,7 +22,6 @@ font pango:$font
 bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec exec rofi -show run
-bindsym $mod+p exec exec rofi -show window
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -66,22 +68,25 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym $mod+g exec google-chrome
+bindsym $mod+g exec $browser
 bindsym $mod+t border toggle
 bindsym $mod+m bar mode toggle
 
 bindsym XF86AudioRaiseVolume exec amixer set Master 7%+
 bindsym XF86AudioLowerVolume exec amixer set Master 7%-
-bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
+bindsym XF86AudioMute exec amixer set Master toggle
+
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
+exec --no-startup-id cbatticon
 exec --no-startup-id screencloud
 exec --no-startup-id owncloud
-exec --no-startup-id syndaemon -i 0.5 -t -K -R -d
 exec --no-startup-id feh --bg-scale ~/.wallpaper.jpg
-exec --no-startup-id setxkbmap -layout 'us,ru' -option 'lv3:ralt_switch,compose:rwin,grp:alt_shift_toggle,ctrl:nocaps'
-exec --no-startup-id compton --backend=glx
+#exec --no-startup-id setxkbmap -layout 'us,ru' -option 'lv3:ralt_switch,grp:lctrl_toggle,ctrl:nocaps,grp_led:caps'
+exec --no-startup-id compton -b --backend glx --vsync opengl-swc --xrender-sync
 
 
 mode "resize" {
@@ -96,14 +101,27 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-mode "power" {
+mode $power_mode_title {
 	bindsym l exec $lock, mode "default"
+	bindsym h exec systemctl hibernate, mode "default"
+	bindsym s exec systemctl poweroff, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
 
-bindsym $mod+q mode "power"
+bindsym $mod+q mode $power_mode_title
+
+mode $im_mode_title {
+	bindsym t exec $browser --app="http://web.telegram.org", mode "default"
+	bindsym c exec $browser --app="https://csssr.slack.com", mode "default"
+	bindsym t exec $browser --app="https://tinkoff.slack.com", mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+i mode $im_mode_title
 
 bar {
 	position top
