@@ -1,7 +1,6 @@
 set $mod Mod4
 
 set $terminal terminator
-set $browser chromium
 set $lock gnome-screensaver-command -l
 
 set $im_mode_title "IM (I - Telegram, C - CSSSR Slack, T - Tinkoff Slack)"

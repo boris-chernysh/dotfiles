@@ -8,7 +8,7 @@
   new_tab = <Primary><Super>t
   next_tab = <Primary><Super>l
   prev_tab = <Primary><Super>h
-  split_horiz = <Primary><Super>h
+  split_horiz = <Primary><Super>b
   split_vert = <Primary><Super>v
 [layouts]
   [[default]]
