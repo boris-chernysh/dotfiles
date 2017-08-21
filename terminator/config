@@ -2,13 +2,13 @@
   borderless = True
   inactive_color_offset = 0.78
 [keybindings]
-  close_term = <Primary><Super>w
+  close_term = <Primary><Super>d
   cycle_next = <Primary><Super>j
   cycle_prev = <Primary><Super>k
   new_tab = <Primary><Super>t
   next_tab = <Primary><Super>l
   prev_tab = <Primary><Super>h
-  split_horiz = <Primary><Super>s
+  split_horiz = <Primary><Super>h
   split_vert = <Primary><Super>v
 [layouts]
   [[default]]
