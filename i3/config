@@ -5,7 +5,7 @@ set $browser $BROWSER
 set $lock gnome-screensaver-command -l
 
 set $im_mode_title "IM (I - Telegram, C - CSSSR Slack, T - Tinkoff Slack)"
-set $power_mode_title "power (L - lock, H - hybernate, S - shutdown)"
+set $power_mode_title "power (L - lock, H - hybernate, S - shutdown, R - reboot)"
 
 set $tag1 1.WORKPLACE
 set $tag2 2.WORKPLACE
@@ -79,6 +79,8 @@ bindsym XF86AudioMute exec amixer set Master toggle
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
+bindsym XF86Display exec --no-startup-id xrandr --output $MAIN_DISPLAY --auto
+
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id cbatticon
@@ -87,7 +89,6 @@ exec --no-startup-id owncloud
 exec --no-startup-id feh --bg-scale ~/.wallpaper.jpg
 #exec --no-startup-id setxkbmap -layout 'us,ru' -option 'lv3:ralt_switch,grp:lctrl_toggle,ctrl:nocaps,grp_led:caps'
 exec --no-startup-id compton -b --backend glx --vsync opengl-swc --xrender-sync
-
 
 mode "resize" {
 	bindsym h resize shrink width 10 px or 10 ppt
@@ -105,6 +106,7 @@ mode $power_mode_title {
 	bindsym l exec $lock, mode "default"
 	bindsym h exec systemctl hibernate, mode "default"
 	bindsym s exec systemctl poweroff, mode "default"
+	bindsym r exec systemctl reboot, moide "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -113,7 +115,7 @@ mode $power_mode_title {
 bindsym $mod+q mode $power_mode_title
 
 mode $im_mode_title {
-	bindsym t exec $browser --app="http://web.telegram.org", mode "default"
+	bindsym i exec $browser --app="http://web.telegram.org", mode "default"
 	bindsym c exec $browser --app="https://csssr.slack.com", mode "default"
 	bindsym t exec $browser --app="https://tinkoff.slack.com", mode "default"
 
