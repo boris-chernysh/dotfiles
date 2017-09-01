@@ -71,9 +71,9 @@ bindsym $mod+g exec $browser
 bindsym $mod+t border toggle
 bindsym $mod+m bar mode toggle
 
-bindsym XF86AudioRaiseVolume exec amixer set Master 7%+
-bindsym XF86AudioLowerVolume exec amixer set Master 7%-
-bindsym XF86AudioMute exec amixer set Master toggle
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 7%+
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 7%-
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle
 
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
