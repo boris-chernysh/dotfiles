@@ -27,6 +27,8 @@ Plug 'benekastah/neomake' "async make tool
 Plug 'webdevel/tabulous' "customazible tab line
 Plug 'dag/vim2hs' "haskell helpers
 Plug 'quramy/tsuquyomi' "typescript features helpers
+Plug 'leafgarland/typescript-vim' "typescript highlight and helpers
+Plug 'ianks/vim-tsx' "typescript highlight and indenting
 " colors and helpers for languages
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
