@@ -23,12 +23,15 @@ Plug 'sjl/gundo.vim' "tree of file changes
 Plug 'Raimondi/delimitMate' "brackets autoclose
 Plug 'mhinz/vim-grepper' "find in filex
 Plug 'skywind3000/asyncrun.vim' "async run shell commands
-Plug 'benekastah/neomake' "async make tool
+Plug 'neomake/neomake' "async make tool
 Plug 'webdevel/tabulous' "customazible tab line
 Plug 'dag/vim2hs' "haskell helpers
-Plug 'quramy/tsuquyomi' "typescript features helpers
-Plug 'leafgarland/typescript-vim' "typescript highlight and helpers
-Plug 'ianks/vim-tsx' "typescript highlight and indenting
+" Plug 'quramy/tsuquyomi' "typescript features helpers
+Plug 'Quramy/tsuquyomi' "typescript IDE features
+Plug 'editorconfig/editorconfig-vim' "use .editorconfig for projects
+if has('nvim') "tsuquyoumi require vim8 features or vimproc
+	Plug 'Shougo/vimproc.vim', {'do': 'make'}
+endif
 " colors and helpers for languages
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
@@ -36,6 +39,8 @@ Plug 'tpope/vim-markdown'
 Plug 'mxw/vim-jsx'
 Plug 'moll/vim-node'
 Plug 'digitaltoad/vim-jade'
+Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
 " colorschemes
 Plug 'reedes/vim-colors-pencil'
 Plug 'jonathanfilip/vim-lucius'
