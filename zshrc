@@ -6,11 +6,12 @@ export NVM_DIR="$HOME/.nvm"
 # export NVM_LAZY_LOAD=true
 export MYVIMRC="~/dotfiles/vimrc"
 export VIMINIT="source $MYVIMRC"
+export EDITOR="vim"
 
 bindkey "^R" history-incremental-search-backward
 
 if [[ -d $ZSH ]]; then
-	plugins=(vi-mode vim-interaction jump git mercurial node npm zsh-nvm git_helpers)
+	plugins=(vi-mode vim-interaction jump git node npm zsh-nvm git_helpers)
 
 	source $ZSH/oh-my-zsh.sh
 fi
@@ -28,10 +29,4 @@ if [ -n LINUXBREW ]; then
 	export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 	export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 	export XDG_DATA_DIRS="/home/boris/.linuxbrew/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS"
-fi
-
-if ! [ -x "$(command -v vim)" ] && [ -x "$(command -v nvim)" ]; then
-	export EDITOR="nvim"
-else
-	export EDITOR="vim"
 fi
