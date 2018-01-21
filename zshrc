@@ -4,6 +4,8 @@ export ZSH_CUSTOM="$HOME/dotfiles/zsh_custom"
 ZSH_THEME="BORIS"
 export NVM_DIR="$HOME/.nvm"
 # export NVM_LAZY_LOAD=true
+export MYVIMRC="~/dotfiles/vimrc"
+export VIMINIT="source $MYVIMRC"
 
 bindkey "^R" history-incremental-search-backward
 

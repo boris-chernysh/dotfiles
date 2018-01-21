@@ -3,3 +3,5 @@
 	name = Boris Chernysh
 [credential]
 	helper = store
+[core]
+	excludesfile = ~/.gitignore

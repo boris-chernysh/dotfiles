@@ -21,7 +21,6 @@
 [profiles]
   [[default]]
     background_color = "#2c2c2c"
-    background_image = None
     cursor_color = "#20bbfc"
     font = Fira Mono for Powerline 13
     foreground_color = "#839496"

@@ -19,31 +19,26 @@ Plug 'tpope/vim-commentary' "commentary helpers
 Plug 'tpope/vim-surround' "brackets helpers
 Plug 'Lokaltog/vim-easymotion' "navigation in files
 Plug 'mattn/emmet-vim' "fast creating html/css
-Plug 'sjl/gundo.vim' "tree of file changes
 Plug 'Raimondi/delimitMate' "brackets autoclose
-Plug 'mhinz/vim-grepper' "find in filex
-Plug 'skywind3000/asyncrun.vim' "async run shell commands
+Plug 'mhinz/vim-grepper' "find in files
 Plug 'neomake/neomake' "async make tool
 Plug 'webdevel/tabulous' "customazible tab line
 Plug 'dag/vim2hs' "haskell helpers
-" Plug 'quramy/tsuquyomi' "typescript features helpers
-Plug 'Quramy/tsuquyomi' "typescript IDE features
 Plug 'editorconfig/editorconfig-vim' "use .editorconfig for projects
-if has('nvim') "tsuquyoumi require vim8 features or vimproc
-	Plug 'Shougo/vimproc.vim', {'do': 'make'}
-endif
+Plug 'Quramy/tsuquyomi' "typescript IDE features
 " colors and helpers for languages
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-markdown'
 Plug 'mxw/vim-jsx'
-Plug 'moll/vim-node'
+" Plug 'moll/vim-node'
 Plug 'digitaltoad/vim-jade'
 Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
 " colorschemes
 Plug 'reedes/vim-colors-pencil'
 Plug 'jonathanfilip/vim-lucius'
+Plug 'nightsense/forgotten'
 " buffers
 Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
 Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
@@ -53,6 +48,7 @@ call plug#end()
 " }}}
 
 " options {{{
+let $PATH .= ':./node_modules/.bin/' "extend PATH for using local npm binaries
 let mapleader = ';' "set leader
 set encoding=utf-8 "characters encoding inside vim
 set modelines=0 "disable modelines
@@ -80,6 +76,7 @@ set relativenumber "relative numbers for other lines
 set list "empty characters highlight
 set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~"
 set t_Co=256 "terminal colors
+set suffixesadd+=.js,.jsx,.ts,.tsx "open files without extension by gf
 
 " use spaces instead tabs
 augroup expandtab
@@ -92,10 +89,10 @@ autocmd! FileType vim setlocal foldmethod=marker
 " }}}
 
 " statusline {{{
-set statusline=λ\ %{fugitive#statusline()}
+set statusline=\ %{fugitive#statusline()}
 set statusline+=\ <%{GetFilePath()}>
 set statusline+=%=
-set statusline+=%c:%l\ %L\ λ
+set statusline+=%c:%l\ %L\ 
 " }}}
 
 " colors {{{
@@ -191,11 +188,17 @@ endif
 " neomake {{{
 let g:jsx_ext_required = 0 "allow jsx in normal js files
 
-augroup neomakers
-	autocmd!
-	autocmd FileType javascript,less,css call SetNeomakers() " set local npm makers
-	autocmd BufWritePost,BufEnter * Neomake
-augroup END
+let g:js_makers = ['eslint']
+let g:style_makers = ['stylelint']
+let g:ts_makers = ['tslint', 'tsc']
+let g:neomake_javascript_enabled_makers = g:js_makers
+let g:neomake_jsx_enabled_makers = g:js_makers
+let g:neomake_less_enabled_makers = g:style_makers
+let g:neomake_css_enabled_makers = g:style_makers
+let g:neomake_typescript_enabled_makers = g:ts_makers
+let g:neomake_tsx_enabled_makers = g:ts_makers
+
+autocmd BufWritePost,BufEnter * Neomake
 " }}}
 
 " silver searcher {{{
@@ -212,27 +215,6 @@ endif
 " write file with sudo
 command! -nargs=0 -bang Wsudo :silent! w !sudo tee % &>/dev/null
 
-" SetLinters() sets Neomake variables for project linting engines
-" if ./node_modules/.bin not set in $PATH binaries for makers not be found, and
-" Neomake won't use it
-function! SetNeomakers()
-	let b:npm_bin = './node_modules/.bin/'
-	if !isdirectory(b:npm_bin)
-		return
-	endif
-
-	let g:js_makers = ['eslint']
-	let g:style_makers = ['stylelint']
-	let g:neomake_javascript_enabled_makers = g:js_makers
-	let g:neomake_jsx_enabled_makers = g:js_makers
-	let g:neomake_less_enabled_makers = g:style_makers
-	let g:neomake_css_enabled_makers = g:style_makers
-
-	let b:neomake_javascript_eslint_exe = b:npm_bin . '/eslint'
-	let b:neomake_less_stylelint_exe = b:npm_bin . '/stylelint'
-	let b:neomake_css_stylelint_exe = b:npm_bin . '/stylelint'
-endfunction
-
 function! SetHaskellOptions()
 	setlocal tabstop=8
 	setlocal shiftwidth=8
@@ -244,3 +226,4 @@ function! GetFilePath()
 	return expand('%:.:h')
 endfunction
 " }}}
+
