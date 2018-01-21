@@ -7,7 +7,7 @@ else
 endif
 
 if empty(glob(g:plug_path))
-	execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+	execute '!curl -fLo ' . g:plug_path . ' --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 " }}}
 
