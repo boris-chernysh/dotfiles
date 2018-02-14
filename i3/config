@@ -6,22 +6,23 @@ set $lock gnome-screensaver-command -l
 set $im_mode_title "IM (T - Telegram, S - Slack)"
 set $power_mode_title "power (L - lock, H - hybernate, S - shutdown, R - reboot)"
 
-set $tag1 1.WORKPLACE
-set $tag2 2.WORKPLACE
+set $tag1 1.Workplace
+set $tag2 2.Workplace
 set $tag3 3.IM
-set $tag4 4.PLAYGROUND
-set $tag5 5.MUSIC
-set $tag6 6.EDUCATION
-set $tag7 7.INTERVIEW
-set $tag8 8.EMAIL
+set $tag4 4.Playground
+set $tag5 5.Music
+set $tag6 6.Education
+set $tag7 7.Interview
+set $tag8 8.Email
 
-#set $font Arimo for Powerline 11
-set $font Permanent Marker 11
+set $font Cousine 12
+set $dfont 'Cousine-12'
 font pango:$font
 
 bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec exec rofi -show run
+# bindsym $mod+d exec exec rofi -show run
+bindsym $mod+d exec dmenu_run -fn $dfont
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -88,11 +89,11 @@ bindsym $mod+XF86Display exec --no-startup-id xrandr --output eDP1 --off --outpu
 bindcode 37 exec pkill -SIGRTMIN+11 i3blocks
 
 exec --no-startup-id nm-applet
-exec --no-startup-id volumeicon
-exec --no-startup-id cbatticon
+# exec --no-startup-id volumeicon
+# exec --no-startup-id cbatticon
 exec --no-startup-id screencloud
 exec --no-startup-id feh --bg-scale ~/.wallpaper.jpg
-#exec --no-startup-id setxkbmap -layout 'us,ru' -option 'lv3:ralt_switch,grp:lctrl_toggle,ctrl:nocaps,grp_led:caps'
+# exec --no-startup-id setxkbmap -layout 'us,ru' -option 'lv3:ralt_switch,grp:lctrl_toggle,ctrl:nocaps,grp_led:caps'
 exec --no-startup-id compton -b --backend glx --vsync opengl-swc --xrender-sync
 
 mode "resize" {
@@ -121,8 +122,8 @@ bindsym $mod+q mode $power_mode_title
 
 mode $im_mode_title {
 	bindsym t exec $browser --app="http://web.telegram.org", mode "default"
-	#bindsym c exec $browser --app="https://csssr.slack.com", mode "default"
-	#bindsym t exec $browser --app="https://tinkoff.slack.com", mode "default"
+	# bindsym c exec $browser --app="https://csssr.slack.com", mode "default"
+	# bindsym t exec $browser --app="https://tinkoff.slack.com", mode "default"
 	bindsym s exec slack, mode "default"
 
 	bindsym Return mode "default"
@@ -133,7 +134,7 @@ bindsym $mod+i mode $im_mode_title
 
 bar {
 	position top
-	status_command i3blocks
+	status_command i3blocks -c ~/dotfiles/i3/i3blocks.conf
 	workspace_buttons yes
 	colors {
 		separator #666666
