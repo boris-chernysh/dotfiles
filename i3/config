@@ -75,18 +75,18 @@ bindsym $mod+g exec $browser
 bindsym $mod+t border toggle
 bindsym $mod+m bar mode toggle
 
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 7%+, exec pkill -SIGRTMIN+11 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 7%-, exec pkill -SIGRTMIN+11 i3blocks
-bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 7%+, exec pkill -SIGRTMIN+2 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 7%-, exec pkill -SIGRTMIN+2 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle, exec pkill -SIGRTMIN+2 i3blocks
 
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10, exec pkill -SIGRTMIN+3 i3blocks
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10, exec pkill -SIGRTMIN+3 i3blocks
 
 bindsym XF86Display exec --no-startup-id xrandr --output eDP1 --auto --output HDMI1 --off
 bindsym $mod+XF86Display exec --no-startup-id xrandr --output eDP1 --off --output HDMI1 --auto
 
-# listen ctrl and send code 11 for i3block layout command
-bindcode 37 exec pkill -SIGRTMIN+11 i3blocks
+# listen ctrl and send code 1 for i3block layout command
+bindcode 37 exec pkill -SIGRTMIN+1 i3blocks
 
 exec --no-startup-id nm-applet
 # exec --no-startup-id volumeicon
@@ -143,7 +143,7 @@ bar {
 		focused_workspace #222222 #222222 #4FB8CC
 		active_workspace #222222 #222222 #dddddd
 		inactive_workspace #222222 #222222 #dddddd
-		urgent_workspace  #222222 #222222 #dddddd
+		urgent_workspace  #222222 #FF0000 #FFFFFF
 	}
 }
 
