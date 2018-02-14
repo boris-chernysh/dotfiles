@@ -3,7 +3,7 @@ set $mod Mod4
 set $terminal terminator
 set $lock gnome-screensaver-command -l
 
-set $im_mode_title "IM (I - Telegram, C - CSSSR Slack, T - Tinkoff Slack)"
+set $im_mode_title "IM (T - Telegram, S - Slack)"
 set $power_mode_title "power (L - lock, H - hybernate, S - shutdown, R - reboot)"
 
 set $tag1 1.WORKPLACE
@@ -74,8 +74,8 @@ bindsym $mod+g exec $browser
 bindsym $mod+t border toggle
 bindsym $mod+m bar mode toggle
 
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 7%+
-bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 7%-
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 7%+, exec pkill -SIGRTMIN+11 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 7%-, exec pkill -SIGRTMIN+11 i3blocks
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle
 
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
@@ -83,6 +83,9 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
 bindsym XF86Display exec --no-startup-id xrandr --output eDP1 --auto --output HDMI1 --off
 bindsym $mod+XF86Display exec --no-startup-id xrandr --output eDP1 --off --output HDMI1 --auto
+
+# listen ctrl and send code 11 for i3block layout command
+bindcode 37 exec pkill -SIGRTMIN+11 i3blocks
 
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
@@ -117,9 +120,10 @@ mode $power_mode_title {
 bindsym $mod+q mode $power_mode_title
 
 mode $im_mode_title {
-	bindsym i exec $browser --app="http://web.telegram.org", mode "default"
-	bindsym c exec $browser --app="https://csssr.slack.com", mode "default"
-	bindsym t exec $browser --app="https://tinkoff.slack.com", mode "default"
+	bindsym t exec $browser --app="http://web.telegram.org", mode "default"
+	#bindsym c exec $browser --app="https://csssr.slack.com", mode "default"
+	#bindsym t exec $browser --app="https://tinkoff.slack.com", mode "default"
+	bindsym s exec slack, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -129,7 +133,7 @@ bindsym $mod+i mode $im_mode_title
 
 bar {
 	position top
-	status_command i3status
+	status_command i3blocks
 	workspace_buttons yes
 	colors {
 		separator #666666
