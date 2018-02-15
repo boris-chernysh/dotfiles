@@ -15,8 +15,8 @@ set $tag6 6.Education
 set $tag7 7.Interview
 set $tag8 8.Email
 
-set $font Cousine 12
-set $dfont 'Cousine-12'
+set $font Ubuntu 12
+set $dfont 'Ubuntu-12'
 font pango:$font
 
 bindsym $mod+Return exec $terminal
@@ -143,7 +143,7 @@ bar {
 		focused_workspace #222222 #222222 #4FB8CC
 		active_workspace #222222 #222222 #dddddd
 		inactive_workspace #222222 #222222 #dddddd
-		urgent_workspace  #222222 #FF0000 #FFFFFF
+		urgent_workspace  #222222 #4FB8CC #FFFFFF
 	}
 }
 
