@@ -2,33 +2,58 @@
 
 const { exec } = require('child_process')
 
-exec('acpi -b', (err, stdout, stderr) => {
+const execComand = comand => new Promise((resolve, reject) => exec(comand, (err, stdout) => {
     if (err) {
-        console.log(`<span color="#FF0000">${stderr}</span>`)
-        return
+        reject()
+
+        return;
     }
 
-    const [, batteryStatus] = stdout.split(': ')
-    const [chargeState, percentString] = batteryStatus.split(', ')
+    resolve(stdout)
+}))
 
-    const percent = parseInt(percentString, 10)
+execComand('acpi -b')
+    .then(stdout => {
+        const [, batteryStatus] = stdout.split(': ')
+        const [chargeState, percentString] = batteryStatus.split(', ')
 
-    let color = '#00FF00'
+        const percent = parseInt(percentString, 10)
 
-    if (percent < 20) color = '#FF0000'
-    else if (percent < 40) color = '#FFAE00'
-    else if (percent < 60) color = '#FFF600'
-    else if (percent < 85) color = '#A8FF00'
+        if (chargeState !== 'Unknown') {
+            return {
+                percent,
+                isCharging: chargeState === 'Charging'
+            }
+        }
 
-    const isCharging = chargeState === 'Charging'
-    const pangoColor = isCharging ? '' : ` color="${color}"`
+        return execComand('acpi -a')
+            .then(stdout => ({
+                percent,
+                isCharging: /on-line/.test(stdout)
+            }))
+    })
+    .then(({ percent, isCharging }) => {
+        let color = ''
 
-    console.log(
-        `<span${pangoColor}>${percentString}</span>` +
-        (isCharging ? '⚡' : '')
-    )
+        if (!isCharging) {
+            if (percent < 20) color = '#FF0000'
+            else if (percent < 40) color = '#FFAE00'
+            else if (percent < 60) color = '#FFF600'
+            else if (percent < 85) color = '#A8FF00'
+            else color = '#00FF00'
+        }
 
-    if (percent < 5) process.exit(33)
+        const pangoColor = color && ` color="${color}"`
 
-    process.exit(0)
-})
+        process.stdout.write(
+            `<span${pangoColor}>${percent}%</span>` + (isCharging ? '⚡' : '')
+        )
+
+        if (percent < 10) process.exit(33)
+
+        process.exit(0)
+    })
+    .catch(() => {
+        console.log('error')
+        process.exit(33)
+    })

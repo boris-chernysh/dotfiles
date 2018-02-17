@@ -38,7 +38,6 @@ Plug 'ianks/vim-tsx'
 " colorschemes
 Plug 'reedes/vim-colors-pencil'
 Plug 'jonathanfilip/vim-lucius'
-Plug 'nightsense/forgotten'
 " buffers
 Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
 Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp

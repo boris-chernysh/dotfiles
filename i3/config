@@ -3,8 +3,8 @@ set $mod Mod4
 set $terminal terminator
 set $lock gnome-screensaver-command -l
 
-set $im_mode_title "IM (T - Telegram, S - Slack)"
-set $power_mode_title "power (L - lock, H - hybernate, S - shutdown, R - reboot)"
+set $im_mode_title "IM:  [T]elegram, [S]lack"
+set $power_mode_title "Power: [L]ock, [H]ybernate, [S]hutdown, [R]eboot"
 
 set $tag1 1.Workplace
 set $tag2 2.Workplace
@@ -15,14 +15,14 @@ set $tag6 6.Education
 set $tag7 7.Interview
 set $tag8 8.Email
 
-set $font Ubuntu 12
-set $dfont 'Ubuntu-12'
-font pango:$font
+set $fontName Ubuntu
+set $fontSize 11
+font pango:$fontName $fontSize
 
 bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
 # bindsym $mod+d exec exec rofi -show run
-bindsym $mod+d exec dmenu_run -fn $dfont
+bindsym $mod+d exec dmenu_run -fn $fontName-$fontSize
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -132,22 +132,31 @@ mode $im_mode_title {
 
 bindsym $mod+i mode $im_mode_title
 
+set $bg #2f343f
+set $window_bg #1e232e
+set $text #bbbbcc
+set $active #ffffff
+set $inactive #676e7d
+set $separator #555577
+
 bar {
 	position top
 	status_command i3blocks -c ~/dotfiles/i3/i3blocks.conf
 	workspace_buttons yes
 	colors {
-		separator #666666
-		background #222222
-		statusline #dddddd
-		focused_workspace #222222 #222222 #4FB8CC
-		active_workspace #222222 #222222 #dddddd
-		inactive_workspace #222222 #222222 #dddddd
-		urgent_workspace  #222222 #4FB8CC #FFFFFF
+		separator $separator
+		background $bg
+		statusline $text
+		focused_workspace $bg $bg $text
+		active_workspace $bg $bg $text
+		inactive_workspace $bg $bg $inactive
+		urgent_workspace $active $active $bg
 	}
 }
 
-client.focused #333333 #333338 #4FB8CC #dddddd
-client.focused_inactive #333333 #333338 #447188 #292d2e
-client.unfocused #333333 #333333 #888888 #292d2e
-client.urgent #2f343a #900000 #ffffff #900000
+client.focused $window_bg $window_bg $text $window_bg
+client.focused_inactive $window_bg $window_bg $inactive $window_bg
+client.unfocused $window_bg $window_bg $inactive $window_bg
+client.urgent $active $active $window_bg $active
+
+hide_edge_borders both
