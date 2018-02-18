@@ -36,4 +36,4 @@ if all(speakers_info[0][1] == info[1] for info in speakers_info):
     print(speakers_info[0][1])
     exit()
 
-print(",".join([":".join(info) for info in speakers_info]))
+print(",".join([":".join((info[0], info[1])) for info in speakers_info]))
