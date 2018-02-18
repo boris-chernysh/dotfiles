@@ -1,26 +1,37 @@
 #!/usr/bin/env python
 
-import re
-
 from time import sleep
 from subprocess import Popen, PIPE
+from re import search, findall, match
 
-def get_type_and_loud(info):
-    name = re.search("^[ a-zA-Z]*(?=:)", info).group(0)
-    short_name = "".join(re.findall("[A-Z]", name))
-    loud = re.search("[0-9]{1,3}%", info).group(0)
+def get_name(info):
+    name = search("^[ a-zA-Z]*(?=:)", info).group(0)
+    return "".join(findall("[A-Z]", name))
 
-    return (short_name, loud)
+def get_loud(info):
+    return search("[0-9]{1,3}%", info).group(0)
+
+def check_muted(info):
+    return "[off]" in info
 
 try:
     process = Popen(["amixer", "get", "Master"], stdout=PIPE, stderr=PIPE)
     output, err = process.communicate()
-    speakers_raw_info = re.findall("[a-zA-Z ]+:.*[[0-9]{1,2}%].*", output.decode("utf-8"))
+    speakers_raw_info = findall("[a-zA-Z ]+:.*[[0-9]{1,2}%].*", output.decode("utf-8"))
 except Exception:
     print('error')
     exit(33)
 
-speakers_info = [get_type_and_loud(raw_info) for raw_info in speakers_raw_info]
+speakers_info = [
+    (get_name(raw_info), get_loud(raw_info), check_muted(raw_info))
+    for raw_info
+    in speakers_raw_info
+]
+
+if all(speakers_info[0][2] for info in speakers_info):
+    print("MUTE")
+    exit()
+
 if all(speakers_info[0][1] == info[1] for info in speakers_info):
     print(speakers_info[0][1])
     exit()

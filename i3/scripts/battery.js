@@ -38,9 +38,6 @@ execComand('acpi -b')
         if (!isCharging) {
             if (percent < 20) color = '#FF0000'
             else if (percent < 40) color = '#FFAE00'
-            else if (percent < 60) color = '#FFF600'
-            else if (percent < 85) color = '#A8FF00'
-            else color = '#00FF00'
         }
 
         const pangoColor = color && ` color="${color}"`

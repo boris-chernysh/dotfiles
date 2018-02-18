@@ -21,7 +21,8 @@ Plug 'Lokaltog/vim-easymotion' "navigation in files
 Plug 'mattn/emmet-vim' "fast creating html/css
 Plug 'Raimondi/delimitMate' "brackets autoclose
 Plug 'mhinz/vim-grepper' "find in files
-Plug 'neomake/neomake' "async make tool
+" Plug 'neomake/neomake' "async make tool
+Plug 'w0rp/ale' "make tool
 Plug 'webdevel/tabulous' "customazible tab line
 Plug 'dag/vim2hs' "haskell helpers
 Plug 'editorconfig/editorconfig-vim' "use .editorconfig for projects
@@ -91,6 +92,7 @@ autocmd! FileType vim setlocal foldmethod=marker
 set statusline=\ %{fugitive#statusline()}
 set statusline+=\ <%{GetFilePath()}>
 set statusline+=%=
+set statusline+=%{LinterStatus()}
 set statusline+=%c:%l\ %L\ 
 " }}}
 
@@ -144,6 +146,9 @@ nnoremap <leader>yn :let @+ = expand("%:t:r")<CR>
 " always use the command editing window
 nnoremap : q:i
 vnoremap : q:i
+
+nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
+nmap <silent> <leader>] <Plug>(ale_next_wrap)
 " }}}
 
 " easy motion {{{
@@ -184,22 +189,6 @@ if has('gui_running')
 endif
 " }}}
 
-" neomake {{{
-let g:jsx_ext_required = 0 "allow jsx in normal js files
-
-let g:js_makers = ['eslint']
-let g:style_makers = ['stylelint']
-let g:ts_makers = ['tslint', 'tsc']
-let g:neomake_javascript_enabled_makers = g:js_makers
-let g:neomake_jsx_enabled_makers = g:js_makers
-let g:neomake_less_enabled_makers = g:style_makers
-let g:neomake_css_enabled_makers = g:style_makers
-let g:neomake_typescript_enabled_makers = g:ts_makers
-let g:neomake_tsx_enabled_makers = g:ts_makers
-
-autocmd BufWritePost,BufEnter * Neomake
-" }}}
-
 " silver searcher {{{
 if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
@@ -207,6 +196,40 @@ if executable('ag')
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 	let g:ctrlp_use_caching = 0
 endif
+" }}}
+
+" ale {{{
+" error signs
+let g:ale_sign_error = '☠️'
+let g:ale_sign_warning = '💩'
+
+" do not highlight bg under ale signs
+hi AleErrorSign cterm=none ctermfg=160 ctermbg=0
+hi AleWarningSign cterm=none ctermfg=220 ctermbg=0
+
+let g:js_linters = ['eslint', 'tsserver']
+let g:ale_pattern_options = {
+\ '\.js$': {'ale_linters': ['eslint', 'flow']},
+\ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
+\}
+let g:ale_pattern_options_enabled = 1
+
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? '' : printf(
+    \   '%d💩 %d☠️ ',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
+let g:ale_echo_msg_error_str = '☠️'
+let g:ale_echo_msg_warning_str = '💩'
+let g:ale_echo_msg_format = '%severity% (%linter%) %s'
 " }}}
 
 " utils {{{
