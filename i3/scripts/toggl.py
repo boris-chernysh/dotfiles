@@ -1,12 +1,20 @@
 #!/usr/bin/env python
 
 from os import environ
+import os
 from http.client import HTTPSConnection
 from base64 import b64encode
 from json import loads
 from time import time, sleep
 from math import floor
 from subprocess import call
+
+sleep_time = 1
+
+if "TOGGL_TOKEN" not in environ:
+    print("no token")
+    sleep(sleep_time)
+    exit(33)
 
 token = environ["TOGGL_TOKEN"]
 
@@ -32,7 +40,7 @@ except Exception:
 if data is None:
     print("[]")
 
-    sleep(1)
+    sleep(sleep_time)
     exit()
 
 description = ""
@@ -50,4 +58,4 @@ time = "%d:%02d:%02d" % (hours, minutes, seconds)
 
 print("%(description)s[%(time)s]" % locals())
 
-sleep(1)
+sleep(sleep_time)

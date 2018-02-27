@@ -46,7 +46,7 @@ execComand('acpi -b')
             `<span${pangoColor}>${percent}%</span>` + (isCharging ? '⚡' : '')
         )
 
-        if (percent < 10) process.exit(33)
+        if (percent < 15) process.exit(33)
 
         process.exit(0)
     })
