@@ -1,6 +1,6 @@
 set $mod Mod4
 
-set $terminal terminator
+set $terminal hyper
 set $lock gnome-screensaver-command -l
 
 set $im_mode_title "IM:  [T]elegram, [S]lack"

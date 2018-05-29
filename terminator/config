@@ -23,8 +23,14 @@
 [plugins]
 [profiles]
   [[default]]
-    cursor_color = "#aaaaaa"
+    background_color = "#002b36"
+    cursor_color = "#eee8d5"
+    font = Fira Mono for Powerline 13
+    foreground_color = "#eee8d5"
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    show_titlebar = False
+    use_system_font = False
+    visible_bell = True
   [[pencil]]
     background_color = "#2c2c2c"
     cursor_color = "#20bbfc"
@@ -33,15 +39,6 @@
     palette = "#2e3436:#c30771:#10a778:#8c8961:#008ec4:#523c79:#20a5ba:#d9d9d9:#555753:#fb007a:#5fd7af:#9b933c:#20bbfc:#6855de:#4fb8cc:#f1f1f1"
     scrollback_infinite = True
     scrollbar_position = hidden
-    show_titlebar = False
-    use_system_font = False
-    visible_bell = True
-  [[solarized-dark]]
-    background_color = "#002b36"
-    cursor_color = "#eee8d5"
-    font = Fira Mono for Powerline 13
-    foreground_color = "#eee8d5"
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     show_titlebar = False
     use_system_font = False
     visible_bell = True
