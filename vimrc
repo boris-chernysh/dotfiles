@@ -39,6 +39,7 @@ Plug 'ianks/vim-tsx'
 " colorschemes
 Plug 'reedes/vim-colors-pencil'
 Plug 'jonathanfilip/vim-lucius'
+Plug 'altercation/vim-colors-solarized'
 " buffers
 Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
 Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
@@ -97,7 +98,7 @@ set statusline+=%c:%l\ %L\
 " }}}
 
 " colors {{{
-colorscheme pencil " also may be used 'lucius'
+colorscheme solarized " also may be used 'lucius'
 set background=dark
 " }}}
 
