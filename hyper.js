@@ -2,7 +2,7 @@ module.exports = {
   config: {
     updateChannel: 'stable',
     fontSize: 16,
-    fontFamily: '"Fira Mono for Powerline"',
+    fontFamily: '"Fira Code"',
     fontWeight: 'normal',
     fontWeightBold: 'bold',
     cursorAccentColor: '#000',
