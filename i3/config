@@ -1,6 +1,6 @@
 set $mod Mod4
 
-set $terminal hyper
+set $terminal kitty
 set $lock gnome-screensaver-command -l
 
 set $im_mode_title "IM:  [T]elegram, [S]lack"
@@ -123,8 +123,6 @@ bindsym $mod+q mode $power_mode_title
 
 mode $im_mode_title {
 	bindsym t exec $browser --app="http://web.telegram.org", mode "default"
-	# bindsym c exec $browser --app="https://csssr.slack.com", mode "default"
-	# bindsym t exec $browser --app="https://tinkoff.slack.com", mode "default"
 	bindsym s exec slack, mode "default"
 
 	bindsym Return mode "default"
@@ -144,14 +142,14 @@ bar {
 		background #002b36
 		statusline #839496
 		separator  #586e75
-		focused_workspace  #b58900 #b58900 #002b36
-		active_workspace   #586e75 #586e75 #002b36
-		inactive_workspace #073642 #002b36 #839496
-		urgent_workspace   #dc322f #dc322f #fdf6e3
+		focused_workspace  #002b36 #002b36 #b58900
+		active_workspace #586e75 #586e75 #002b36
+		inactive_workspace #002b36 #002b36 #839496
+		urgent_workspace #dc322f #dc322f #fdf6e3
 	}
 }
 
-client.focused          #002b36 #586e75 #fdf6e3 #268bd2
+client.focused #002b36 #586e75 #fdf6e3 #268bd2
 client.focused_inactive #002b36 #073642 #839496 #073642
-client.unfocused        #002b36 #073642 #839496 #073642
-client.urgent           #002b36 #dc322f #fdf6e3 #002b36
+client.unfocused #002b36 #073642 #839496 #073642
+client.urgent #002b36 #dc322f #fdf6e3 #002b36

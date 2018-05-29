@@ -208,7 +208,7 @@ let g:ale_sign_warning = '💩'
 hi AleErrorSign cterm=none ctermfg=160 ctermbg=0
 hi AleWarningSign cterm=none ctermfg=220 ctermbg=0
 
-let g:js_linters = ['eslint', 'tsserver']
+let g:js_linters = ['eslint']
 let g:ale_pattern_options = {
 \ '\.js$': {'ale_linters': ['eslint', 'flow']},
 \ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
