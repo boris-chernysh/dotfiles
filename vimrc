@@ -17,6 +17,7 @@ Plug 'kshenoy/vim-signature' "marks helpers
 Plug 'tpope/vim-fugitive' "git aliases
 Plug 'tpope/vim-commentary' "commentary helpers
 Plug 'tpope/vim-surround' "brackets helpers
+Plug 'tpope/vim-eunuch' "unix commands helpers
 Plug 'Lokaltog/vim-easymotion' "navigation in files
 Plug 'mattn/emmet-vim' "fast creating html/css
 Plug 'Raimondi/delimitMate' "brackets autoclose
@@ -57,7 +58,7 @@ set backspace=2 "allow backspacing over autoident, breaks and the starts of inse
 set smartindent "automaticaly set right indent
 set tabstop=4 "number of spaces in tab
 set shiftwidth=4 "number of spaces for each ident level
-set softtabstop=4 "count of spaces for show tab
+set softtabstop=4 "count of spaces for tab
 set showtabline=2 "always show tabline
 set scrolloff=5 "number of screen lines to keep above and below cursor
 set laststatus=2 "always show statusline
@@ -83,7 +84,7 @@ set suffixesadd+=.js,.jsx,.ts,.tsx "open files without extension by gf
 augroup expandtab
 	autocmd!
 	autocmd FileType haskell call SetHaskellOptions()
-	autocmd FileType javascript,css,less,haskell setlocal expandtab
+	autocmd FileType javascript,css,less,haskell,markdown setlocal expandtab
 augroup END
 " set marker fold method for vim script
 autocmd! FileType vim setlocal foldmethod=marker
@@ -208,7 +209,7 @@ let g:ale_sign_warning = '💩'
 hi AleErrorSign cterm=none ctermfg=160 ctermbg=0
 hi AleWarningSign cterm=none ctermfg=220 ctermbg=0
 
-let g:js_linters = ['eslint']
+let g:js_linters = ['eslint', 'flow']
 let g:ale_pattern_options = {
 \ '\.js$': {'ale_linters': ['eslint', 'flow']},
 \ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
@@ -236,8 +237,6 @@ let g:ale_echo_msg_format = '%severity% (%linter%) %s'
 " utils {{{
 
 " write file with sudo
-command! -nargs=0 -bang Wsudo :silent! w !sudo tee % &>/dev/null
-
 function! SetHaskellOptions()
 	setlocal tabstop=8
 	setlocal shiftwidth=8

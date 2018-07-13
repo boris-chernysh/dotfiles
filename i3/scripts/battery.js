@@ -36,7 +36,7 @@ execComand('acpi -b')
         let color = ''
 
         if (!isCharging) {
-            if (percent < 20) color = '#FF0000'
+            if (percent < 20) color = '#FFFFFF'
             else if (percent < 40) color = '#FFAE00'
         }
 
