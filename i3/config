@@ -22,7 +22,6 @@ font pango:$fontName $fontSize
 
 bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
-# bindsym $mod+d exec exec rofi -show run
 bindsym $mod+d exec dmenu_run -fn "$fontName-$fontSize"
 
 bindsym $mod+h focus left
@@ -90,11 +89,8 @@ bindsym $mod+XF86Display exec --no-startup-id xrandr --output eDP1 --off --outpu
 bindcode 37 exec pkill -SIGRTMIN+1 i3blocks
 
 exec --no-startup-id nm-applet
-# exec --no-startup-id volumeicon
-# exec --no-startup-id cbatticon
 exec --no-startup-id screencloud
 exec --no-startup-id feh --bg-scale ~/.wallpaper.jpg
-# exec --no-startup-id setxkbmap -layout 'us,ru' -option 'lv3:ralt_switch,grp:lctrl_toggle,ctrl:nocaps,grp_led:caps'
 exec --no-startup-id compton -b --backend glx --vsync opengl-swc --xrender-sync
 
 mode "resize" {
@@ -136,15 +132,16 @@ hide_edge_borders both
 
 bar {
 	position top
+	i3bar_command i3bar -t
 	status_command i3blocks -c ~/dotfiles/i3/i3blocks.conf
 	workspace_buttons yes
 	colors {
-		background #002b36
+		background #002b3600
 		statusline #839496
 		separator  #586e75
-		focused_workspace  #002b36 #002b36 #b58900
-		active_workspace #586e75 #586e75 #002b36
-		inactive_workspace #002b36 #002b36 #839496
+		focused_workspace  #002b3600 #002b3600 #b58900
+		active_workspace #586e75 #586e75 #002b3600
+		inactive_workspace #002b3600 #002b3600 #839496
 		urgent_workspace #dc322f #dc322f #fdf6e3
 	}
 }
