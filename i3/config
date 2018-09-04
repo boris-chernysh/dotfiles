@@ -2,6 +2,7 @@ set $mod Mod4
 
 set $terminal kitty
 set $lock gnome-screensaver-command -l
+set $set_wallpapper feh --bg-scale ~/.wallpaper.jpg
 
 set $im_mode_title "IM:  [T]elegram, [S]lack"
 set $power_mode_title "Power: [L]ock, [H]ybernate, [S]hutdown, [R]eboot"
@@ -15,8 +16,7 @@ set $tag6 6.Education
 set $tag7 7.Interview
 set $tag8 8.Email
 
-# set $fontName Ubuntu
-set $fontName HelveticaNeueCyr
+set $fontName SFNS Display
 set $fontSize 11
 font pango:$fontName $fontSize
 
@@ -82,15 +82,15 @@ bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle, exec pkill -SI
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10, exec pkill -SIGRTMIN+3 i3blocks
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10, exec pkill -SIGRTMIN+3 i3blocks
 
-bindsym XF86Display exec --no-startup-id xrandr --output eDP1 --auto --output HDMI1 --off
-bindsym $mod+XF86Display exec --no-startup-id xrandr --output eDP1 --off --output HDMI1 --auto
+bindsym XF86Display exec --no-startup-id xrandr --output eDP1 --auto --output HDMI1 --off, exec --no-startup-id $set_wallpapper
+bindsym $mod+XF86Display exec --no-startup-id xrandr --output eDP1 --off --output HDMI1 --auto, exec --no-startup-id $set_wallpapper
 
 # listen ctrl and send code 1 for i3block layout command
 bindcode 37 exec pkill -SIGRTMIN+1 i3blocks
 
 exec --no-startup-id nm-applet
 exec --no-startup-id screencloud
-exec --no-startup-id feh --bg-scale ~/.wallpaper.jpg
+exec --no-startup-id $set_wallpapper
 exec --no-startup-id compton -b --backend glx --vsync opengl-swc --xrender-sync
 
 mode "resize" {
@@ -127,26 +127,30 @@ mode $im_mode_title {
 
 bindsym $mod+i mode $im_mode_title
 
-
-hide_edge_borders both
-
 bar {
 	position top
 	i3bar_command i3bar -t
 	status_command i3blocks -c ~/dotfiles/i3/i3blocks.conf
 	workspace_buttons yes
 	colors {
-		background #002b3600
+		background #002b36aa
 		statusline #839496
 		separator  #586e75
-		focused_workspace  #002b3600 #002b3600 #b58900
+		focused_workspace  #002b36aa #002b36aa #b58900
 		active_workspace #586e75 #586e75 #002b3600
-		inactive_workspace #002b3600 #002b3600 #839496
-		urgent_workspace #dc322f #dc322f #fdf6e3
+		inactive_workspace #002b36aa #002b36aa #839496
+		urgent_workspace #dc322faa #dc322faa #fdf6e3
 	}
 }
 
-client.focused #002b36 #586e75 #fdf6e3 #268bd2
-client.focused_inactive #002b36 #073642 #839496 #073642
-client.unfocused #002b36 #073642 #839496 #073642
-client.urgent #002b36 #dc322f #fdf6e3 #002b36
+client.focused #002b36aa #002b36aa #b58900 #268bd2
+client.focused_inactive #002b36aa #002b36aa #83949677 #073642
+client.unfocused #002b36aa #002b36aa #839496 #073642
+client.urgent #002b36 #dc322f77 #fdf6e3 #002b36
+
+gaps inner 0
+gaps outer 0
+
+default_border none
+
+for_window [class=".*"] title_format " %title"

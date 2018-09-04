@@ -22,7 +22,6 @@ Plug 'Lokaltog/vim-easymotion' "navigation in files
 Plug 'mattn/emmet-vim' "fast creating html/css
 Plug 'Raimondi/delimitMate' "brackets autoclose
 Plug 'mhinz/vim-grepper' "find in files
-" Plug 'neomake/neomake' "async make tool
 Plug 'w0rp/ale' "make tool
 Plug 'webdevel/tabulous' "customazible tab line
 Plug 'dag/vim2hs' "haskell helpers
@@ -134,8 +133,6 @@ nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " show/hide gundo window
 nnoremap <leader>g :GundoToggle<CR>
-" instead !
-nnoremap <leader>r :AsyncRun<Space>
 " find something
 nnoremap <leader>f q:iGrepper -query<Space>
 nnoremap <leader>F :Grepper -cword<CR>
