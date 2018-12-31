@@ -26,7 +26,7 @@ set $fontName SFNS Display
 set $fontSize 11
 font pango:$fontName $fontSize
 
-bindsym Print exec ~/bin/mk_screenshot.sh
+bindsym Print exec ~/dotfiles/bin/mk_screenshot.sh
 bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
 
