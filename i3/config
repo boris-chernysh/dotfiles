@@ -3,6 +3,12 @@ set $mod Mod4
 set $terminal kitty
 set $lock gnome-screensaver-command -l
 set $set_wallpapper feh --bg-scale ~/.wallpaper.jpg
+set $browser google-chrome-stable
+
+exec --no-startup-id nm-applet
+exec --no-startup-id albert -k Meta+d
+exec --no-startup-id $set_wallpapper
+exec --no-startup-id compton -b --backend glx --vsync opengl-swc --xrender-sync
 
 set $im_mode_title "IM:  [T]elegram, [S]lack"
 set $power_mode_title "Power: [L]ock, [H]ybernate, [S]hutdown, [R]eboot"
@@ -20,9 +26,9 @@ set $fontName SFNS Display
 set $fontSize 11
 font pango:$fontName $fontSize
 
+bindsym Print exec ~/bin/mk_screenshot.sh
 bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec dmenu_run -fn "$fontName-$fontSize"
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -88,11 +94,6 @@ bindsym $mod+XF86Display exec --no-startup-id xrandr --output eDP1 --off --outpu
 # listen ctrl and send code 1 for i3block layout command
 bindcode 37 exec pkill -SIGRTMIN+1 i3blocks
 
-exec --no-startup-id nm-applet
-exec --no-startup-id screencloud
-exec --no-startup-id $set_wallpapper
-exec --no-startup-id compton -b --backend glx --vsync opengl-swc --xrender-sync
-
 mode "resize" {
 	bindsym h resize shrink width 10 px or 10 ppt
 	bindsym j resize grow height 10 px or 10 ppt
@@ -133,20 +134,20 @@ bar {
 	status_command i3blocks -c ~/dotfiles/i3/i3blocks.conf
 	workspace_buttons yes
 	colors {
-		background #002b36aa
+		background #000000aa
 		statusline #839496
 		separator  #586e75
-		focused_workspace  #002b36aa #002b36aa #b58900
-		active_workspace #586e75 #586e75 #002b3600
-		inactive_workspace #002b36aa #002b36aa #839496
+		focused_workspace  #000000aa #000000aa #b58900
+		active_workspace #586e75 #586e75 #00000000
+		inactive_workspace #000000aa #000000aa #839496
 		urgent_workspace #dc322faa #dc322faa #fdf6e3
 	}
 }
 
-client.focused #002b36aa #002b36aa #b58900 #268bd2
-client.focused_inactive #002b36aa #002b36aa #83949677 #073642
-client.unfocused #002b36aa #002b36aa #839496 #073642
-client.urgent #002b36 #dc322f77 #fdf6e3 #002b36
+client.focused #000000aa #000000aa #b58900 #268bd2
+client.focused_inactive #000000aa #000000aa #83949677 #073642
+client.unfocused #000000aa #000000aa #839496 #073642
+client.urgent #000000 #dc322f77 #fdf6e3 #000000
 
 gaps inner 0
 gaps outer 0

@@ -83,7 +83,7 @@ set suffixesadd+=.js,.jsx,.ts,.tsx "open files without extension by gf
 augroup expandtab
 	autocmd!
 	autocmd FileType haskell call SetHaskellOptions()
-	autocmd FileType javascript,css,less,haskell,markdown setlocal expandtab
+	autocmd FileType typescript,tsx,javascript,css,less,haskell,markdown setlocal expandtab
 augroup END
 " set marker fold method for vim script
 autocmd! FileType vim setlocal foldmethod=marker
@@ -148,6 +148,7 @@ vnoremap : q:i
 
 nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
 nmap <silent> <leader>] <Plug>(ale_next_wrap)
+nmap <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 " }}}
 
 " easy motion {{{
