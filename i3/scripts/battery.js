@@ -1,19 +1,10 @@
 #!/usr/bin/env node
 
-const { exec } = require('child_process')
+const { promisify } = require('util')
+const exec = promisify(require('child_process').exec)
 
-const execComand = comand => new Promise((resolve, reject) => exec(comand, (err, stdout) => {
-    if (err) {
-        reject()
-
-        return;
-    }
-
-    resolve(stdout)
-}))
-
-execComand('acpi -b')
-    .then(stdout => {
+exec('acpi -b')
+    .then(({ stdout }) => {
         const [, batteryStatus] = stdout.split(': ')
         const [chargeState, percentString] = batteryStatus.split(', ')
 

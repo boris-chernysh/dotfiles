@@ -2,13 +2,14 @@ set $mod Mod4
 
 set $terminal kitty
 set $lock gnome-screensaver-command -l
-set $set_wallpapper feh --bg-scale ~/.wallpaper.jpg
+set $set_wallpapper feh --bg-scale ~/.wallpaper
 set $browser google-chrome-stable
 
 exec --no-startup-id nm-applet
 exec --no-startup-id albert -k Meta+d
 exec --no-startup-id $set_wallpapper
 exec --no-startup-id compton -b --backend glx --vsync opengl-swc --xrender-sync
+exec --no-startup-id gnome-screensaver
 
 set $im_mode_title "IM:  [T]elegram, [S]lack"
 set $power_mode_title "Power: [L]ock, [H]ybernate, [S]hutdown, [R]eboot"
@@ -88,8 +89,8 @@ bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle, exec pkill -SI
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10, exec pkill -SIGRTMIN+3 i3blocks
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10, exec pkill -SIGRTMIN+3 i3blocks
 
-bindsym XF86Display exec --no-startup-id xrandr --output eDP1 --auto --output HDMI1 --off, exec --no-startup-id $set_wallpapper
-bindsym $mod+XF86Display exec --no-startup-id xrandr --output eDP1 --off --output HDMI1 --auto, exec --no-startup-id $set_wallpapper
+bindsym XF86Display exec --no-startup-id xrandr --output eDP1 --auto --output HDMI1 --off, exec pkill -SIGRTMIN+4 i3blocks
+bindsym $mod+XF86Display exec --no-startup-id xrandr --output eDP1 --off --output HDMI1 --auto, exec pkill -SIGRTMIN+4 i3blocks
 
 # listen ctrl and send code 1 for i3block layout command
 bindcode 37 exec pkill -SIGRTMIN+1 i3blocks
