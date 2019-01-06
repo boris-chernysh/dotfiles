@@ -4,7 +4,7 @@
 
 # Set terminal
 Terminal = kitty
-TermExec = ${Terminal} -e
+TermExec = ${Terminal}
 AlwaysInTerm = ssh vim man
 
 # Set window geometry (except height)
@@ -38,7 +38,7 @@ TabTimeout = 0
 #   - %s gets replaced with "//www.google.com".  This is useful for URL-s
 #     like "man:printf" --> %s will get replaced with "printf"
 URL_h = google-chrome-stable %s
-URL_man = ${TermExec} 'man %s'
+URL_man = ${TermExec} man %s
 URL_file = nautilus %s
 URL_sh = sh -c '%s'
 
