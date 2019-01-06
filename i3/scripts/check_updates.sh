@@ -6,6 +6,7 @@ if [ "$UPDATES" = "Your system is up-to-date." ] || [ -z "$UPDATES" ]
 then
 	echo 👌
 else
-	echo $(awk '{print $1;}' <<< "$UPDATES")
-	exit 33
+	UPDATES_COUNT=$(awk '{print $1;}' <<< "$UPDATES")
+	echo $UPDATES_COUNT
+	notify-send "$UPDATES_COUNT packages awaiting update"
 fi
