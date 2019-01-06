@@ -129,26 +129,33 @@ mode $im_mode_title {
 
 bindsym $mod+i mode $im_mode_title
 
+set $background_color #2c2c2cee
+set $background_urgent_color #d24184
+set $font_color #e0e0e0
+set $font_accent_color #58B48c
+set $font_secondary_color #545454
+set $indicator_color #b58900
+
 bar {
 	position top
 	i3bar_command i3bar -t
 	status_command i3blocks -c ~/dotfiles/i3/i3blocks.conf
 	workspace_buttons yes
 	colors {
-		background #000000aa
-		statusline #839496
-		separator  #586e75
-		focused_workspace  #000000aa #000000aa #b58900
-		active_workspace #586e75 #586e75 #00000000
-		inactive_workspace #000000aa #000000aa #839496
-		urgent_workspace #dc322faa #dc322faa #fdf6e3
+		background $background_color
+		statusline $font_color
+		separator $font_secondary_color
+		focused_workspace $background_color $background_color $font_accent_color
+		active_workspace $background_color $background_color $font_accent_color
+		inactive_workspace $background_color $background_color $font_secondary_color
+		urgent_workspace $background_urgent_color $background_urgent_color $font_color
 	}
 }
 
-client.focused #000000aa #000000aa #b58900 #268bd2
-client.focused_inactive #000000aa #000000aa #83949677 #073642
-client.unfocused #000000aa #000000aa #839496 #073642
-client.urgent #000000 #dc322f77 #fdf6e3 #000000
+client.focused $background_color $background_color $font_accent_color $indicator_color
+client.focused_inactive $background_color $background_color $font_secondary_color $indicator_color
+client.unfocused $background_color $background_color $font_secondary_color $indicator_color
+client.urgent $background_urgent_color $background_urgent_color $font_color $indicator_color
 
 gaps inner 0
 gaps outer 0
