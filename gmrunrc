@@ -1,0 +1,47 @@
+# gmrun configuration file
+# gmrun is (C) Mihai Bazon, <mishoo@infoiasi.ro>
+# GPL v2.0 applies
+
+# Set terminal
+Terminal = kitty
+TermExec = ${Terminal} -e
+AlwaysInTerm = ssh vim man
+
+# Set window geometry (except height)
+Width = 400
+Top = 100
+Left = 200
+# Place window centered by the size of screen
+CenteredByWidth = 0
+CenteredByHeight = 0
+# Place window on active monitor
+UseActiveMonitor = 0
+
+# History size
+History = 256
+
+# Shows last history line selected when invoked
+ShowLast = 1
+
+# Show files starting with '.'
+# Default is 0 (off), set it to 1 if you want "hidden" files to show up
+# in the completion window
+ShowDotFiles = 1
+
+# Timeout (in milliseconds) after which gmrun will simulate a TAB press
+# Set this to NULL if don't like this feature.
+TabTimeout = 0
+
+# URL handlers
+# If the entered text is "http://www.google.com" then:
+#   - %u gets replaced with the whole URL ("http://www.google.com")
+#   - %s gets replaced with "//www.google.com".  This is useful for URL-s
+#     like "man:printf" --> %s will get replaced with "printf"
+URL_h = google-chrome-stable %s
+URL_man = ${TermExec} 'man %s'
+URL_file = nautilus %s
+URL_sh = sh -c '%s'
+
+# extension handlers
+EXT:txt,cc,cpp,h,java,html,htm,epl,tex,latex,js,css,xml,xsl,am = vim %s
+EXT:pdf = google-chrome-stable %s

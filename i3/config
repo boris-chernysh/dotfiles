@@ -6,7 +6,6 @@ set $set_wallpapper feh --bg-scale ~/.wallpaper
 set $browser google-chrome-stable
 
 exec --no-startup-id nm-applet
-exec --no-startup-id albert -k Meta+d
 exec --no-startup-id $set_wallpapper
 exec --no-startup-id compton -b --backend glx --vsync opengl-swc --xrender-sync
 exec --no-startup-id gnome-screensaver
@@ -28,6 +27,7 @@ set $fontSize 11
 font pango:$fontName $fontSize
 
 bindsym Print exec ~/dotfiles/bin/mk_screenshot.sh
+bindsym $mod+d exec gmrun
 bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
 
