@@ -17,7 +17,7 @@ exec('acpi -b')
             }
         }
 
-        return execComand('acpi -a')
+        return exec('acpi -a')
             .then(stdout => ({
                 percent,
                 isCharging: /on-line/.test(stdout)
@@ -41,7 +41,8 @@ exec('acpi -b')
 
         process.exit(0)
     })
-    .catch(() => {
+    .catch((e) => {
         console.log('error')
+        console.log(e.message)
         process.exit(33)
     })
