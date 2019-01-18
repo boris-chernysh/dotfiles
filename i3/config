@@ -129,6 +129,9 @@ mode $im_mode_title {
 
 bindsym $mod+i mode $im_mode_title
 
+bindsym $mod+Shift+p move scratchpad
+bindsym $mod+p scratchpad show
+
 set $background_color #2c2c2cee
 set $background_urgent_color #d24184
 set $font_color #e0e0e0

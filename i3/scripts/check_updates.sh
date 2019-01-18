@@ -13,5 +13,4 @@ then
 else
 	UPDATES_COUNT=$(awk '{print $1;}' <<< "$UPDATES")
 	echo $UPDATES_COUNT
-	notify-send "$UPDATES_COUNT packages awaiting update"
 fi
