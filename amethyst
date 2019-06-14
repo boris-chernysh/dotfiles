@@ -2,6 +2,7 @@
 	"layouts": [
 		"fullscreen",
 		"tall",
+		"wide",
 	],
 	"mouse-follows-focus": true,
 }

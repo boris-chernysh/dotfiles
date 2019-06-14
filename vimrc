@@ -211,6 +211,8 @@ let g:js_linters = ['eslint', 'jshint', 'flow']
 let g:ale_pattern_options = {
 \ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow']},
 \ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
+\ '\.ts$': {'ale_linters': ['eslint']},
+\ '\.tsx$': {'ale_linters': ['eslint']},
 \}
 let g:ale_pattern_options_enabled = 1
 
@@ -234,7 +236,6 @@ let g:ale_echo_msg_format = '%severity% (%linter%) %s'
 
 " utils {{{
 
-" write file with sudo
 function! SetHaskellOptions()
 	setlocal tabstop=8
 	setlocal shiftwidth=8

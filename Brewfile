@@ -1,40 +1,38 @@
 tap "caskroom/fonts"
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
-# Bourne-Again SHell, a UNIX command interpreter
+tap "loadimpact/k6"
 brew "bash"
-# Emacs dependency management
 brew "cask"
-# Lightweight DNS forwarder and DHCP server
 brew "dnsmasq", restart_service: true
-# Pack, ship and run any application as a lightweight container
 brew "docker"
-# Isolated development environments using Docker
 brew "docker-compose"
-# Improved top (interactive process viewer)
+brew "git-lfs"
+brew "graphviz"
 brew "htop"
-# User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
-# Kubernetes command-line interface
+brew "imagemagick"
+brew "jq"
 brew "kubernetes-cli"
-# GUI for vim, made for macOS
 brew "macvim"
-# UNIX movie player
 brew "mplayer"
-# Code-search similar to ack
+brew "nmap"
+brew "plantuml"
+brew "telnet"
 brew "the_silver_searcher"
-# Internet file retriever
 brew "wget"
-# JavaScript package manager
 brew "yarn"
-# Bash completion for Yarn
 brew "yarn-completion"
+brew "loadimpact/k6/k6"
 cask "amethyst"
 cask "docker"
 cask "firefox"
+cask "gimp"
 cask "google-chrome"
+cask "java"
 cask "kitty"
 cask "minikube"
 cask "openconnect-gui"
@@ -44,4 +42,5 @@ cask "transmission"
 cask "visual-studio-code"
 cask "vlc"
 cask "xmind"
+cask "yandex"
 cask "caskroom/fonts/font-fira-code"
