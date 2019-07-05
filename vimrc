@@ -152,8 +152,8 @@ nmap <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<C
 " }}}
 
 " easy motion {{{
-let g:EasyMotion_do_mapping = 0 " dont use default mapping
-let g:EasyMotion_smartcase = 1 " ignore case
+let g:EasyMotion_do_mapping = 0 " dont use default mapping{{{
+let g:EasyMotion_smartcase = 1 " ignore case}}}
 let g:EasyMotion_startofline = 0 " save cursor column when use easymoiton-(j|k)
 let g:EasyMotion_use_smartsign_us = 1 " use smart sign like 2->@ on us layout
 " replace standart search
@@ -168,10 +168,14 @@ map <leader>h <Plug>(easymotion-linebackward)
 " }}}
 
 " grepper {{{
-let g:grepper = {}
-let g:grepper.tools = ['ag', 'git', 'grep'] " use ag if exists, or use git grep, or just grep
-let g:grepper.highlight = 1
-let g:grepper.prompt = 0
+let g:grepper = {
+\ 'tools': ['ag', 'git', 'grep'],
+\ 'highlight': 1,
+\ 'prompt': 0,
+\ 'ag': {
+\   'grepprg': 'ag --vimgrep --hidden',
+\ },
+\}
 " }}}
 
 " ctrlp {{{
