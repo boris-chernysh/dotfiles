@@ -27,6 +27,7 @@ Plug 'webdevel/tabulous' "customazible tab line
 Plug 'dag/vim2hs' "haskell helpers
 Plug 'editorconfig/editorconfig-vim' "use .editorconfig for projects
 Plug 'Quramy/tsuquyomi' "typescript IDE features
+Plug 'vimwiki/vimwiki' "notes for vim
 " colors and helpers for languages
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
@@ -122,12 +123,12 @@ nnoremap <leader>c :echo expand('%:p')<CR>
 nnoremap <leader>W :tabclose<CR>
 nnoremap <leader>T :tabnew<CR>
 " delete buffer without close window
-nnoremap <leader>ww :Bdelete<CR>
+nnoremap <leader>wq :Bdelete<CR>
 " delete all buffers except current one
 nnoremap <leader>wa :BufOnly<CR>
 " window bindings
 nnoremap <leader>q :quit<CR>
-nnoremap <leader>wq :bd<CR>
+nnoremap <leader>bq :bd<CR>
 " fast work with vimrc
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
@@ -236,6 +237,18 @@ endfunction
 let g:ale_echo_msg_error_str = '☠️'
 let g:ale_echo_msg_warning_str = '💩'
 let g:ale_echo_msg_format = '%severity% (%linter%) %s'
+" }}}
+
+" Tsuquyomi {{{
+" Tooltip not working for unknown reasons
+" set ballooneval
+" autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+let g:tsuquyomi_disable_quickfix = 1
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+" }}}
+
+" VimWiki {{{
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 " }}}
 
 " utils {{{
