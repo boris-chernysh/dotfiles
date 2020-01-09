@@ -27,7 +27,8 @@ exec('acpi -b')
         let color = ''
 
         if (!isCharging) {
-            if (percent < 20) color = '#FFFFFF'
+            if (percent < 10) color = '#FFFFFF'
+            if (percent < 20) color = '#D24184'
             else if (percent < 40) color = '#FFAE00'
         }
 
@@ -37,7 +38,7 @@ exec('acpi -b')
             `<span${pangoColor}>${percent}%</span>` + (isCharging ? '⚡' : '')
         )
 
-        if (percent < 15) process.exit(33)
+        if (percent < 10) process.exit(33)
 
         process.exit(0)
     })
