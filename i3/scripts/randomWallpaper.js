@@ -21,8 +21,8 @@ Promise.resolve()
             .map(Number)
     })
     .then(([ width, heigth ]) => new Promise((resolve, reject) =>
-        request(`${PICSUM_URL}/${width}/${heigth}/?random`, (res) => {
-            resolve(`${PICSUM_URL}${res.headers.location}`)
+        request(`${PICSUM_URL}/${width}/${heigth}?random`, (res) => {
+            resolve(res.headers.location)
         }).on('error', reject).end()
     ))
     .then((pictureUrl) => new Promise(
@@ -37,12 +37,17 @@ Promise.resolve()
         const fehProcess = spawn('feh', ['--bg-fill', wallpaperFilename])
 
         fehProcess.on('close', (code) => {
+            if (code !== 0) {
+                console.log('😡')
+                process.exit(33)
+            }
+
             console.log('🖼️')
-            process.exit(code)
+            process.exit(0)
         })
     })
     .catch((err) => {
-        console.log('err')
+        console.log('😡')
         console.log(err.message)
         console.log(err.stack)
         process.exit(1)
