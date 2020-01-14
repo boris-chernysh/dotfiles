@@ -265,3 +265,6 @@ function! GetFilePath()
 endfunction
 " }}}
 
+" kitty {{{
+let &t_ut=''
+" }}}
