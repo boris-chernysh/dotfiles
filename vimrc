@@ -27,7 +27,7 @@ Plug 'webdevel/tabulous' "customazible tab line
 Plug 'dag/vim2hs' "haskell helpers
 Plug 'editorconfig/editorconfig-vim' "use .editorconfig for projects
 Plug 'Quramy/tsuquyomi' "typescript IDE features
-Plug 'vimwiki/vimwiki' "notes for vim
+Plug 'powerman/vim-plugin-ruscmd' "russian layout for NORMAL mode
 " colors and helpers for languages
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
