@@ -34,7 +34,7 @@ exec('acpi -b')
 
         const pangoColor = color && ` color="${color}"`
 
-        process.stdout.write(
+        console.log(
             `<span${pangoColor}>${percent}%</span>` + (isCharging ? '⚡' : '')
         )
 
