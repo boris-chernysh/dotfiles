@@ -86,8 +86,9 @@ bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle, exec pkill -SI
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10, exec pkill -SIGRTMIN+3 i3blocks
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10, exec pkill -SIGRTMIN+3 i3blocks
 
-bindsym XF86Display exec xrandr --output eDP1 --auto --output HDMI1 --off --output DP1 --off, exec pkill -SIGRTMIN+4 i3blocks
-bindsym $mod+XF86Display exec xrandr --output eDP1 --off --output HDMI1 --auto --output DP1 --auto, exec pkill -SIGRTMIN+4 i3blocks
+bindsym XF86Display exec ~/dotfiles/i3/scripts/screens.sh
+# just in case
+bindsym $mod+XF86Display exec xrandr --output eDP1 --auto --output HDMI1 --off --output DP1 --off, exec pkill -SIGRTMIN+4 i3blocks
 
 # listen ctrl and send code 1 for i3block layout command
 bindcode 37 exec pkill -SIGRTMIN+1 i3blocks
