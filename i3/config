@@ -1,13 +1,31 @@
 set $mod Mod4
 
+set $fontName SFNS Display
+set $fontSize 13
+font pango:$fontName $fontSize
+
+# no-i3 commands
 set $terminal kitty
 set $lock gnome-screensaver-command -l
-set $set_wallpapper feh --bg-scale ~/.wallpaper
 set $browser google-chrome-stable
-
-exec nm-applet
-exec $set_wallpapper
-exec compton -b --backend glx --vsync opengl-swc --xrender-sync
+set $launcher dmenu_run -nb "#fdf6e3" -nf "#657b83" -sb "#eee8d5" -sf "#cb4b16" -fn pango:$fontName $fontSize
+set $volume_up amixer -q -D pulse sset Master 7%+
+set $volume_down amixer -q -D pulse sset Master 7%-
+set $volume_toggle amixer -q -D pulse sset Master toggle
+set $brightness_up xbacklight -inc 10
+set $brightness_down xbacklight -dec 10
+set $configure_screens ~/dotfiles/i3/scripts/screens.sh
+set $only_main_screen xrandr --output eDP1 --auto --output HDMI1 --off --output DP1 --off
+set $tg telegram-desktop
+set $kill_tg killall telegram-desktop
+set $slack slack
+set $kill_slack killall slack
+set $screenshot escrotum -s -C
+set $hibernate systemctl hibernate
+set $poweroff systemctl poweroff
+set $reboot systemctl reboot
+exec feh --bg-scale ~/.wallpaper
+exec picom
 exec gnome-screensaver
 
 set $tag1 1.Workplace
@@ -19,12 +37,8 @@ set $tag6 6.Education
 set $tag7 7.Interview
 set $tag8 8.Email
 
-set $fontName SFNS Display
-set $fontSize 11
-font pango:$fontName $fontSize
-
-bindsym Print exec ~/dotfiles/bin/mk_screenshot.sh
-bindsym $mod+d exec gmrun
+bindsym Print exec $screenshot
+bindsym $mod+d exec $launcher
 bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
 
@@ -79,27 +93,24 @@ bindsym $mod+g exec $browser
 bindsym $mod+t border toggle
 bindsym $mod+m bar mode toggle
 
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 7%+, exec pkill -SIGRTMIN+2 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 7%-, exec pkill -SIGRTMIN+2 i3blocks
-bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle, exec pkill -SIGRTMIN+2 i3blocks
+bindsym XF86AudioRaiseVolume exec $volume_up, exec pkill -SIGRTMIN+2 i3blocks
+bindsym XF86AudioLowerVolume exec $volume_down, exec pkill -SIGRTMIN+2 i3blocks
+bindsym XF86AudioMute exec $volume_toggle, exec pkill -SIGRTMIN+2 i3blocks
 
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10, exec pkill -SIGRTMIN+3 i3blocks
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10, exec pkill -SIGRTMIN+3 i3blocks
+bindsym XF86MonBrightnessUp exec $brightness_up, exec pkill -SIGRTMIN+3 i3blocks
+bindsym XF86MonBrightnessDown exec $brightness_down, exec pkill -SIGRTMIN+3 i3blocks
 
-bindsym XF86Display exec ~/dotfiles/i3/scripts/screens.sh
+bindsym XF86Display exec $configure_screens, exec pkill -SIGRTMIN+4 i3blocks
 # just in case
-bindsym $mod+XF86Display exec xrandr --output eDP1 --auto --output HDMI1 --off --output DP1 --off, exec pkill -SIGRTMIN+4 i3blocks
-
-# listen ctrl and send code 1 for i3block layout command
-bindcode 37 exec pkill -SIGRTMIN+1 i3blocks
+bindsym $mod+XF86Display exec $only_main_screen, exec pkill -SIGRTMIN+4 i3blocks
 
 set $monitos_mode_title "Monitors: h/j/k/l for left/down/up/right"
 
 mode $monitos_mode_title {
-	bindsym h move workspace to output left
-	bindsym j move workspace to output down
-	bindsym k move workspace to output up
-	bindsym l move workspace to output right
+	bindsym h move workspace to output left, mode "default"
+	bindsym j move workspace to output down, mode "default"
+	bindsym k move workspace to output up, mode "default"
+	bindsym l move workspace to output right, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -123,9 +134,9 @@ set $power_mode_title "Power: [L]ock, [H]ybernate, [S]hutdown, [R]eboot"
 
 mode $power_mode_title {
 	bindsym l exec $lock, mode "default"
-	bindsym h exec systemctl hibernate, mode "default"
-	bindsym s exec systemctl poweroff, mode "default"
-	bindsym r exec systemctl reboot, moide "default"
+	bindsym h exec $hibernate, mode "default"
+	bindsym s exec $poweroff, mode "default"
+	bindsym r exec $reboot, moide "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -133,11 +144,13 @@ mode $power_mode_title {
 
 bindsym $mod+q mode $power_mode_title
 
-set $im_mode_title "IM:  [T]elegram, [S]lack"
+set $im_mode_title "IM:  [T]elegram, [S]lack, [A]ll, [K]illall"
 
 mode $im_mode_title {
-	bindsym t exec $browser --app="http://web.telegram.org", mode "default"
-	bindsym s exec slack, mode "default"
+	bindsym a exec i3-msg 'workspace $tag3', exec $tg, exec $slack, mode "default"
+	bindsym t exec i3-msg 'workspace $tag3', exec $tg, mode "default"
+	bindsym s exec i3-msg 'workspace $tag3', exec $slack, mode "default"
+	bindsym k exec $kill_tg, exec $kill_slack, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"

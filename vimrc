@@ -26,7 +26,6 @@ Plug 'w0rp/ale' "make tool
 Plug 'webdevel/tabulous' "customazible tab line
 Plug 'dag/vim2hs' "haskell helpers
 Plug 'editorconfig/editorconfig-vim' "use .editorconfig for projects
-Plug 'Quramy/tsuquyomi' "typescript IDE features
 Plug 'powerman/vim-plugin-ruscmd' "russian layout for NORMAL mode
 " colors and helpers for languages
 Plug 'othree/html5.vim'
@@ -237,14 +236,6 @@ endfunction
 let g:ale_echo_msg_error_str = '☠️'
 let g:ale_echo_msg_warning_str = '💩'
 let g:ale_echo_msg_format = '%severity% (%linter%) %s'
-" }}}
-
-" Tsuquyomi {{{
-" Tooltip not working for unknown reasons
-" set ballooneval
-" autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
-let g:tsuquyomi_disable_quickfix = 1
-autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 " }}}
 
 " VimWiki {{{

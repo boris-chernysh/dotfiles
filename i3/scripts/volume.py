@@ -3,13 +3,14 @@
 from time import sleep
 from subprocess import Popen, PIPE
 from re import search, findall, match
+from pangoBar import get_pango_bar
 
 def get_name(info):
     name = search("^[ a-zA-Z]*(?=:)", info).group(0)
     return "".join(findall("[A-Z]", name))
 
 def get_loud(info):
-    return search("[0-9]{1,3}%", info).group(0)
+    return int(search("[0-9]{1,3}(?=%)", info).group(0))
 
 def check_muted(info):
     return "[off]" in info
@@ -17,7 +18,7 @@ def check_muted(info):
 try:
     process = Popen(["amixer", "get", "Master"], stdout=PIPE, stderr=PIPE)
     output, err = process.communicate()
-    speakers_raw_info = findall("[a-zA-Z ]+:.*[[0-9]{1,2}%].*", output.decode("utf-8"))
+    speakers_raw_info = findall("[a-zA-Z ]+:.*\[[0-9]{1,2}%\].*", output.decode("utf-8"))
 except Exception:
     print('error')
     exit(33)
@@ -33,7 +34,7 @@ if all(speakers_info[0][2] for info in speakers_info):
     exit()
 
 if all(speakers_info[0][1] == info[1] for info in speakers_info):
-    print(speakers_info[0][1])
+    print(get_pango_bar(speakers_info[0][1]))
     exit()
 
-print(",".join([":".join((info[0], info[1])) for info in speakers_info]))
+print(",".join([":".join((info[0], get_pango_bar(info[1]))) for info in speakers_info]))

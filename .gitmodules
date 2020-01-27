@@ -4,3 +4,6 @@
 [submodule "zsh_custom/plugins/zsh-syntax-highlighting"]
 	path = zsh_custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "i3/scripts/networkmanager-dmenu"]
+	path = i3/scripts/networkmanager-dmenu
+	url = git@github.com:firecat53/networkmanager-dmenu.git
