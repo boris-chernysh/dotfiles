@@ -5,13 +5,13 @@ set $fontSize 13
 font pango:$fontName $fontSize
 
 # no-i3 commands
-set $terminal kitty
+set $terminal kitty --config ~/dotfiles/kitty/kitty.conf
 set $lock gnome-screensaver-command -l
 set $browser google-chrome-stable
 set $launcher dmenu_run -nb "#fdf6e3" -nf "#657b83" -sb "#eee8d5" -sf "#cb4b16" -fn pango:$fontName $fontSize
-set $volume_up amixer -q -D pulse sset Master 7%+
-set $volume_down amixer -q -D pulse sset Master 7%-
-set $volume_toggle amixer -q -D pulse sset Master toggle
+set $volume_up amixer set Master 7%+
+set $volume_down amixer set Master 7%-
+set $volume_toggle amixer set Master toggle
 set $brightness_up xbacklight -inc 10
 set $brightness_down xbacklight -dec 10
 set $configure_screens ~/dotfiles/i3/scripts/screens.sh
@@ -161,7 +161,7 @@ bindsym $mod+i mode $im_mode_title
 bindsym $mod+Shift+p move scratchpad
 bindsym $mod+p scratchpad show
 
-set $background_color #2c2c2cee
+set $background_color #2c2c2c
 set $background_urgent_color #d24184
 set $font_color #e0e0e0
 set $font_accent_color #58B48c
@@ -173,6 +173,7 @@ bar {
 	i3bar_command i3bar -t
 	status_command i3blocks -c ~/dotfiles/i3/i3blocks.conf
 	workspace_buttons yes
+	tray_output none
 	colors {
 		background $background_color
 		statusline $font_color
@@ -188,9 +189,6 @@ client.focused $background_color $background_color $font_accent_color $indicator
 client.focused_inactive $background_color $background_color $font_secondary_color $indicator_color
 client.unfocused $background_color $background_color $font_secondary_color $indicator_color
 client.urgent $background_urgent_color $background_urgent_color $font_color $indicator_color
-
-gaps inner 0
-gaps outer 0
 
 default_border none
 

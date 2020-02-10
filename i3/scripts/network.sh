@@ -1,10 +1,6 @@
 #!/bin/bash
 
 SELF_DIR=$( dirname "${BASH_SOURCE[0]}" )
-if [[ $button -eq 1 ]]
-then
-	i3-msg -q exec $SELF_DIR/networkmanager-dmenu/networkmanager_dmenu
-fi
 
 if nmcli -t -f TYPE connection show --active | grep wireless > /dev/null
 then

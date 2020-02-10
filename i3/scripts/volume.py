@@ -16,9 +16,9 @@ def check_muted(info):
     return "[off]" in info
 
 try:
-    process = Popen(["amixer", "get", "Master"], stdout=PIPE, stderr=PIPE)
+    process = Popen(["amixer", "-M", "get", "Master"], stdout=PIPE, stderr=PIPE)
     output, err = process.communicate()
-    speakers_raw_info = findall("[a-zA-Z ]+:.*\[[0-9]{1,2}%\].*", output.decode("utf-8"))
+    speakers_raw_info = findall("[a-zA-Z ]+:.*\[[0-9]{1,3}%\].*", output.decode("utf-8"))
 except Exception:
     print('error')
     exit(33)
