@@ -5,9 +5,15 @@ then
 	kitty --hold pamac update
 fi
 
-UPDATES=$(pamac checkupdates | head -1)
+if which pamac &>/dev/null
+then
+	UPDATES=$(pamac checkupdates | head -1)
+elif which dnf &>/dev/null
+then
+	UPDATES=$(dnf check-update | grep 'updates' -c)
+fi
 
-if [ "$UPDATES" = "Your system is up-to-date." ] || [ -z "$UPDATES" ]
+if [ "$UPDATES" = "Your system is up-to-date." ] || [ -z "$UPDATES" ] || [ "$UPDATES" = "0" ]
 then
 	echo 👌
 else

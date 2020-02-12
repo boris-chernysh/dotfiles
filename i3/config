@@ -6,7 +6,7 @@ font pango:$fontName $fontSize
 
 # no-i3 commands
 set $terminal kitty --config ~/dotfiles/kitty/kitty.conf
-set $lock gnome-screensaver-command -l
+set $lock i3lock
 set $browser google-chrome-stable
 set $launcher dmenu_run -nb "#fdf6e3" -nf "#657b83" -sb "#eee8d5" -sf "#cb4b16" -fn pango:$fontName $fontSize
 set $volume_up amixer set Master 7%+
@@ -24,9 +24,8 @@ set $screenshot escrotum -s -C
 set $hibernate systemctl hibernate
 set $poweroff systemctl poweroff
 set $reboot systemctl reboot
+exec dunst -conf ~/dotfiles/dunstrc
 exec feh --bg-scale ~/.wallpaper
-exec picom
-exec gnome-screensaver
 
 set $tag1 1.Workplace
 set $tag2 2.Workplace
