@@ -7,6 +7,3 @@
 [submodule "ohmyzsh"]
 	path = ohmyzsh
 	url = git@github.com:ohmyzsh/ohmyzsh.git
-[submodule "i3/scripts/i3blocks-contrib"]
-	path = i3/scripts/i3blocks-contrib
-	url = git@github.com:vivien/i3blocks-contrib.git
