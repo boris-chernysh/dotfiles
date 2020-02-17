@@ -6,4 +6,4 @@
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "ohmyzsh"]
 	path = ohmyzsh
-	url = git@github.com:ohmyzsh/ohmyzsh.git
+	url = https://github.com/ohmyzsh/ohmyzsh.git
