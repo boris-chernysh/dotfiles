@@ -204,8 +204,8 @@ endif
 
 " ale {{{
 " error signs
-let g:ale_sign_error = '☠️'
-let g:ale_sign_warning = '💩'
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '!'
 
 " do not highlight bg under ale signs
 hi AleErrorSign cterm=none ctermfg=160 ctermbg=0
