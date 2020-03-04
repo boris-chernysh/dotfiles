@@ -36,6 +36,7 @@ Plug 'mxw/vim-jsx'
 Plug 'digitaltoad/vim-jade'
 Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
+Plug 'quramy/tsuquyomi'
 " colorschemes
 Plug 'reedes/vim-colors-pencil'
 Plug 'jonathanfilip/vim-lucius'
@@ -215,8 +216,8 @@ let g:js_linters = ['eslint', 'jshint', 'flow']
 let g:ale_pattern_options = {
 \ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow']},
 \ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
-\ '\.ts$': {'ale_linters': ['eslint']},
-\ '\.tsx$': {'ale_linters': ['eslint']},
+\ '\.ts$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
+\ '\.tsx$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
 \}
 let g:ale_pattern_options_enabled = 1
 
@@ -257,5 +258,11 @@ endfunction
 " }}}
 
 " kitty {{{
-let &t_ut=''
+" let &t_ut=''
+" }}}
+
+" {{{ tsuquyomi
+let g:tsuquyomi_disable_quickfix = 1
+set ballooneval
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 " }}}
