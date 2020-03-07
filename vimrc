@@ -38,7 +38,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
 Plug 'quramy/tsuquyomi'
 " colorschemes
-Plug 'reedes/vim-colors-pencil'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'altercation/vim-colors-solarized'
 " buffers
@@ -99,8 +98,8 @@ set statusline+=%c:%l\ %L\
 " }}}
 
 " colors {{{
-colorscheme solarized " also may be used 'lucius'
-set background=dark
+colorscheme lucius " also may be used 'solarized'
+set background=light
 " }}}
 
 " netrw {{{
