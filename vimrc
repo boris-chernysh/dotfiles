@@ -87,6 +87,7 @@ augroup expandtab
 augroup END
 " set marker fold method for vim script
 autocmd! FileType vim setlocal foldmethod=marker
+autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 " }}}
 
 " statusline {{{
