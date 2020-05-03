@@ -23,8 +23,6 @@ Plug 'mattn/emmet-vim' "fast creating html/css
 Plug 'Raimondi/delimitMate' "brackets autoclose
 Plug 'mhinz/vim-grepper' "find in files
 Plug 'w0rp/ale' "make tool
-Plug 'webdevel/tabulous' "customazible tab line
-Plug 'dag/vim2hs' "haskell helpers
 Plug 'editorconfig/editorconfig-vim' "use .editorconfig for projects
 Plug 'powerman/vim-plugin-ruscmd' "russian layout for NORMAL mode
 " colors and helpers for languages
@@ -32,8 +30,6 @@ Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-markdown'
 Plug 'mxw/vim-jsx'
-" Plug 'moll/vim-node'
-Plug 'digitaltoad/vim-jade'
 Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
 Plug 'quramy/tsuquyomi'
@@ -49,10 +45,8 @@ call plug#end()
 " }}}
 
 " options {{{
-let $PATH .= ':./node_modules/.bin/' "extend PATH for using local npm binaries
 let mapleader = ';' "set leader
 set encoding=utf-8 "characters encoding inside vim
-set modelines=0 "disable modelines
 set backspace=2 "allow backspacing over autoident, breaks and the starts of insert
 set smartindent "automaticaly set right indent
 set tabstop=4 "number of spaces in tab
@@ -78,16 +72,9 @@ set list "empty characters highlight
 set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~"
 set t_Co=256 "terminal colors
 set suffixesadd+=.js,.jsx,.ts,.tsx "open files without extension by gf
-
-" use spaces instead tabs
-augroup expandtab
-	autocmd!
-	autocmd FileType haskell call SetHaskellOptions()
-	autocmd FileType typescript,tsx,javascript,css,less,haskell,markdown setlocal expandtab
-augroup END
-" set marker fold method for vim script
-autocmd! FileType vim setlocal foldmethod=marker
-autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
+set expandtab " use spaces instead tabs
+autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby " ruby syntax for Vagrantfile
+autocmd! FileType vim setlocal foldmethod=marker " set marker fold method for vim script
 " }}}
 
 " statusline {{{
@@ -113,14 +100,11 @@ let g:netrw_localrmdir='rm -r'
 " move blocks in visual mode
 vnoremap < <gv
 vnoremap > >gv
-" cure terminal
-noremap <F7> :!reset<CR>
 " go to shell
 nnoremap <leader>z :sh<CR>
 " show full path for current file
 nnoremap <leader>c :echo expand('%:p')<CR>
 " tabs bindings
-nnoremap <leader>W :tabclose<CR>
 nnoremap <leader>T :tabnew<CR>
 " delete buffer without close window
 nnoremap <leader>wq :Bdelete<CR>
@@ -132,8 +116,6 @@ nnoremap <leader>bq :bd<CR>
 " fast work with vimrc
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
-" show/hide gundo window
-nnoremap <leader>g :GundoToggle<CR>
 " find something
 nnoremap <leader>f q:iGrepper -query<Space>
 nnoremap <leader>F :Grepper -cword<CR>
@@ -153,8 +135,8 @@ nmap <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<C
 " }}}
 
 " easy motion {{{
-let g:EasyMotion_do_mapping = 0 " dont use default mapping{{{
-let g:EasyMotion_smartcase = 1 " ignore case}}}
+let g:EasyMotion_do_mapping = 0 " dont use default mapping
+let g:EasyMotion_smartcase = 1 " ignore case
 let g:EasyMotion_startofline = 0 " save cursor column when use easymoiton-(j|k)
 let g:EasyMotion_use_smartsign_us = 1 " use smart sign like 2->@ on us layout
 " replace standart search
@@ -187,13 +169,6 @@ let g:ctrlp_switch_buffer = 'Et'
 call ctrlp_bdelete#init() " init plugin for delete buffers from ctrlp
 " }}}
 
-" Gvim {{{
-if has('gui_running')
-	set guioptions-=T
-	set guifont=Source\ Code\ Pro\ for\ Powerline\ 9
-endif
-" }}}
-
 " silver searcher {{{
 if executable('ag')
 	set grepprg=ag\ --vimgrep
@@ -212,7 +187,6 @@ let g:ale_sign_warning = '!'
 hi AleErrorSign cterm=none ctermfg=160 ctermbg=0
 hi AleWarningSign cterm=none ctermfg=220 ctermbg=0
 
-let g:js_linters = ['eslint', 'jshint', 'flow']
 let g:ale_pattern_options = {
 \ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow']},
 \ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
@@ -239,26 +213,11 @@ let g:ale_echo_msg_warning_str = '💩'
 let g:ale_echo_msg_format = '%severity% (%linter%) %s'
 " }}}
 
-" VimWiki {{{
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-" }}}
-
 " utils {{{
-
-function! SetHaskellOptions()
-	setlocal tabstop=8
-	setlocal shiftwidth=8
-	setlocal softtabstop=8
-endfunction
-
 function! GetFilePath()
 	" return path to file relative to current dir
 	return expand('%:.:h')
 endfunction
-" }}}
-
-" kitty {{{
-" let &t_ut=''
 " }}}
 
 " {{{ tsuquyomi
