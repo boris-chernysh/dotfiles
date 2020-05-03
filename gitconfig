@@ -1,7 +1,0 @@
-[user]
-	email = borischernysh31@gmail.com
-	name = Boris Chernysh
-[credential]
-	helper = store
-[core]
-	excludesfile = ~/.gitignore
