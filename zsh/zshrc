@@ -11,7 +11,7 @@ export VIMINIT="source $MYVIMRC"
 export EDITOR="vim"
 
 # oh-my-zsh
-export ZSH="$HOME/dotfiles/ohmyzsh"
+export ZSH="$HOME/dotfiles/zsh/ohmyzsh"
 export ZSH_CUSTOM="$HOME/dotfiles/zsh"
 ZSH_THEME="CLEAR"
 
