@@ -8,6 +8,8 @@ endif
 
 if empty(glob(g:plug_path))
     execute '!curl -fLo ' . g:plug_path . ' --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+    source $MYVIMRC
+    execute 'PlugInstall'
 endif
 " }}}
 
