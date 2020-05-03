@@ -154,16 +154,13 @@ map <leader>h <Plug>(easymotion-linebackward)
 
 " grepper {{{
 let g:grepper = {
-            \ 'tools': ['rg', 'ag', 'git', 'grep'],
-            \ 'highlight': 1,
-            \ 'prompt': 0,
-            \ 'ag': {
-            \   'grepprg': 'ag --vimgrep --hidden',
-            \ },
-            \ 'rg': {
-            \   'grepprg': 'rg --vimgrep --hidden',
-            \ },
-            \}
+\ 'tools': ['rg', 'git', 'grep'],
+\ 'highlight': 1,
+\ 'prompt': 0,
+\ 'rg': {
+\   'grepprg': 'rg --vimgrep --hidden',
+\ },
+\}
 " }}}
 
 " ctrlp {{{
@@ -172,15 +169,6 @@ let g:ctrlp_lazy_update = 1 " 250ms debouncing
 let g:ctrlp_match_window = 'order:ttb'
 let g:ctrlp_switch_buffer = 'Et'
 call ctrlp_bdelete#init() " init plugin for delete buffers from ctrlp
-" }}}
-
-" silver searcher {{{
-if executable('ag')
-    set grepprg=ag\ --vimgrep\ --hidden
-
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    let g:ctrlp_use_caching = 0
-endif
 " }}}
 
 " ripgrep {{{
