@@ -1,13 +1,13 @@
 " plug autoinstall {{{
 
 if has('nvim')
-	let g:plug_path = "~/.config/nvim/autoload/plug.vim"
+    let g:plug_path = "~/.config/nvim/autoload/plug.vim"
 else
-	let g:plug_path = "~/.vim/autoload/plug.vim"
+    let g:plug_path = "~/.vim/autoload/plug.vim"
 endif
 
 if empty(glob(g:plug_path))
-	execute '!curl -fLo ' . g:plug_path . ' --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+    execute '!curl -fLo ' . g:plug_path . ' --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 " }}}
 
@@ -58,9 +58,9 @@ set laststatus=2 "always show statusline
 set colorcolumn=81 "border for code
 " use system clipboard
 if has('unnamedplus')
-	set clipboard=unnamedplus
+    set clipboard=unnamedplus
 else
-	set clipboard=unnamed
+    set clipboard=unnamed
 endif
 set mouse=a "enable mouse for all modes
 set hidden "hide buffer instead close
@@ -152,16 +152,16 @@ map <leader>h <Plug>(easymotion-linebackward)
 
 " grepper {{{
 let g:grepper = {
-\ 'tools': ['rg', 'ag', 'git', 'grep'],
-\ 'highlight': 1,
-\ 'prompt': 0,
-\ 'ag': {
-\   'grepprg': 'ag --vimgrep --hidden',
-\ },
-\ 'rg': {
-\   'grepprg': 'rg --vimgrep --hidden',
-\ },
-\}
+            \ 'tools': ['rg', 'ag', 'git', 'grep'],
+            \ 'highlight': 1,
+            \ 'prompt': 0,
+            \ 'ag': {
+            \   'grepprg': 'ag --vimgrep --hidden',
+            \ },
+            \ 'rg': {
+            \   'grepprg': 'rg --vimgrep --hidden',
+            \ },
+            \}
 " }}}
 
 " ctrlp {{{
@@ -174,19 +174,19 @@ call ctrlp_bdelete#init() " init plugin for delete buffers from ctrlp
 
 " silver searcher {{{
 if executable('ag')
-	set grepprg=ag\ --vimgrep\ --hidden
+    set grepprg=ag\ --vimgrep\ --hidden
 
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-	let g:ctrlp_use_caching = 0
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_use_caching = 0
 endif
 " }}}
 
 " ripgrep {{{
 if executable('rg')
-	set grepprg=rg\ --vimgrep\ --hidden
+    set grepprg=rg\ --vimgrep\ --hidden
 
-	let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-	let g:ctrlp_use_caching = 0
+    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+    let g:ctrlp_use_caching = 0
 endif
 " }}}
 
@@ -200,11 +200,11 @@ hi AleErrorSign cterm=none ctermfg=160 ctermbg=0
 hi AleWarningSign cterm=none ctermfg=220 ctermbg=0
 
 let g:ale_pattern_options = {
-\ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow']},
-\ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
-\ '\.ts$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
-\ '\.tsx$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
-\}
+            \ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow']},
+            \ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
+            \ '\.ts$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
+            \ '\.tsx$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
+            \}
 let g:ale_pattern_options_enabled = 1
 
 function! LinterStatus() abort
@@ -214,10 +214,10 @@ function! LinterStatus() abort
     let l:all_non_errors = l:counts.total - l:all_errors
 
     return l:counts.total == 0 ? '' : printf(
-    \   '%d💩 %d☠️ ',
-    \   all_non_errors,
-    \   all_errors
-    \)
+                \   '%d💩 %d☠️ ',
+                \   all_non_errors,
+                \   all_errors
+                \)
 endfunction
 
 let g:ale_echo_msg_error_str = '☠️'
@@ -227,8 +227,8 @@ let g:ale_echo_msg_format = '%severity% (%linter%) %s'
 
 " utils {{{
 function! GetFilePath()
-	" return path to file relative to current dir
-	return expand('%:.:h')
+    " return path to file relative to current dir
+    return expand('%:.:h')
 endfunction
 " }}}
 
