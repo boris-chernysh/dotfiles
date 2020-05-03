@@ -180,7 +180,7 @@ endif
 
 " ale {{{
 " error signs
-let g:ale_sign_error = '✗'
+let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '!'
 
 " do not highlight bg under ale signs
