@@ -11,9 +11,9 @@ export VIMINIT="source $MYVIMRC"
 export EDITOR="vim"
 
 # oh-my-zsh
-export ZSH="$HOME/dotfiles/ohmyzsh"
-export ZSH_CUSTOM="$HOME/dotfiles/zsh_custom"
-ZSH_THEME="BORIS"
+export ZSH="$HOME/dotfiles/zsh/ohmyzsh"
+export ZSH_CUSTOM="$HOME/dotfiles/zsh"
+ZSH_THEME="CLEAR"
 
 if [[ -d $ZSH ]]; then
 	plugins=(vi-mode vim-interaction jump git node npm zsh-nvm git_helpers zsh-syntax-highlighting yarn kubectl)
