@@ -23,10 +23,11 @@ Plug 'tpope/vim-eunuch' "unix commands helpers
 Plug 'Lokaltog/vim-easymotion' "navigation in files
 Plug 'mattn/emmet-vim' "fast creating html/css
 Plug 'Raimondi/delimitMate' "brackets autoclose
-Plug 'mhinz/vim-grepper' "find in files
 Plug 'w0rp/ale' "make tool
 Plug 'editorconfig/editorconfig-vim' "use .editorconfig for projects
 Plug 'powerman/vim-plugin-ruscmd' "russian layout for NORMAL mode
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "fuzzy search via lists
+Plug 'junegunn/fzf.vim'
 " colors and helpers for languages
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
@@ -40,9 +41,7 @@ Plug 'jonathanfilip/vim-lucius'
 Plug 'altercation/vim-colors-solarized'
 Plug 'arcticicestudio/nord-vim'
 " buffers
-Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
-Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
-Plug 'moll/vim-bbye' "close buffers without close window
+Plug 'moll/vim-bbye' "delete buffer without close window
 Plug 'vim-scripts/BufOnly.vim' "close buffers except current one
 call plug#end()
 " }}}
@@ -120,10 +119,16 @@ nnoremap <leader>bq :bd<CR>
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " find something
-nnoremap <leader>f q:iGrepper -query<Space>
-nnoremap <leader>F :Grepper -cword<CR>
+" nnoremap <leader>f q:iGrepper -query<Space>
+nmap <leader>F :execute 'Rg '.expand('<cword>').'<CR>'
+" find files by name
+nmap <c-p> :call <sid>Files()<CR>
+" open changed files
+nmap <c-g>p :GFiles?<CR>
+" search in open buffers
+map <leader>/ :Lines<CR>
 " buffers navigation
-nnoremap <c-k> :CtrlPBuffer<CR>
+nnoremap <c-k> :Buffers<CR>
 " open netrw
 nnoremap <leader>. :Explore<CR>
 nnoremap <leader>yp :let @+ = expand("%")<CR>
@@ -153,32 +158,70 @@ map <leader>k <Plug>(easymotion-k)
 map <leader>h <Plug>(easymotion-linebackward)
 " }}}
 
-" grepper {{{
-let g:grepper = {
-\ 'tools': ['rg', 'git', 'grep'],
-\ 'highlight': 1,
-\ 'prompt': 0,
-\ 'rg': {
-\   'grepprg': 'rg --vimgrep --hidden',
-\ },
-\}
-" }}}
-
-" ctrlp {{{
-let g:ctrlp_types = ['fil', 'buf'] " use only file and buffers search
-let g:ctrlp_lazy_update = 1 " 250ms debouncing
-let g:ctrlp_match_window = 'order:ttb'
-let g:ctrlp_switch_buffer = 'Et'
-call ctrlp_bdelete#init() " init plugin for delete buffers from ctrlp
-" }}}
-
-" ripgrep {{{
-if executable('rg')
-    set grepprg=rg\ --vimgrep\ --hidden
-
-    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-    let g:ctrlp_use_caching = 0
+" fzf {{{
+" open fzf in modal window
+if has('nvim-0.4.0') || has("patch-8.2.0191")
+    let g:fzf_layout = { 'window': {
+        \ 'width': 0.9,
+        \ 'height': 0.7,
+        \ 'highlight': 'Comment',
+        \ 'rounded': v:false } }
 endif
+
+if $FZF_DEFAULT_COMMAND == ''
+    let s:fzf_find_comand = 'find * -type f'
+    let $FZF_DEFAULT_COMMAND = s:fzf_find_comand
+
+    if executable('rg')
+        let $FZF_DEFAULT_COMMAND = 'rg . --files --color=never --glob ""'
+    endif
+endif
+
+function! s:Files()
+    if $FZF_DEFAULT_COMMAND != s:fzf_find_comand || fugitive#head() == ''
+        execute 'Files'
+    else
+        execute 'GFiles'
+    endif
+endfunction
+
+function! s:FindInFilesFzf(query, fullscreen, opt)
+    let initial_command = printf(a:opt.command, shellescape(a:query))
+    let reload_command = printf(a:opt.command, '{q}')
+    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+    let has_column = a:opt->has_key('has_column') ? a:opt.has_column : 0
+    if a:opt->has_key(1)
+        call extend(spec, a:1)
+    endif
+    call fzf#vim#grep(initial_command, has_column, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+let s:opts = {
+            \ 'git': {
+            \ 'command': 'git grep --line-number -- %s || true',
+            \ 'spec': {'dir': systemlist('git rev-parse --show-toplevel')[0]}
+            \ },
+            \ 'rg': {
+            \ 'command': 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true',
+            \ 'has_column': 1
+            \ },
+            \ 'grep': {
+            \ 'command': 'grep --line-number %s **/*'
+            \ }
+            \ }
+
+function! s:Grep(query, fullscreen)
+    let opt = s:opts.grep
+    " if executable('rg')
+    "     let opt = s:opts.rg
+    " elseif fugitive#head() != ''
+    "     let opt = s:opts.git
+    " endif
+
+    call s:FindInFilesFzf(a:query, a:fullscreen, opt)
+endfunction
+
+command! -nargs=* -bang Grep call s:Grep(<q-args>, <bang>0)
 " }}}
 
 " ale {{{
@@ -191,11 +234,11 @@ hi AleErrorSign cterm=none ctermfg=160 ctermbg=0
 hi AleWarningSign cterm=none ctermfg=220 ctermbg=0
 
 let g:ale_pattern_options = {
-            \ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow']},
-            \ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
-            \ '\.ts$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
-            \ '\.tsx$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
-            \}
+\ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow']},
+\ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
+\ '\.ts$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
+\ '\.tsx$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
+\}
 let g:ale_pattern_options_enabled = 1
 
 function! LinterStatus() abort
@@ -227,4 +270,9 @@ endfunction
 let g:tsuquyomi_disable_quickfix = 1
 set ballooneval
 autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+" }}}
+
+" kitty {{{
+" fix scrolling bug in kitty https://github.com/kovidgoyal/kitty/issues/108
+let &t_ut=''
 " }}}
