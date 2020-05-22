@@ -185,40 +185,22 @@ function! s:Files()
     endif
 endfunction
 
-function! s:FindInFilesFzf(query, fullscreen, opt)
-    let initial_command = printf(a:opt.command, shellescape(a:query))
-    let reload_command = printf(a:opt.command, '{q}')
-    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-    let has_column = a:opt->has_key('has_column') ? a:opt.has_column : 0
-    if a:opt->has_key(1)
-        call extend(spec, a:1)
-    endif
-    call fzf#vim#grep(initial_command, has_column, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-let s:opts = {
-            \ 'git': {
-            \ 'command': 'git grep --line-number -- %s || true',
-            \ 'spec': {'dir': systemlist('git rev-parse --show-toplevel')[0]}
-            \ },
-            \ 'rg': {
-            \ 'command': 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true',
-            \ 'has_column': 1
-            \ },
-            \ 'grep': {
-            \ 'command': 'grep --line-number %s **/*'
-            \ }
-            \ }
-
 function! s:Grep(query, fullscreen)
-    let opt = s:opts.grep
-    " if executable('rg')
-    "     let opt = s:opts.rg
-    " elseif fugitive#head() != ''
-    "     let opt = s:opts.git
-    " endif
-
-    call s:FindInFilesFzf(a:query, a:fullscreen, opt)
+    if executable('rg')
+        let command =  'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+        let initial_command = printf(command, shellescape(a:query))
+        let reload_command = printf(command, '{q}')
+        let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+        call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+    elseif fugitive#head() != ''
+        call fzf#vim#grep(
+                    \   'git grep --line-number -- '.shellescape(a:query), 0,
+                    \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), a:fullscreen)
+    else
+        call fzf#vim#grep(
+                    \   'grep --line-number '.shellescape(a:query).' **/*', 0,
+                    \   fzf#vim#with_preview({}), a:fullscreen)
+    endif
 endfunction
 
 command! -nargs=* -bang Grep call s:Grep(<q-args>, <bang>0)
@@ -234,11 +216,11 @@ hi AleErrorSign cterm=none ctermfg=160 ctermbg=0
 hi AleWarningSign cterm=none ctermfg=220 ctermbg=0
 
 let g:ale_pattern_options = {
-\ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow']},
-\ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
-\ '\.ts$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
-\ '\.tsx$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
-\}
+            \ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow']},
+            \ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
+            \ '\.ts$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
+            \ '\.tsx$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
+            \}
 let g:ale_pattern_options_enabled = 1
 
 function! LinterStatus() abort
