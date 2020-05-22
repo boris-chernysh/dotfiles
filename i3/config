@@ -1,7 +1,7 @@
 set $mod Mod4
 
-set $fontName SFNS Display
-set $fontSize 13
+set $fontName Fira Code
+set $fontSize 12
 font pango:$fontName $fontSize
 
 # no-i3 commands
@@ -161,9 +161,12 @@ bindsym $mod+Shift+p move scratchpad
 bindsym $mod+p scratchpad show
 
 set $background_color #2c2c2c
+set $background_color #000000
 set $background_urgent_color #d24184
 set $font_color #e0e0e0
 set $font_accent_color #58B48c
+set $font_color #ffffff
+set $font_accent_color #ffffff
 set $font_secondary_color #545454
 set $indicator_color #b58900
 
