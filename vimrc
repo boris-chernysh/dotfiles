@@ -38,6 +38,7 @@ Plug 'quramy/tsuquyomi'
 " colorschemes
 Plug 'jonathanfilip/vim-lucius'
 Plug 'altercation/vim-colors-solarized'
+Plug 'arcticicestudio/nord-vim'
 " buffers
 Plug 'ctrlpvim/ctrlp.vim' "open buffers and files
 Plug 'd11wtq/ctrlp_bdelete.vim' "delete buffers from ctrlp
@@ -88,8 +89,8 @@ set statusline+=%c:%l\ %L\
 " }}}
 
 " colors {{{
-colorscheme lucius " also may be used 'solarized'
-set background=light
+colorscheme nord " also may be used 'solarized' or 'lucius
+set background=dark
 " }}}
 
 " netrw {{{
