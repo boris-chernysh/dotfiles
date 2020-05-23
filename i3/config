@@ -1,6 +1,6 @@
 set $mod Mod4
 
-set $fontName Fira Code
+set $fontName fixed
 set $fontSize 12
 font pango:$fontName $fontSize
 
@@ -8,7 +8,7 @@ font pango:$fontName $fontSize
 set $terminal kitty --config ~/dotfiles/kitty/kitty.conf
 set $lock i3lock
 set $browser google-chrome-stable
-set $launcher dmenu_run -nb "#fdf6e3" -nf "#657b83" -sb "#eee8d5" -sf "#cb4b16" -fn pango:$fontName $fontSize
+set $launcher dmenu_run -nb "#212121" -nf "#767676" -sb "#424242" -sf "#4FB8CC" -fn pango:$fontName $fontSize
 set $volume_up amixer set Master 7%+
 set $volume_down amixer set Master 7%-
 set $volume_toggle amixer set Master toggle
@@ -25,7 +25,8 @@ set $hibernate systemctl hibernate
 set $poweroff systemctl poweroff
 set $reboot systemctl reboot
 exec dunst -conf ~/dotfiles/dunstrc
-exec feh --bg-scale ~/.wallpaper
+exec_always feh --bg-scale ~/.wallpaper
+exec_always --no-startup-id ~/dotfiles/polybar/run.sh
 
 set $tag1 1.Workplace
 set $tag2 2.Workplace
@@ -90,7 +91,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 bindsym $mod+g exec $browser
 bindsym $mod+t border toggle
-bindsym $mod+m bar mode toggle
 
 bindsym XF86AudioRaiseVolume exec $volume_up, exec pkill -SIGRTMIN+2 i3blocks
 bindsym XF86AudioLowerVolume exec $volume_down, exec pkill -SIGRTMIN+2 i3blocks
@@ -160,32 +160,12 @@ bindsym $mod+i mode $im_mode_title
 bindsym $mod+Shift+p move scratchpad
 bindsym $mod+p scratchpad show
 
-set $background_color #2c2c2c
-set $background_color #000000
+set $background_color #202020
 set $background_urgent_color #d24184
-set $font_color #e0e0e0
-set $font_accent_color #58B48c
 set $font_color #ffffff
 set $font_accent_color #ffffff
 set $font_secondary_color #545454
 set $indicator_color #b58900
-
-bar {
-	position top
-	i3bar_command i3bar -t
-	status_command i3blocks -c ~/dotfiles/i3/i3blocks.conf
-	workspace_buttons yes
-	tray_output none
-	colors {
-		background $background_color
-		statusline $font_color
-		separator $font_secondary_color
-		focused_workspace $background_color $background_color $font_accent_color
-		active_workspace $background_color $background_color $font_accent_color
-		inactive_workspace $background_color $background_color $font_secondary_color
-		urgent_workspace $background_urgent_color $background_urgent_color $font_color
-	}
-}
 
 client.focused $background_color $background_color $font_accent_color $indicator_color
 client.focused_inactive $background_color $background_color $font_secondary_color $indicator_color
@@ -193,5 +173,8 @@ client.unfocused $background_color $background_color $font_secondary_color $indi
 client.urgent $background_urgent_color $background_urgent_color $font_color $indicator_color
 
 default_border none
+title_align center
+hide_edge_borders vertical
 
 for_window [class=".*"] title_format " %title"
+
