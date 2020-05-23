@@ -38,8 +38,7 @@ Plug 'ianks/vim-tsx'
 Plug 'quramy/tsuquyomi'
 " colorschemes
 Plug 'jonathanfilip/vim-lucius'
-Plug 'altercation/vim-colors-solarized'
-Plug 'arcticicestudio/nord-vim'
+Plug 'reedes/vim-colors-pencil'
 " buffers
 Plug 'moll/vim-bbye' "delete buffer without close window
 Plug 'vim-scripts/BufOnly.vim' "close buffers except current one
@@ -88,7 +87,7 @@ set statusline+=%c:%l\ %L\
 " }}}
 
 " colors {{{
-colorscheme nord " also may be used 'solarized' or 'lucius
+colorscheme pencil " also may be used 'lucius'
 set background=dark
 " }}}
 
