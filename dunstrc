@@ -45,19 +45,19 @@ history = ctrl+grave
 context = ctrl+mod1+period
 
 [urgency_low]
-frame_color = "#268bd2"
-background = "#fdf6e3"
-foreground = "#657b83"
+frame_color = "#5FD7A7"
+background = "#424242"
+foreground = "#767676"
 timeout = 4
 
 [urgency_normal]
-frame_color = "#859900"
-background = "#fdf6e3"
-foreground = "#657b83"
+frame_color = "#005F87"
+background = "#424242"
+foreground = "#767676"
 timeout = 6
 
 [urgency_critical]
-frame_color = "#d33682"
-background = "#fdf6e3"
-foreground = "#657b83"
+frame_color = "#C30771"
+background = "#424242"
+foreground = "#767676"
 timeout = 8

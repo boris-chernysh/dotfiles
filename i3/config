@@ -24,7 +24,7 @@ set $screenshot escrotum -s -C
 set $hibernate systemctl hibernate
 set $poweroff systemctl poweroff
 set $reboot systemctl reboot
-exec dunst -conf ~/dotfiles/dunstrc
+exec_always dunst -conf ~/dotfiles/dunstrc
 exec_always feh --bg-fill ~/.wallpaper
 exec_always --no-startup-id ~/dotfiles/polybar/run.sh
 
