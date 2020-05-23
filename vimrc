@@ -119,8 +119,8 @@ nnoremap <leader>bq :bd<CR>
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " find something
-" nnoremap <leader>f q:iGrepper -query<Space>
-nmap <leader>F :execute 'Rg '.expand('<cword>').'<CR>'
+nnoremap <leader>f :Grep<CR>
+nmap <leader>F :execute 'Grep '.expand('<cword>').'<CR>'
 " find files by name
 nmap <c-p> :call <sid>Files()<CR>
 " open changed files
