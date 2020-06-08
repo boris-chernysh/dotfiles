@@ -119,7 +119,7 @@ nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " find something
 nnoremap <leader>f :Grep<CR>
-nmap <leader>F :execute 'Grep '.expand('<cword>').'<CR>'
+nmap <leader>F :execute 'Grep '.expand('<cword>')<CR>
 " find files by name
 nmap <c-p> :call <sid>Files()<CR>
 " open changed files
