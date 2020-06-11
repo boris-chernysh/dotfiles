@@ -1,9 +1,9 @@
 " plug autoinstall {{{
 
 if has('nvim')
-    let g:plug_path = "~/.config/nvim/autoload/plug.vim"
+    let g:plug_path = '~/.config/nvim/autoload/plug.vim'
 else
-    let g:plug_path = "~/.vim/autoload/plug.vim"
+    let g:plug_path = '~/.vim/autoload/plug.vim'
 endif
 
 if empty(glob(g:plug_path))
@@ -76,6 +76,10 @@ set suffixesadd+=.js,.jsx,.ts,.tsx "open files without extension by gf
 set expandtab " use spaces instead tabs
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby " ruby syntax for Vagrantfile
 autocmd! FileType vim setlocal foldmethod=marker " set marker fold method for vim script
+let s:swpdir = $HOME.'/.vim/swapfiles/'
+if isdirectory(s:swpdir)
+    let &directory = s:swpdir
+endif
 " }}}
 
 " statusline {{{
@@ -94,7 +98,7 @@ set background=dark
 " netrw {{{
 let g:netrw_liststyle = 0
 let g:netrw_browse_split = 0
-let g:netrw_localrmdir='rm -r'
+let g:netrw_localrmdir = 'rm -r'
 " }}}
 
 " mappings {{{
@@ -127,18 +131,18 @@ nmap <c-g>p :GFiles?<CR>
 " search in open buffers
 map <leader>/ :Lines<CR>
 " buffers navigation
-nnoremap <c-k> :Buffers<CR>
+nnoremap <c-b> :Buffers<CR>
 " open netrw
 nnoremap <leader>. :Explore<CR>
-nnoremap <leader>yp :let @+ = expand("%")<CR>
-nnoremap <leader>yn :let @+ = expand("%:t:r")<CR>
+nnoremap <leader>yp :let @+ = expand('%')<CR>
+nnoremap <leader>yn :let @+ = expand('%:t:r')<CR>
 " always use the command editing window
 nnoremap : q:i
 vnoremap : q:i
 
 nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
 nmap <silent> <leader>] <Plug>(ale_next_wrap)
-nmap <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+nmap <Leader>bg :let &background = ( &background == 'dark'? 'light' : 'dark' )<CR>
 " }}}
 
 " easy motion {{{
@@ -159,7 +163,7 @@ map <leader>h <Plug>(easymotion-linebackward)
 
 " fzf {{{
 " open fzf in modal window
-if has('nvim-0.4.0') || has("patch-8.2.0191")
+if has('nvim-0.4.0') || has('patch-8.2.0191')
     let g:fzf_layout = { 'window': {
         \ 'width': 0.9,
         \ 'height': 0.7,
@@ -186,7 +190,7 @@ endfunction
 
 function! s:Grep(query, fullscreen)
     if executable('rg')
-        let command =  'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+        let command = 'rg --hidden --column --line-number --no-heading --color=always --smart-case -- %s || true'
         let initial_command = printf(command, shellescape(a:query))
         let reload_command = printf(command, '{q}')
         let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
