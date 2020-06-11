@@ -1,5 +1,4 @@
 " plug autoinstall {{{
-
 if has('nvim')
     let g:plug_path = '~/.config/nvim/autoload/plug.vim'
 else
