@@ -260,3 +260,11 @@ autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()
 " fix scrolling bug in kitty https://github.com/kovidgoyal/kitty/issues/108
 let &t_ut=''
 " }}}
+
+" tmux {{{
+if exists('$TMUX')
+    let s:tmuxWindowName = system('tmux display-message -p "#W"')
+    autocmd VimEnter,DirChanged * silent !tmux rename-window $(basename "$PWD")
+    autocmd VimLeave * silent execute '!tmux rename-window '.s:tmuxWindowName
+endif
+" }}}
