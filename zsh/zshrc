@@ -16,7 +16,7 @@ export ZSH_CUSTOM="$HOME/dotfiles/zsh"
 ZSH_THEME="CLEAR"
 
 if [[ -d $ZSH ]]; then
-	plugins=(vi-mode vim-interaction jump git node npm zsh-nvm git_helpers zsh-syntax-highlighting yarn kubectl docker)
+	plugins=(vi-mode vim-interaction jump git node npm zsh-nvm zsh-syntax-highlighting yarn kubectl docker)
 
 	source $ZSH/oh-my-zsh.sh
 fi
