@@ -18,5 +18,5 @@ ZSH_THEME="CLEAR"
 if [[ -d $ZSH ]]; then
 	plugins=(vi-mode vim-interaction jump git node npm zsh-nvm zsh-syntax-highlighting yarn kubectl docker)
 
-	source $ZSH/oh-my-zsh.sh
+	DISABLE_AUTO_UPDATE="true" source $ZSH/oh-my-zsh.sh
 fi
