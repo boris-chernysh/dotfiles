@@ -75,10 +75,13 @@ set suffixesadd+=.js,.jsx,.ts,.tsx "open files without extension by gf
 set expandtab " use spaces instead tabs
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby " ruby syntax for Vagrantfile
 autocmd! FileType vim setlocal foldmethod=marker " set marker fold method for vim script
+
+" keep swapfiles away from the working directory
 let s:swpdir = $HOME.'/.vim/swapfiles/'
-if isdirectory(s:swpdir)
-    let &directory = s:swpdir
+if !isdirectory(s:swpdir)
+    call mkdir(s:swpdir, 'p')
 endif
+let &directory = s:swpdir
 " }}}
 
 " statusline {{{
