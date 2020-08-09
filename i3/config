@@ -6,7 +6,6 @@ font pango:$fontName $fontSize
 
 # no-i3 commands
 set $terminal kitty --config ~/dotfiles/kitty/kitty.conf
-set $lock i3lock
 set $browser google-chrome-stable
 set $launcher dmenu_run -nb "#212121" -nf "#767676" -sb "#424242" -sf "#4FB8CC" -fn pango:$fontName $fontSize
 set $volume_up amixer set Master 7%+
@@ -21,6 +20,7 @@ set $kill_tg killall telegram-desktop
 set $slack slack
 set $kill_slack killall slack
 set $screenshot escrotum -s -C
+set $suspend systemctl suspend
 set $hibernate systemctl hibernate
 set $poweroff systemctl poweroff
 set $reboot systemctl reboot
@@ -129,12 +129,12 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $power_mode_title "Power: [L]ock, [H]ybernate, [S]hutdown, [R]eboot"
+set $power_mode_title "Power: [S]uspend, [H]ybernate, [P]oweroff, [R]eboot"
 
 mode $power_mode_title {
-	bindsym l exec $lock, mode "default"
+	bindsym s exec $suspend, mode "default"
 	bindsym h exec $hibernate, mode "default"
-	bindsym s exec $poweroff, mode "default"
+	bindsym p exec $poweroff, mode "default"
 	bindsym r exec $reboot, moide "default"
 
 	bindsym Return mode "default"
