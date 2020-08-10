@@ -20,6 +20,7 @@ set $kill_tg killall telegram-desktop
 set $slack slack
 set $kill_slack killall slack
 set $screenshot escrotum -s -C
+set $lock i3lock
 set $suspend systemctl suspend
 set $hibernate systemctl hibernate
 set $poweroff systemctl poweroff
@@ -129,9 +130,10 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $power_mode_title "Power: [S]uspend, [H]ybernate, [P]oweroff, [R]eboot"
+set $power_mode_title "Power: [L]ock, [S]uspend, [H]ybernate, [P]oweroff, [R]eboot"
 
 mode $power_mode_title {
+	bindsym l exec $lock, mode "default"
 	bindsym s exec $suspend, mode "default"
 	bindsym h exec $hibernate, mode "default"
 	bindsym p exec $poweroff, mode "default"
