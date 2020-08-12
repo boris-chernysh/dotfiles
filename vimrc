@@ -263,8 +263,6 @@ let &t_ut=''
 
 " tmux {{{
 if exists('$TMUX')
-    let s:tmuxWindowName = system('tmux display-message -p "#W"')
     autocmd VimEnter,DirChanged * silent !tmux rename-window $(basename "$PWD")
-    autocmd VimLeave * silent execute '!tmux rename-window '.s:tmuxWindowName
 endif
 " }}}
