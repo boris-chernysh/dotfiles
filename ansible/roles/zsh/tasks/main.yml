@@ -1,0 +1,19 @@
+---
+- name: Ensure zsh is installed
+  become: yes
+  package:
+    name: zsh
+    state: present
+- name: Get zsh binary path
+  command: which zsh
+  register: zsh_path
+- name: Set zsh as default shell
+  become: yes
+  user:
+    name: "{{ username }}"
+    shell: "{{ zsh_path.stdout }}"
+- name: Link rc file
+  file:
+    src: "{{ dotfiles_dir }}/zsh/zshrc"
+    dest: "{{ home_dir }}/.zshrc"
+    state: link

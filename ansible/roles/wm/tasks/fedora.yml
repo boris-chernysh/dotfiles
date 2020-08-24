@@ -1,0 +1,48 @@
+---
+- name: Install xorg
+  become: yes
+  dnf:
+    name:
+      - "@base-x"
+- name: Enable copr for i3-gaps
+  become: yes
+  command:
+    cmd: dnf copr enable -y fuhrmann/i3-gaps
+    creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:fuhrmann:i3-gaps.repo
+    warn: false # dnf module cannot enable copr repos
+- name: Install i3-gaps and deps
+  become: yes
+  dnf:
+    name:
+      - i3-gaps
+      - i3lock
+      - polybar
+      - dmenu
+      - feh
+      - fira-code-fonts
+      - xbacklight
+    state: present
+- name: Add xinitrc
+  file:
+    src: "{{ dotfiles_dir }}/i3/xinitrc"
+    dest: "{{ home_dir }}/.xinitrc"
+    state: link
+- name: Find xorg config files
+  find:
+    paths: "{{ dotfiles_dir }}/xorg/"
+    patterns: "*.conf"
+  register: xorg_conf
+  changed_when: False
+- name: Link xorg config
+  become: yes
+  file:
+    src: "{{ item.path }}"
+    dest: "/etc/X11/xorg.conf.d/{{ item.path | basename }}"
+    state: link
+    force: yes # in case when xorg.conf.d already contains keyboard config
+  with_items: "{{ xorg_conf.files }}"
+- name: Enable i3lock on sleep
+  become: yes
+  template:
+    src: i3lock.service.j2
+    dest: "/etc/systemd/system/i3lock.service"

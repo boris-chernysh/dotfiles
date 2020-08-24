@@ -1,0 +1,19 @@
+---
+- name: Install vim
+  become: true
+  dnf:
+    # use vim-X11 because it compiled with clipboard option
+    name: vim-X11
+    state: present
+- name: Link vim to vimx
+  become: true
+  file:
+    src: /usr/bin/vimx
+    dest: /usr/bin/vim
+    state: link
+- name: Ensure ripgrep is installed
+  become: true
+  dnf:
+    name: ripgrep
+    state: present
+

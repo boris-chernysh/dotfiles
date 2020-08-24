@@ -1,0 +1,24 @@
+---
+- hosts: all
+  vars:
+    username: "boris"
+    home_dir: "/home/{{ username }}"
+    dotfiles_dir: "{{ home_dir }}/dotfiles"
+    dotfiles_repo: "https://github.com/boris-chernysh/dotfiles.git"
+  roles:
+    - git
+    - dotfiles
+    - zsh
+    - tmux
+    - vim
+    - wm
+    - firefox
+    - ansible
+    - kitty
+    - network_manager
+    - vagrant
+    - kubectl
+    - podman
+    - role: minikube
+      become: yes
+

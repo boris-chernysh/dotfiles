@@ -1,0 +1,6 @@
+---
+- name: Intall kitty
+  become: yes
+  package:
+    name: kitty
+    state: present

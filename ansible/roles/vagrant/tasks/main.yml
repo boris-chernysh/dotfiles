@@ -1,0 +1,6 @@
+---
+- name: Intall vagrant
+  become: yes
+  package:
+    name: vagrant
+    state: present

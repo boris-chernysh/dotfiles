@@ -1,0 +1,9 @@
+---
+- name: Install podman, podman-compose and docker shim
+  become: yes
+  package:
+    name:
+      - podman
+      - podman-compose
+      - podman-docker
+    state: present

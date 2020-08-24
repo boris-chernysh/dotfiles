@@ -1,0 +1,6 @@
+---
+- name: Intall ansible
+  become: yes
+  package:
+    name:
+      - ansible

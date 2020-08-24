@@ -20,7 +20,7 @@ set $kill_tg killall telegram-desktop
 set $slack slack
 set $kill_slack killall slack
 set $screenshot escrotum -s -C
-set $lock i3lock --ignore-empty-password --image=/home/boris/.wallpaper --color=202020
+set $lock i3lock --ignore-empty-password --color=202020
 set $suspend systemctl hybrid-sleep
 set $hibernate systemctl hibernate
 set $poweroff systemctl poweroff

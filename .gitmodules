@@ -7,3 +7,9 @@
 [submodule "ohmyzsh"]
 	path = zsh/ohmyzsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule "ansible/roles/kubectl"]
+	path = ansible/roles/kubectl
+	url = https://github.com/andrewrothstein/ansible-kubectl
+[submodule "ansible/roles/minikube"]
+	path = ansible/roles/minikube
+	url = https://github.com/amine7777/ansible-role-minikube.git

@@ -1,0 +1,11 @@
+---
+- name: Install tmux
+  become: true
+  package:
+    name: tmux
+    state: present
+- name: Ensure config is linked
+  file:
+    src: "{{ dotfiles_dir }}/tmux.conf"
+    dest: "{{ home_dir }}/.tmux.conf"
+    state: link

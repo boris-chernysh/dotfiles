@@ -1,0 +1,7 @@
+---
+- name: Install network manager
+  become: yes
+  package:
+    name: NetworkManager-wifi
+    state: present
+
