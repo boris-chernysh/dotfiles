@@ -6,7 +6,7 @@ font pango:$fontName $fontSize
 
 # no-i3 commands
 set $terminal kitty --config ~/dotfiles/kitty/kitty.conf
-set $browser google-chrome-stable
+set $browser firefox
 set $launcher dmenu_run -nb "#212121" -nf "#767676" -sb "#424242" -sf "#4FB8CC" -fn pango:$fontName $fontSize
 set $volume_up amixer set Master 7%+
 set $volume_down amixer set Master 7%-
@@ -20,8 +20,8 @@ set $kill_tg killall telegram-desktop
 set $slack slack
 set $kill_slack killall slack
 set $screenshot escrotum -s -C
-set $lock i3lock
-set $suspend systemctl suspend
+set $lock i3lock --ignore-empty-password --image=/home/boris/.wallpaper --color=202020
+set $suspend systemctl hybrid-sleep
 set $hibernate systemctl hibernate
 set $poweroff systemctl poweroff
 set $reboot systemctl reboot
@@ -179,4 +179,6 @@ title_align center
 hide_edge_borders vertical
 
 for_window [class=".*"] title_format " %title"
+for_window [class=".*"] border pixel 0
 
+gaps inner 10

@@ -163,16 +163,6 @@ map <leader>k <Plug>(easymotion-k)
 map <leader>h <Plug>(easymotion-linebackward)
 " }}}
 
-" fzf {{{
-" open fzf in modal window
-if has('nvim-0.4.0') || has('patch-8.2.0191')
-    let g:fzf_layout = { 'window': {
-        \ 'width': 0.9,
-        \ 'height': 0.7,
-        \ 'highlight': 'Comment',
-        \ 'rounded': v:false } }
-endif
-
 if $FZF_DEFAULT_COMMAND == ''
     let s:fzf_find_comand = 'find * -type f'
     let $FZF_DEFAULT_COMMAND = s:fzf_find_comand
