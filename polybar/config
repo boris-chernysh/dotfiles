@@ -1,18 +1,34 @@
+[pencil-dark]
+; TODO: move colors to xrdb
+color0 = #202020
+color1 = #c30670
+color2 = #10a778
+color3 = #a79c14
+color4 = #008ec4
+color5 = #523b78
+color6 = #20a4b9
+color7 = #d9d9d9
+color8 = #414141
+color9 = #fb0079
+color10 = #5ed6ae
+color11 = #f3e42f
+color12 = #20bafb
+color13 = #6854de
+color14 = #4fb8cc
+color15 = #f0f0f0
+
 [colors]
-background = #202020
-background-alt = #424242
-foreground = #767676
-foreground-alt = #F1F1F1
-primary = #5FD7A7
-secondary = #20A5BA
-alert = #E32791
+background = ${pencil-dark.color0}
+background-alt = ${pencil-dark.color8}
+foreground = ${pencil-dark.color7}
+foreground-alt = ${pencil-dark.color15}
+primary = ${pencil-dark.color5}
+secondary = ${pencil-dark.color3}
+alert = ${pencil-dark.color9}
 
 [bar/topbar]
 width = 100%
 height = 27
-; offset-x = 1%
-; offset-y = 1%
-; radius = 6.0
 fixed-center = true
 
 background = ${colors.background}
@@ -34,9 +50,6 @@ font-0 = fixed:pixelsize=10;1
 modules-left = i3
 modules-center = date
 modules-right = xbacklight alsa memory cpu wlan eth battery
-
-tray-position = right
-tray-padding = 2
 
 wm-restack = i3
 
@@ -89,7 +102,7 @@ type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.secondary}
+format-underline = ${colors.primary}
 label = %percentage:2%%
 
 [module/memory]
@@ -97,7 +110,7 @@ type = internal/memory
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.secondary}
+format-underline = ${colors.primary}
 label = %percentage_used%%
 
 [module/wlan]
@@ -106,7 +119,7 @@ interface = wlp3s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = ${colors.secondary}
+format-connected-underline = ${colors.primary}
 label-connected = %essid%
 
 format-disconnected = <label-disconnected>
@@ -175,7 +188,7 @@ adapter = ACAD
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = ${colors.secondary}
+format-charging-underline = ${colors.primary}
 
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
