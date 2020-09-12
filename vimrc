@@ -163,6 +163,7 @@ map <leader>k <Plug>(easymotion-k)
 map <leader>h <Plug>(easymotion-linebackward)
 " }}}
 
+"{{{ fzf
 if $FZF_DEFAULT_COMMAND == ''
     let s:fzf_find_comand = 'find * -type f'
     let $FZF_DEFAULT_COMMAND = s:fzf_find_comand
