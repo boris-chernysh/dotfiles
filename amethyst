@@ -1,7 +1,7 @@
 {
 	"layouts": [
 		"fullscreen",
-		"tall",
+		"column",
 		"wide",
 	],
 	"mouse-follows-focus": true,
