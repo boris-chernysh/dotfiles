@@ -3,6 +3,7 @@
 		"fullscreen",
 		"column",
 		"wide",
+		"tall",
 	],
 	"mouse-follows-focus": true,
 }
