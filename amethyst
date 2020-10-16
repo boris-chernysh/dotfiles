@@ -1,9 +1,10 @@
 {
 	"layouts": [
 		"fullscreen",
-		"column",
 		"wide",
 		"tall",
+		"column",
+		"row",
 	],
 	"mouse-follows-focus": true,
 }
