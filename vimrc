@@ -183,7 +183,7 @@ endfunction
 
 function! s:Grep(query, fullscreen)
     if executable('rg')
-        let command = 'rg --hidden --column --line-number --no-heading --color=always --smart-case -- %s || true'
+        let command = 'rg --hidden --glob=!.git --column --line-number --no-heading --color=always --smart-case -- %s || true'
         let initial_command = printf(command, shellescape(a:query))
         let reload_command = printf(command, '{q}')
         let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
