@@ -94,7 +94,7 @@ set statusline+=%c:%l\ %L\
 
 " colors {{{
 colorscheme pencil " also may be used 'lucius'
-set background=dark
+set background=light
 " }}}
 
 " netrw {{{
@@ -212,10 +212,10 @@ hi AleErrorSign cterm=none ctermfg=160 ctermbg=0
 hi AleWarningSign cterm=none ctermfg=220 ctermbg=0
 
 let g:ale_pattern_options = {
-            \ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow']},
-            \ '\.jsx$': {'ale_linters': ['eslint', 'flow']},
-            \ '\.ts$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
-            \ '\.tsx$': {'ale_linters': ['eslint', 'tslint', 'tsserver']},
+            \ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow'], 'ale_fixers': ['prettier', 'eslint']},
+            \ '\.jsx$': {'ale_linters': ['eslint', 'flow'], 'ale_fixers': ['prettier', 'eslint']},
+            \ '\.ts$': {'ale_linters': ['eslint', 'tslint', 'tsserver'], 'ale_fixers': ['prettier', 'eslint']},
+            \ '\.tsx$': {'ale_linters': ['eslint', 'tslint', 'tsserver'], 'ale_fixers': ['prettier', 'eslint']},
             \}
 let g:ale_pattern_options_enabled = 1
 
@@ -235,6 +235,7 @@ endfunction
 let g:ale_echo_msg_error_str = '☠️'
 let g:ale_echo_msg_warning_str = '💩'
 let g:ale_echo_msg_format = '%severity% (%linter%) %s'
+autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx ALEFix
 " }}}
 
 " utils {{{
