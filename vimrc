@@ -22,11 +22,11 @@ Plug 'tpope/vim-eunuch' "unix commands helpers
 Plug 'Lokaltog/vim-easymotion' "navigation in files
 Plug 'mattn/emmet-vim' "fast creating html/css
 Plug 'Raimondi/delimitMate' "brackets autoclose
-Plug 'w0rp/ale' "make tool
 Plug 'editorconfig/editorconfig-vim' "use .editorconfig for projects
 Plug 'powerman/vim-plugin-ruscmd' "russian layout for NORMAL mode
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "fuzzy search via lists
 Plug 'junegunn/fzf.vim'
+Plug 'vim-scripts/textutil.vim' "editing rtf,rtfd,doc,wordml files
 " colors and helpers for languages
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
@@ -34,13 +34,22 @@ Plug 'tpope/vim-markdown'
 Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
-Plug 'quramy/tsuquyomi'
 " colorschemes
 Plug 'jonathanfilip/vim-lucius'
 Plug 'reedes/vim-colors-pencil'
 " buffers
 Plug 'moll/vim-bbye' "delete buffer without close window
 Plug 'vim-scripts/BufOnly.vim' "close buffers except current one
+" coc extensions
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-markdown', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
 " }}}
 
@@ -82,18 +91,20 @@ if !isdirectory(s:swpdir)
     call mkdir(s:swpdir, 'p')
 endif
 let &directory = s:swpdir
+
+set updatetime=300
 " }}}
 
 " statusline {{{
 set statusline=\ %{fugitive#statusline()}
 set statusline+=\ <%{GetFilePath()}>
 set statusline+=%=
-set statusline+=%{LinterStatus()}
 set statusline+=%c:%l\ %L\ 
 " }}}
 
 " colors {{{
 colorscheme pencil " also may be used 'lucius'
+let g:pencil_higher_contrast_ui = 1
 set background=light
 " }}}
 
@@ -142,9 +153,37 @@ nnoremap <leader>yn :let @+ = expand('%:t:r')<CR>
 nnoremap : q:i
 vnoremap : q:i
 
-nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
-nmap <silent> <leader>] <Plug>(ale_next_wrap)
 nmap <Leader>bg :let &background = ( &background == 'dark'? 'light' : 'dark' )<CR>
+" }}}
+
+" coc {{{
+function! s:ensure_coc_config_symlinked()
+    if has('nvim')
+        let s:coc_config_dist = '~/.config/nvim/coc-settings.json'
+    else
+        let s:coc_config_dist = '~/.vim/coc-settings.json'
+    endif
+    let s:coc_config_source = expand('<sfile>:p:h') . '/coc-settings.json'
+    if !empty(glob(s:coc_config_source)) && empty(glob(s:coc_config_dist))
+        execute '!ln -s ' . s:coc_config_source . ' ' . s:coc_config_dist . ' && echo "COC config symlinked"'
+    endif
+endfunction
+
+call <SID>ensure_coc_config_symlinked()
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
 
 " easy motion {{{
@@ -202,53 +241,11 @@ endfunction
 command! -nargs=* -bang Grep call s:Grep(<q-args>, <bang>0)
 " }}}
 
-" ale {{{
-" error signs
-let g:ale_sign_error = 'x'
-let g:ale_sign_warning = '!'
-
-" do not highlight bg under ale signs
-hi AleErrorSign cterm=none ctermfg=160 ctermbg=0
-hi AleWarningSign cterm=none ctermfg=220 ctermbg=0
-
-let g:ale_pattern_options = {
-            \ '\.js$': {'ale_linters': ['eslint', 'jshint', 'flow'], 'ale_fixers': ['prettier', 'eslint']},
-            \ '\.jsx$': {'ale_linters': ['eslint', 'flow'], 'ale_fixers': ['prettier', 'eslint']},
-            \ '\.ts$': {'ale_linters': ['eslint', 'tslint', 'tsserver'], 'ale_fixers': ['prettier', 'eslint']},
-            \ '\.tsx$': {'ale_linters': ['eslint', 'tslint', 'tsserver'], 'ale_fixers': ['prettier', 'eslint']},
-            \}
-let g:ale_pattern_options_enabled = 1
-
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return l:counts.total == 0 ? '' : printf(
-                \   '%d💩 %d☠️ ',
-                \   all_non_errors,
-                \   all_errors
-                \)
-endfunction
-
-let g:ale_echo_msg_error_str = '☠️'
-let g:ale_echo_msg_warning_str = '💩'
-let g:ale_echo_msg_format = '%severity% (%linter%) %s'
-autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx ALEFix
-" }}}
-
 " utils {{{
 function! GetFilePath()
     " return path to file relative to current dir
     return expand('%:.:h')
 endfunction
-" }}}
-
-" {{{ tsuquyomi
-let g:tsuquyomi_disable_quickfix = 1
-set ballooneval
-autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 " }}}
 
 " kitty {{{
