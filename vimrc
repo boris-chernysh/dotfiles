@@ -21,7 +21,6 @@ Plug 'tpope/vim-surround' "brackets helpers
 Plug 'tpope/vim-eunuch' "unix commands helpers
 Plug 'Lokaltog/vim-easymotion' "navigation in files
 Plug 'mattn/emmet-vim' "fast creating html/css
-Plug 'Raimondi/delimitMate' "brackets autoclose
 Plug 'editorconfig/editorconfig-vim' "use .editorconfig for projects
 Plug 'powerman/vim-plugin-ruscmd' "russian layout for NORMAL mode
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "fuzzy search via lists
@@ -49,7 +48,10 @@ Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-markdown', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tabnine', {'do': 'yarn install --frozen-lockfile'}
+Plug 'fannheyward/coc-markdownlint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
 " }}}
 
@@ -93,6 +95,7 @@ endif
 let &directory = s:swpdir
 
 set updatetime=300
+set shortmess+=c
 " }}}
 
 " statusline {{{
@@ -118,8 +121,6 @@ let g:netrw_localrmdir = 'rm -r'
 " move blocks in visual mode
 vnoremap < <gv
 vnoremap > >gv
-" go to shell
-nnoremap <leader>z :sh<CR>
 " show full path for current file
 nnoremap <leader>c :echo expand('%:p')<CR>
 " tabs bindings
@@ -170,6 +171,13 @@ function! s:ensure_coc_config_symlinked()
 endfunction
 
 call <SID>ensure_coc_config_symlinked()
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nmap <leader>rn <Plug>(coc-rename)
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
