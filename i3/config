@@ -182,3 +182,4 @@ for_window [class=".*"] title_format " %title"
 for_window [class=".*"] border pixel 0
 
 gaps inner 10
+gaps top -4

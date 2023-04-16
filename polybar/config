@@ -25,19 +25,22 @@ foreground-alt = ${pencil-dark.color15}
 primary = ${pencil-dark.color5}
 secondary = ${pencil-dark.color3}
 alert = ${pencil-dark.color9}
+disabled = ${pencil-dark.color7}
 
 [bar/topbar]
 width = 100%
-height = 27
+height = 23
+radius = 4
 fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
-line-color = #000
+line-size = 4
 
-border-size = 0
+separator = |
+separator-foreground = ${colors.disabled}
+border-size = 4pt
 
 padding-left = 0
 padding-right = 2
@@ -45,72 +48,54 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
+font-0 = monospace:pixelsize=12;2
 
-modules-left = i3
-modules-center = date
-modules-right = xbacklight alsa memory cpu wlan eth battery
+modules-left = xworkspaces
+modules-center = xwindow
+modules-right = pulseaudio memory cpu wlan eth battery date
 
 wm-restack = i3
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
+[module/xworkspaces]
+type = internal/xworkspaces
 
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-active = %name%
+label-active-background = ${colors.background-alt}
+label-active-underline= ${colors.secondary}
+label-active-padding = 1
 
-label-focused = %name%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-occupied = %name%
+label-occupied-padding = 1
 
-label-unfocused = %name%
-label-unfocused-padding = 2
-
-label-visible = %name%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-label-urgent = %index%
+label-urgent = %name%
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
-[module/xbacklight]
-type = internal/xbacklight
+label-empty = %name%
+label-empty-foreground = ${colors.disabled}
+label-empty-padding = 1
 
-format = <label> <bar>
-label = light:
-
-bar-width = 10
-bar-indicator =
-bar-indicator-foreground = ${colors.foreground}
-bar-fill = ─
-bar-fill-foreground = ${colors.secondary}
-bar-empty = ─
-bar-empty-foreground = ${colors.foreground}
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:60:...%
 
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.primary}
+format-prefix = "CPU "
+format-prefix-foreground = ${colors.primary}
+format-underline = ${colors.secondary}
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.primary}
+format-prefix = "MEM "
+format-prefix-foreground = ${colors.primary}
+format-underline = ${colors.secondary}
 label = %percentage_used%%
 
 [module/wlan]
@@ -162,24 +147,20 @@ format-underline = ${colors.primary}
 
 label = %time%%date%
 
-[module/alsa]
-type = internal/alsa
+[module/pulseaudio]
+type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
-label-volume = vol:
-label-volume-foreground = ${root.foreground}
+format-volume-prefix = "VOL "
+format-volume-prefix-foreground = ${colors.primary}
+format-volume = <label-volume>
+format-volume-underline = ${colors.secondary}
 
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground}
-label-muted = sound muted
+label-volume = %percentage%%
 
-bar-volume-width = 10
-bar-volume-foreground-0 = ${colors.secondary}
-bar-volume-gradient = false
-bar-volume-indicator =
-bar-volume-fill = ─
-bar-volume-empty = ─
-bar-volume-empty-foreground = ${colors.foreground}
+label-muted = mute
+label-muted-foreground = ${colors.disabled}
+format-muted-underline = ${colors.primary}
+
 
 [module/battery]
 type = internal/battery
@@ -216,6 +197,7 @@ animation-discharging-framerate = 750
 
 [settings]
 screenchange-reload = true
+pseudo-transparency = true
 
 [global/wm]
 margin-top = 5
