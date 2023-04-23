@@ -33,7 +33,7 @@ height = 23
 radius = 4
 fixed-center = true
 
-background = ${colors.background}
+background = #11000000
 foreground = ${colors.foreground}
 
 line-size = 4
@@ -50,14 +50,17 @@ module-margin-right = 2
 
 font-0 = monospace:pixelsize=12;2
 
-modules-left = i3
-modules-center = xwindow
-modules-right = pulseaudio memory cpu wlan eth battery date
+; modules-left = i3
+modules-center = i3
+modules-right = xkeyboard pulseaudio wlan eth battery date
 
 wm-restack = i3
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[module/xkeyboard]
+type = internal/xkeyboard
 
 [module/i3]
 type = internal/i3
@@ -66,11 +69,10 @@ index-sort = true
 wrapping-scroll = false
 
 label-mode-padding = 1
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-mode-foreground = ${colors.foreground}
+label-mode-underline = ${colors.alert}
 
 label-focused = %name%
-label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.secondary}
 label-focused-padding = 1
 
@@ -90,33 +92,17 @@ label-urgent-padding = 1
 type = internal/xwindow
 label = %title:0:60:...%
 
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = "CPU "
-format-prefix-foreground = ${colors.primary}
-format-underline = ${colors.secondary}
-label = %percentage:2%%
-
-[module/memory]
-type = internal/memory
-interval = 2
-format-prefix = "MEM "
-format-prefix-foreground = ${colors.primary}
-format-underline = ${colors.secondary}
-label = %percentage_used%%
-
 [module/wlan]
 type = internal/network
 interface = wlp3s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = ${colors.primary}
+format-connected-underline = ${colors.secondary}
 label-connected = %essid%
 
 format-disconnected = <label-disconnected>
-format-disconnected-underline = ${self.format-connected-underline}
+format-disconnected-underline = ${colors.alert}
 label-disconnected = %ifname% disconnected
 label-disconnected-foreground = ${colors.foreground-alt}
 
@@ -151,7 +137,7 @@ time-alt = %H:%M:%S
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground}
-format-underline = ${colors.primary}
+format-underline = ${colors.secondary}
 
 label = %time%%date%
 
@@ -177,7 +163,7 @@ adapter = ACAD
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = ${colors.primary}
+format-charging-underline = ${colors.secondary}
 
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
