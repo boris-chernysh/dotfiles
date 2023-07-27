@@ -1,12 +1,4 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascirpt",
-    "javascriptreact",
-    "typescriptreact",
-    "typescript",
-    "json",
-    "markdown"
-  ],
-  "prettier.eslintIntegration": true,
+  "eslint.autoFixOnSave": true,
   "yaml.schemaStore.enable": true
 }

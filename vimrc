@@ -221,7 +221,7 @@ if $FZF_DEFAULT_COMMAND == ''
 endif
 
 function! s:Files()
-    if $FZF_DEFAULT_COMMAND != s:fzf_find_comand || fugitive#head() == ''
+    if $FZF_DEFAULT_COMMAND != s:fzf_find_comand || FugitiveHead() == ''
         execute 'Files'
     else
         execute 'GFiles'
@@ -235,7 +235,7 @@ function! s:Grep(query, fullscreen)
         let reload_command = printf(command, '{q}')
         let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
         call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-    elseif fugitive#head() != ''
+    elseif FugitiveHead() != ''
         call fzf#vim#grep(
                     \   'git grep --line-number -- '.shellescape(a:query), 0,
                     \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), a:fullscreen)
