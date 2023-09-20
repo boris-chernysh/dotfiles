@@ -21,7 +21,7 @@ set $slack slack
 set $kill_slack killall slack
 set $screenshot escrotum -s -C
 set $lock i3lock --ignore-empty-password --image=/home/boris/.wallpaper --color=202020
-set $suspend systemctl hybrid-sleep
+set $suspend systemctl suspend
 set $hibernate systemctl hibernate
 set $poweroff systemctl poweroff
 set $reboot systemctl reboot
