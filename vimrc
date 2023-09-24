@@ -155,6 +155,9 @@ nnoremap : q:i
 vnoremap : q:i
 
 nmap <Leader>bg :let &background = ( &background == 'dark'? 'light' : 'dark' )<CR>
+
+" fix coc completions
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 " }}}
 
 " coc {{{
