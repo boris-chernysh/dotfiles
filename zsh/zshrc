@@ -4,14 +4,10 @@ bindkey "^R" history-incremental-search-backward
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
-# если включить lazy load, то в новом терминале открытие вима без загруженной ноды приводит к поломке coc.nvim
 export NVM_LAZY_LOAD=false
-export NVM_AUTO_USE=true
+export NVM_AUTO_USE=false
 
-# vim
-export MYVIMRC="$HOME/dotfiles/vimrc"
-export VIMINIT="source $MYVIMRC"
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # oh-my-zsh
 export ZSH="$HOME/dotfiles/zsh/ohmyzsh"
@@ -23,3 +19,4 @@ if [[ -d $ZSH ]]; then
 
 	DISABLE_AUTO_UPDATE="true" source $ZSH/oh-my-zsh.sh
 fi
+

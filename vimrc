@@ -88,7 +88,11 @@ autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby " ruby syntax for Vagra
 autocmd! FileType vim setlocal foldmethod=marker " set marker fold method for vim script
 
 " keep swapfiles away from the working directory
-let s:swpdir = $HOME.'/.vim/swapfiles/'
+if has('nvim')
+    let s:swpdir = stdpath('data') . '/swapfiles/'
+else
+    let s:swpdir = $HOME.'/.vim/swapfiles/'
+endif
 if !isdirectory(s:swpdir)
     call mkdir(s:swpdir, 'p')
 endif
@@ -108,7 +112,7 @@ set statusline+=%c:%l\ %L\
 " colors {{{
 colorscheme pencil " also may be used 'lucius'
 let g:pencil_higher_contrast_ui = 1
-set background=light
+set background=dark
 " }}}
 
 " netrw {{{

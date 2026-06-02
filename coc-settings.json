@@ -1,5 +1,0 @@
-{
-  "eslint.autoFixOnSave": true,
-  "eslint.run": "onSave",
-  "yaml.schemaStore.enable": true
-}
