@@ -50,7 +50,7 @@ return {
 		'nvim-treesitter/nvim-treesitter',
 		build = ':TSUpdate',
 		config = function()
-			require('nvim-treesitter.configs').setup({
+			require('nvim-treesitter.config').setup({
 				ensure_installed = {
 					'javascript', 'typescript', 'tsx',
 					'html', 'css', 'scss',
@@ -86,29 +86,22 @@ return {
 			'hrsh7th/cmp-nvim-lsp',
 		},
 		config = function()
-			local lspconfig = require('lspconfig')
 			local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-			local servers = {
-				ts_ls = {},
-				jsonls = {},
-				html = {},
-				cssls = {},
-				eslint = {},
-				yamlls = {},
-				marksman = {},
-				vimls = {},
-				lua_ls = {
-					settings = {
-						Lua = { diagnostics = { globals = { 'vim' } } },
-					},
+			vim.lsp.config('ts_ls', { capabilities = capabilities })
+			vim.lsp.config('jsonls', { capabilities = capabilities })
+			vim.lsp.config('html', { capabilities = capabilities })
+			vim.lsp.config('cssls', { capabilities = capabilities })
+			vim.lsp.config('eslint', { capabilities = capabilities })
+			vim.lsp.config('yamlls', { capabilities = capabilities })
+			vim.lsp.config('marksman', { capabilities = capabilities })
+			vim.lsp.config('vimls', { capabilities = capabilities })
+			vim.lsp.config('lua_ls', {
+				capabilities = capabilities,
+				settings = {
+					Lua = { diagnostics = { globals = { 'vim' } } },
 				},
-			}
-
-			for name, opts in pairs(servers) do
-				opts.capabilities = capabilities
-				lspconfig[name].setup(opts)
-			end
+			})
 		end,
 		event = { 'BufReadPre', 'BufNewFile' },
 	},

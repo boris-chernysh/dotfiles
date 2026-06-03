@@ -24,8 +24,8 @@ npm_install yaml-language-server
 echo "=== bash-language-server ==="
 npm_install bash-language-server
 
-echo "=== lua-language-server ==="
-npm_install lua-language-server
+# echo "=== lua-language-server ==="
+# npm_install lua-language-server
 
 echo "=== marksman (Markdown) ==="
 if command -v marksman >/dev/null 2>&1; then
